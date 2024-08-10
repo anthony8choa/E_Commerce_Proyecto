@@ -90,7 +90,7 @@
     </nav>
 
     <!-- Pagina principal -->
-    <section class="container">
+    <section class="container bg-primary rounded">
         <section class="row m-3">
             <section class="row mt-3 mb-2">
                 <section class="col-6 fw-bold fs-4">
