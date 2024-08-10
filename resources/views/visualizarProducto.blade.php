@@ -94,19 +94,25 @@
         <!-- Descripcion del producto -->
         <section class="row p-2">
             <section class="col-6 p-3 h-100" style="width: 500px;">
+                <!-- Imagen del producto -->
                 <img src="https://hushpuppies.hn/cdn/shop/products/300450171.jpg?v=1679272084" class="img-fluid" alt="...">
             </section>
             <section class="col mt-3 pt-3 pb-3 pd-4 ps-4">
                 <section class="row fs-1 mb-2">
                     <!-- Descripcion del producto -->
                     <div>
-                        {{$dato['descripcion']}}
+                        Ejemplo producto Descripcion
+                        <!-- { {$dato['descripcion']} } -->
                     </div>
                 </section>
                 <section class="row border-top"></section>
                 <section class="row mt-2">
                     <!-- Precio del producto -->
-                    <div class="fs-3 fw-bold">{{$dato['precio']}} Lps.</div>
+                    <div class="fs-3 fw-bold">
+                        Precio ejemplo 1400
+                        <!-- { {$dato['precio']} } -->
+                        Lps.
+                    </div>
                 </section>
                 <section class="row fs-5 fw-bold">
                     <!-- Favoritos -->

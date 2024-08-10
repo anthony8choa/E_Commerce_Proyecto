@@ -11,8 +11,14 @@ Route::get('/login', function () {
     return view('vistaLogin');
 });
 
-Route::get('/pagina/principal', function(){
+Route::get('/principal', function(){
     return view('paginaPrincipal');
 });
 
-Route::get('/visualizar/producto', [ProductosController::class, 'mostrarPorId']);
+//Comentada mientras se implementa funcionalidad
+//Route::get('/visualizar/producto', [ProductosController::class, 'mostrarProductoPorId'])->name('visualizar.producto');
+
+///visualizar/producto PRUEBA
+Route::get('/visualizar/producto', function(){
+    return view('visualizarProducto');
+})->name('visualizar.producto');
