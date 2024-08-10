@@ -38,9 +38,11 @@
 
     <div class="container d-flex justify-content-center">
         <div class="contenedor-login">
-            <h4 class="text-center mb-4">Iniciar sesión</h4>
+            <h4 class="text-center">Iniciar sesión</h4>
             <h4 class="text-center mb-4">como Usuario</h4>
-            <form id="loginForm">
+
+            <!-- Peticion get al backend para verificar si el usuario y contraseña se encuentra registrado -->
+            <form action="" method="GET" id="loginForm">
                 <div class="form-group">
                     <label for="username">Usuario</label>
                     <input type="text" class="form-control" id="username" placeholder="Ingresa tu usuario" required>
@@ -51,6 +53,7 @@
                 </div>
                 <button type="submit" class="btn boton btn-block">Ingresar</button>
             </form>
+
         </div>
     </div>
 
@@ -65,6 +68,5 @@
             
     </div>
 
-   
 </body>
 </html>
