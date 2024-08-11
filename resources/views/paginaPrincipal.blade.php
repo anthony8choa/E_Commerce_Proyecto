@@ -63,16 +63,20 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown d-flex align-items-center" style="margin-right: 10px;">
-                        <a id="nombreUsuarioBarraNavegacion" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li id="tipoIngresoDropdown" class="nav-item dropdown d-flex align-items-center" style="margin-right: 10px;">
+                        <a id="dropdownUsuarioBoton" class="nav-link d-none" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <!-- Nombre de usuario autogenerado por js -->
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Transacciones</a></li>
                             <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
                             <li><a class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                         </ul>
+                        <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
+                            <!-- Invitado (generado por js) -->
+                        </a>
                     </li>
+                    
                     <li class="nav-item">
                         <nav class="navbar ms-4">
                             <a class="navbar-brand" href="#">

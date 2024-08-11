@@ -64,10 +64,10 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown d-flex align-items-center" style="margin-right: 10px;">
-                        <a id="nombreUsuarioBarraNavegacion" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button id="nombreUsuarioBarraNavegacion" class="nav-link" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <!-- Nombre de usuario autogenerado por js -->
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        </button>
+                        <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Transacciones</a></li>
                             <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
                             <li><a class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>

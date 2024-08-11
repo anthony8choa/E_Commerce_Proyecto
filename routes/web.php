@@ -30,6 +30,6 @@ Route::get('/producto/visualizar', function(){
 
 //prueba para probar redirect a paginaPrincipal, luego se cambiara
 Route::get('/usuario/verificar', function(){
-    return view('paginaPrincipal');
+    return redirect('principal');
 })->name('usuario.verificar');
 
