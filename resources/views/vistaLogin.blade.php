@@ -45,7 +45,7 @@
             <h4 class="text-center mb-4">como Usuario</h4>
 
             <!-- Peticion get al backend para verificar si el usuario y contraseña se encuentra registrado -->
-            <form action="" method="GET" id="loginForm">
+            <form action="{{route('usuario.verificar')}}" method="GET" id="loginForm">
                 <div class="form-group">
                     <label for="username">Usuario</label>
                     <input id="usuarioCampo" type="text" class="form-control" id="username" placeholder="Ingresa tu usuario" required>
@@ -66,12 +66,18 @@
                 <h5>¿No tienes una cuenta de Usuario? 
                     <a href="">Registrarse</a>
                 </h5>
+                <h5>
+                    O
+                </h5>
+                <h5>
+                    Ingresar como <a id="invitadoBoton" href="{{route('principal')}}">invitado</a>
+                </h5>
             </div>
         </div>
             
     </div>
 
-    <script src="{{ asset ('/assets/JavaScript/manejoLocalStorage.js') }}"></script>
+    <script src="{{ asset ('/assets/JavaScript/GuardarALocalStorage.js') }}"></script>
 
 </body>
 </html>

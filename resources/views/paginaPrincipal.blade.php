@@ -27,7 +27,12 @@
         .btn-primary:hover {
             background-color: #004494; /* Azul más oscuro */
             border-color: #004494;
-        }   
+        }
+
+        .dropdown-menu .dropdown-item.logout:hover {
+            color: #fff; /* Cambia el texto a blanco */
+            background-color: red; /* Cambia el fondo a rojo */
+        }
 
     </style>
 </head>
@@ -59,11 +64,13 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown d-flex align-items-center" style="margin-right: 10px;">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Alejandro
+                        <a id="nombreUsuarioBarraNavegacion" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <!-- Nombre de usuario autogenerado por js -->
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Transacciones</a></li>
+                            <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+                            <li><a class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -198,5 +205,6 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
 </body>
 </html>
