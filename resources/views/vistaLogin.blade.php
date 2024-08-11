@@ -23,6 +23,9 @@
             color: white;
         }
     </style>
+
+    
+
 </head>
 <body>
 
@@ -45,13 +48,13 @@
             <form action="" method="GET" id="loginForm">
                 <div class="form-group">
                     <label for="username">Usuario</label>
-                    <input type="text" class="form-control" id="username" placeholder="Ingresa tu usuario" required>
+                    <input id="usuarioCampo" type="text" class="form-control" id="username" placeholder="Ingresa tu usuario" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
                 </div>
-                <button type="submit" class="btn boton btn-block">Ingresar</button>
+                <button id="BotonIngresar" type="submit" class="btn boton btn-block">Ingresar</button>
             </form>
 
         </div>
@@ -67,6 +70,8 @@
         </div>
             
     </div>
+
+    <script src="{{ asset ('/assets/JavaScript/manejoLocalStorage.js') }}"></script>
 
 </body>
 </html>
