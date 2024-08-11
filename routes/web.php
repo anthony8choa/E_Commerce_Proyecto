@@ -6,10 +6,15 @@ use App\Http\Controllers\ProductosController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+// visualizar prueba del login
 Route::get('/login', function () {
     return view('vistaLogin');
 })->name('login');
+
+//vizualizar vista de registro
+Route::get('/registro', function () {
+    return view('vistaRegistro');
+})->name('registro');
 
 Route::get('/principal', function(){
     return view('paginaPrincipal');
