@@ -57,14 +57,26 @@
                         <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingresa tu número de teléfono" required>
                     </div>
                 </div>
+              
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="direccion">Dirección</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa tu dirección" required>
+                    <div class="form-group col-md-6">
+                        <label for="pais">Pais</label>
+                        <input type="text" class="form-control" id="pais" name="pais" placeholder="Ingresa el pais" required>
+                    </div>
+              
+                    <div class="form-group col-md-6">
+                        <label for="departamento">Departamento</label>
+                        <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingresa el departamento " required>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
+                        <label for="codigo">Codigo Postal</label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Ingresa el codigo postal" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
                         <label for="correo">Correo Electrónico</label>
                         <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingresa tu correo electrónico" required>
                     </div>
