@@ -9,7 +9,7 @@ class GuardarALocalStorage{
 
     agregarALocalStorageUsuario(event){
         let usuario = document.getElementById("usuarioCampo").value;
-        localStorage.clear;
+        localStorage.clear();
         const esInvitado = "no";
         localStorage.setItem("esInvitado",esInvitado);
         localStorage.setItem("nombreUsuario",usuario);
