@@ -33,3 +33,6 @@ Route::get('/usuario/verificar', function(){
     return redirect('principal');
 })->name('usuario.verificar');
 
+Route::get('/favoritos', function(){
+    return view('listaFavoritos');
+})->name('favoritos');
