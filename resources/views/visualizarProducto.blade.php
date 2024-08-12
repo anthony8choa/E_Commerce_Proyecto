@@ -168,7 +168,7 @@
                         {{$producto['nombreProducto']}}
                     <!-- Descripción del producto -->
                     <div id="productDescripcion">
-                        Zapato de Caballero
+                        <div>{{$producto['descripcion']}}</div>
                         <!-- { {$dato['descripcion']} } -->
                     </div>
                 </section>
@@ -178,12 +178,9 @@
                         <div>{{$producto['descripcion']}}</div>
                     </div>
                     <!-- Precio del producto -->
-                    <div class="fs-3 fw-bold mt-3">
+                    <div id="productPrecio" class=" fs-3 fw-bold">
                         {{$producto['precioUnitario']}}
                         Lps.
-                    <div id="productPrecio" class=" fs-3 fw-bold">
-                         1536
-                        <!-- { {$dato['precio']} } -->Lps.
                     </div>
                 </section>
                 <section class="row fs-5 fw-bold">
