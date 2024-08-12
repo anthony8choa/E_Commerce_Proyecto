@@ -17,7 +17,7 @@ class ProductosController extends Controller
         //$datoConvertir = Http::get('http://localhost:8091/api/productos/mostrar/'.$idProducto);
         //^ ejemplo de ruta a buscar para recibir el producto
 
-        $dato = $datoConvertir->Json();
+       // $dato = $datoConvertir->Json();
 
         return view('visualizarProducto', compact('dato'));
     }

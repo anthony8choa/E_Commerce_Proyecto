@@ -48,29 +48,31 @@
             <h4 class="text-center mb-4">Registro de Usuario</h4>
             <form id="registerForm" action="/register" method="POST">
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="nombre">Nombre Completo</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="telefono">Teléfono</label>
                         <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingresa tu número de teléfono" required>
                     </div>
-                </div>
               
-                <div class="form-row">
+                
                     <div class="form-group col-md-6">
                         <label for="pais">Pais</label>
                         <input type="text" class="form-control" id="pais" name="pais" placeholder="Ingresa el pais" required>
                     </div>
-              
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="departamento">Departamento</label>
                         <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingresa el departamento " required>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
+
+               
+                    <div class="form-group col-md-6">
                         <label for="codigo">Codigo Postal</label>
                         <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Ingresa el codigo postal" required>
                     </div>
