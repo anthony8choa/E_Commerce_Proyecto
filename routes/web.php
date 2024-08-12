@@ -38,4 +38,10 @@ Route::get('/favoritos', function(){
     return view('listaFavoritos');
 })->name('favoritos');
 
-Route::get('obtener/nombre/categorias', [CategoriaController::class, 'obtenerNombreDeCategorias'])->name('obtener.nombre.categorias');
+Route::get('categorias/obtener/nombre',
+    [CategoriaController::class, 'obtenerNombreDeCategorias']
+    )->name('obtener.nombre.categorias');
+
+Route::get('categorias/obtener/productos/{idCategoria}',
+    [CategoriaController::class, 'obtenerProductosDeCategoria']
+    )->name("obtener.productos.categoria");

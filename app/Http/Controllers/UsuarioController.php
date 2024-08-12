@@ -42,4 +42,15 @@ class UsuarioController extends Controller
     public function obtenerListaFavoritos($idUsuario){
 
     }
+
+    /**
+     * Funcion crear nuevo usuario
+     * Esta funcion creará un nuevo usuario asociando todo de este al registrarse, es decir, toda la info del usuario,
+     * la info de su direccion (solo 1 se enviara en el registro), info de su tarjeta (1 se enviara en el registro).
+     * @param request Refiere al tipo de peticion post que contendra toda la informacion previamente mencionada
+     * @return boolean Retorna true si el usuario se registro exitosamente, false si el usuario ya existe
+     */
+    public function registrarUsuario(Request $request){
+
+    }
 }

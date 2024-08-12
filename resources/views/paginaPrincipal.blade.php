@@ -88,113 +88,13 @@
         </nav>
     </div>
 
-    <!-- Pagina principal -->
-    <section class="container bg-primary rounded">
-        <section class="row m-3">
-            <section class="row mt-3 mb-2">
-                <section class="col-6 fw-bold fs-4">
-                    <!-- nombre categoria 1 -->
-                    Ropa
-                </section>
-                <section class="col text-end fs-4">
-                    <button type="button" class="btn btn-primary">Ver mas</button>
-                </section>
-            </section>
-            <section class="row fs-6">
-                <!-- Producto 1, notar que esta secuencia html se repite -->
-                <section class="col-md-3">
-                    <div class="card h-100">
-                        <!-- Imagen del producto -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Jersei-coll-alt.jpg" class="card-img-top" alt="Sueter">
-                        <div class="card-body">
-                            <!-- Nombre del producto -->
-                            <h5 class="card-title">Sueter</h5>
-                            <p class="card-text">
-                                <!-- Precio del producto -->
-                                <div>Precio: 500Lps.</div>
-                            </p>
-                            <a href="#" class="btn btn-primary">Ir al producto</a>
-                        </div>
-                    </div>
-                </section>
-                <!-- Producto 2, notar que esta secuencia html se repite -->
-                <section class="col-md-3">
-                    <div class="card h-100">
-                        <img src="https://yazbek.com.mx/cdn/shop/products/C0651-pantalon-mezclilla-caballero-100algodon-indigo-oscuro_1.jpg?v=1693281330" class="card-img-top" alt="Sueter">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </section>
-                <!-- Producto 3, notar que esta secuencia html se repite -->
-                <section class="col-md-3">
-                    <div class="card h-100">
-                        <img src="https://paylesshn.vtexassets.com/arquivos/ids/409161/195826_1.jpg?v=638180565815400000" class="card-img-top" alt="Sueter">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </section>
-                <!-- Producto 4, notar que esta secuencia html se repite -->
-                <section class="col-md-3">
-                    <div class="card h-100">
-                        <img src="https://www.repuestostotal.com/wp-content/uploads/MJC0112_MLS2N3XL-CHUMPA-BRIGHTON-MAN-LS2-NEGRO-A.jpg" class="card-img-top" alt="Sueter">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </section>
-
-        <section class="row m-3">
-            <section class="row mt-3 mb-2">
-                <!-- nombre categoria 1 -->
-                <section class="col-6 fw-bold fs-4">
-                    Alimentos
-                </section>
-                <section class="col text-end fs-4">
-                    <button type="button" class="btn btn-primary">Ver mas</button>
-                </section>
-            </section>
-            <section class="row fs-6">
-                <section class="col-md-3">
-                    <div class="card h-100">
-                        <img src="https://sula.hn/wp-content/uploads/2020/01/leche-entera-elecster-946ml.jpg" class="card-img-top" alt="Sueter">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </section>
-                <section class="col-md-3">
-                    <div class="card h-100">
-                        <img src="https://thefoodtech.com/wp-content/uploads/2020/05/carne-de-res.jpg" class="card-img-top" alt="Sueter">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </section>
-
-        <section class="row m-3">
-
-        </section>
-
-        <section class="row m-3">
-
-        </section>
+    <!-- Pagina principal auto generada por JS -> archivo assets/JavaScript/paginaPrincipalAñadir.js -->
+    <section id="categoriasProductosPrincipalContainer" class="container bg-primary rounded">
+        
+        
     </section>
+
+    <section class="row mt-3">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
@@ -204,5 +104,7 @@
         };
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
+    <script src="{{ asset ('/assets/JavaScript/paginaPrincipalAñadir.js') }}"></script>
+    
 </body>
 </html>

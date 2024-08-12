@@ -66,9 +66,28 @@ class CategoriaController extends Controller
 
     }
 
+    //Obtiene un json con el nombre y id de todas las categorias registradas
     public function obtenerNombreDeCategorias(){
         $datoConvertir = Http::get('http://localhost:8091/api/categorias/mostrar/todas');
         return $dato = $datoConvertir->Json();
     }
+
+    //Obtiene todos los productos asociados a una categoria
+    public function obtenerProductosDeCategoria($idCategoria){
+        $datoConvertir = Http::get('http://localhost:8091/api/productos/mostrar/porCategoria?codigocategoria='.$idCategoria);
+        $dato = $datoConvertir->Json();
+
+        return view('mostrarProductosDeCategoria', compact('dato'));
+    }
+
+    /**
+     * Esta función envía una petición get y debe recibir todos los productos de todas las 
+     * categorias con su nombre de categoria asociado, por ejemplo de la categoria zapatos quiero todos sus productos,
+     * de la categoria camisetas quiero todos sus productos y asi sucesivamente
+     */
+    public function obtenerProductosDeTodasCategorias(){
+
+    }
+
 
 }
