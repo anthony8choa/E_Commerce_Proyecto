@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\CategoriaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,3 +37,5 @@ Route::get('/usuario/verificar', function(){
 Route::get('/favoritos', function(){
     return view('listaFavoritos');
 })->name('favoritos');
+
+Route::get('obtener/nombre/categorias', [CategoriaController::class, 'obtenerNombreDeCategorias'])->name('obtener.nombre.categorias');

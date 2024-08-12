@@ -66,4 +66,9 @@ class CategoriaController extends Controller
 
     }
 
+    public function obtenerNombreDeCategorias(){
+        $datoConvertir = Http::get('http://localhost:8091/api/categorias/mostrar/todas');
+        return $dato = $datoConvertir->Json();
+    }
+
 }
