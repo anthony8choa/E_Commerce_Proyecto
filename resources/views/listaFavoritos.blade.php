@@ -41,7 +41,7 @@
     <div id="navBarContainer">
         <nav id="navBar" class="navbar navbar-expand-lg fs-5 d-none">
             <div class="container-fluid">
-                <a class="navbar-brand fs-4 fw-bold" href="#">E commerce</a>
+                <a class="navbar-brand fs-4 fw-bold" href="{{ route('principal') }}">E commerce</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

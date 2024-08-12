@@ -41,7 +41,7 @@
     <div id="navBarContainer">
         <nav id="navBar" class="navbar navbar-expand-lg fs-5 d-none">
             <div class="container-fluid">
-                <a class="navbar-brand fs-4 fw-bold" href="#">E commerce</a>
+                <a class="navbar-brand fs-4 fw-bold" href="{{ route('principal') }}">E commerce</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -94,22 +94,23 @@
         <section class="row p-2">
             <section class="col-6 p-3 h-100" style="width: 500px;">
                 <!-- Imagen del producto -->
-                <img src="https://hushpuppies.hn/cdn/shop/products/300450171.jpg?v=1679272084" class="img-fluid" alt="...">
+                <img src="{{ $producto['imagenProducto'] }}" class="img-fluid" alt="...">
             </section>
             <section class="col mt-3 pt-3 pb-3 pd-4 ps-4">
                 <section class="row fs-1 mb-2">
                     <!-- Descripcion del producto -->
                     <div>
-                        Ejemplo producto Descripcion
-                        <!-- { {$dato['descripcion']} } -->
+                        {{$producto['nombreProducto']}}
                     </div>
                 </section>
                 <section class="row border-top"></section>
                 <section class="row mt-2">
+                    <div class="fs-3">
+                        <div>{{$producto['descripcion']}}</div>
+                    </div>
                     <!-- Precio del producto -->
-                    <div class="fs-3 fw-bold">
-                        Precio ejemplo 1400
-                        <!-- { {$dato['precio']} } -->
+                    <div class="fs-3 fw-bold mt-3">
+                        {{$producto['precioUnitario']}}
                         Lps.
                     </div>
                 </section>
@@ -179,8 +180,9 @@
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
     <script>
         window.appConfig = {
-            urlCategorias: "{{ route('obtener.nombre.categorias') }}"
-        };
+                            urlCategorias: "{{ route('obtener.nombre.categorias') }}",
+                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1']) }}"    
+                            };
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
 </body>

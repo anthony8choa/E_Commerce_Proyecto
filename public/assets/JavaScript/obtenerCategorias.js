@@ -12,14 +12,17 @@ fetch(window.appConfig.urlCategorias, {
 .then(data => {
     console.log("Success:", data);
 
-    
+    window.appConfig.urlProductosCategorias = window.appConfig.urlProductosCategorias.replace("/1","");
+
     for(const datos of data){
         let li = document.createElement("li");
         li.classList.add("nav-item");
 
         let ancleLink = document.createElement("a");
         ancleLink.classList.add("nav-link");
-        ancleLink.href = "#";
+        console.log(window.appConfig.urlProductosCategorias);
+        
+        ancleLink.href = `${window.appConfig.urlProductosCategorias}/${datos.codigoCategoria}`;
         ancleLink.innerText = `${datos.nombreCategoria}`;
 
         li.appendChild(ancleLink);
@@ -30,7 +33,7 @@ fetch(window.appConfig.urlCategorias, {
 
 })
 .catch((error) => {
-    console.error("Error:", error);
+    console.warn("Error:"+ error);
 });
 
 /*

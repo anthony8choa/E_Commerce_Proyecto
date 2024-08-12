@@ -74,10 +74,11 @@ class CategoriaController extends Controller
 
     //Obtiene todos los productos asociados a una categoria
     public function obtenerProductosDeCategoria($idCategoria){
-        $datoConvertir = Http::get('http://localhost:8091/api/productos/mostrar/porCategoria?codigocategoria='.$idCategoria);
-        $dato = $datoConvertir->Json();
+        $datoConvertir = Http::get('http://localhost:8091/api/productos/mostrar/porCategoria/'.$idCategoria);
+        $productosEnCategoria = $datoConvertir->Json();
 
-        return view('mostrarProductosDeCategoria', compact('dato'));
+        //dump($productosEnCategoria);
+        return view('categoriaVerProductos', compact('productosEnCategoria'));
     }
 
     /**
@@ -89,5 +90,12 @@ class CategoriaController extends Controller
 
     }
 
+    //CONTROLADOR DE PRUEBA, NO HACER
+    public function obtenerProductosDeCategoriaPrueba($categoria){
+
+
+
+        return view('categoriaVerProductos',compact('categoria'));
+    }
 
 }

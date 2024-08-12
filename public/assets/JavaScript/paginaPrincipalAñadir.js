@@ -26,15 +26,17 @@ fetch(window.appConfig.urlCategorias, {
                     <section class="row fs-6 mb-5">
                         <!-- Producto 1, notar que esta secuencia html se repite -->
                         <section class="col-md-3">
-                            <div class="card h-100">
+                            <div id="imagenProductoPPContainer${i}" class="card h-100">
                                 <!-- Imagen del producto -->
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Jersei-coll-alt.jpg" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
                                     <!-- Nombre del producto -->
-                                    <h5 class="card-title">Sueter</h5>
+                                    <h5 id="nombreProductoPPContainer${i}" class="card-title">Sueter</h5>
                                     <p class="card-text">
                                         <!-- Precio del producto -->
-                                        <div>Precio: 500Lps.</div>
+                                        <div>
+                                            Precio: <div id="precioProductoPPContainer${i}"> 500Lps.</div>
+                                        </div>
                                     </p>
                                     <a href="#" class="btn btn-primary">Ir al producto</a>
                                 </div>
@@ -83,6 +85,6 @@ fetch(window.appConfig.urlCategorias, {
 
 })
 .catch((error) => {
-    console.error("Error:", error);
+    console.warn("Error:" + error);
 });
 

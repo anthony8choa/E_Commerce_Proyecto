@@ -14,12 +14,12 @@ class ProductosController extends Controller
      * @return view refiere a la vista a la cual se le enviará todos los datos de ese producto
      */
     public function mostrarProductoPorId($idProducto){
-        //$datoConvertir = Http::get('http://localhost:8091/api/productos/mostrar/'.$idProducto);
+        $datoConvertir = Http::get('http://localhost:8091/api/productos/mostrar/'.$idProducto);
         //^ ejemplo de ruta a buscar para recibir el producto
 
-        $dato = $datoConvertir->Json();
+        $producto = $datoConvertir->Json();
 
-        return view('visualizarProducto', compact('dato'));
+        return view('visualizarProducto', compact('producto'));
     }
 
 

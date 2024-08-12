@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\DireccionesController;
+use App\Http\Controllers\MetodoPagoController;
+use App\Http\Controllers\UsuarioController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,12 +25,14 @@ Route::get('/principal', function(){
 })->name('principal');
 
 //Comentada mientras se implementa funcionalidad
-//Route::get('/visualizar/producto', [ProductosController::class, 'mostrarProductoPorId'])->name('visualizar.producto');
+Route::get('/producto/visualizar/{idProducto}', 
+    [ProductosController::class, 'mostrarProductoPorId']
+    )->name('producto.visualizar');
 
 ///visualizar/producto PRUEBA
-Route::get('/producto/visualizar', function(){
+/*Route::get('/producto/visualizar', function(){
     return view('visualizarProducto');
-})->name('visualizar.producto');
+})->name('visualizar.producto');*/
 
 //prueba para probar redirect a paginaPrincipal, luego se cambiara
 Route::get('/usuario/verificar', function(){
@@ -42,6 +47,8 @@ Route::get('categorias/obtener/nombre',
     [CategoriaController::class, 'obtenerNombreDeCategorias']
     )->name('obtener.nombre.categorias');
 
+//Obtiene todos los productos de una categoria enviando el idCategoria (Comentada mientras se implementa su funcionalidad)
 Route::get('categorias/obtener/productos/{idCategoria}',
     [CategoriaController::class, 'obtenerProductosDeCategoria']
     )->name("obtener.productos.categoria");
+
