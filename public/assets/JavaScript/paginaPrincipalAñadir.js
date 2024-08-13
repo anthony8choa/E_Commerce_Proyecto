@@ -9,6 +9,10 @@ fetch(window.appConfig.urlCategorias, {
     console.log("Success:", data);
     let i = 1;
 
+    let rutaCategoriaEspecifica = window.appConfig.urlProductosCategorias;
+    rutaCategoriaEspecifica.replace("/1","");
+    console.log(rutaCategoriaEspecifica);
+
     for(const datos of data){
         document.querySelector("#categoriasProductosPrincipalContainer").innerHTML +=
         `
@@ -20,7 +24,7 @@ fetch(window.appConfig.urlCategorias, {
                             ${datos.nombreCategoria}
                         </section>
                         <section class="col text-end fs-4">
-                            <button type="button" class="btn btn-primary">Ver mas</button>
+                            <a type="button" href="${rutaCategoriaEspecifica}/${i}" class="btn btn-primary">Ver mas</a>
                         </section>
                     </section>
                     <section class="row fs-6 mb-5">

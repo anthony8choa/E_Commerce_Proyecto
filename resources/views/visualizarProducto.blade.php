@@ -41,6 +41,15 @@
             max-width: 100%;
             height: auto;
         }
+
+        .modal .modal-dialog {
+            max-width: 80%;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -82,7 +91,7 @@
                         </li>
                         <li class="nav-item ms-1">
                             <nav class="navbar">
-                                <a class="navbar-brand" href="#">
+                                <a id="iconoCarrito" class="navbar-brand" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                                     </svg>
@@ -164,7 +173,7 @@
             <section class="col mt-3 pt-3 pb-3 pd-4 ps-4">
                 <section class="row fs-1 mb-2">
                     <!-- Descripcion del producto -->
-                    <div>
+                    <div id="productDescripcion">
                         {{$producto['nombreProducto']}}
                     <!-- Descripción del producto -->
                     <div id="productDescripcion">
@@ -178,7 +187,7 @@
                         <div>{{$producto['descripcion']}}</div>
                     </div>
                     <!-- Precio del producto -->
-                    <div id="productPrecio" class=" fs-3 fw-bold">
+                    <div id="productPrecio" class="fs-3 fw-bold mt-3">
                         {{$producto['precioUnitario']}}
                         Lps.
                     </div>
@@ -190,7 +199,7 @@
                     </section>
                     <!-- Carrito -->
                     <section class="row mt-3 align-items-center">
-                        <a href="#" class="btn btn-light" id="addToCart">Agregar al carrito</a>
+                        <a href="#" id="addToCart" class="btn btn-light">Agregar al carrito</a>
                     </section>
                 </section>
             </section>
@@ -262,89 +271,7 @@
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const carritoModal = new bootstrap.Modal(document.getElementById('carritoModal'));
-        const productosCarrito = document.getElementById('productosCarrito');
-        const totalCarrito = document.getElementById('totalCarrito');
-        const addToCartButton = document.getElementById('addToCart');
-        const iconoCarrito = document.getElementById('iconoCarrito');
-        const vaciarCarritoButton = document.getElementById('vaciarCarrito');
-        const comprarCarritoButton = document.getElementById('comprarCarrito');
-
-        const updateCarritoModal = () => {
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            productosCarrito.innerHTML = '';
-            let total = 0;
-            carrito.forEach((producto, index) => {
-                const productoDiv = document.createElement('div');
-                productoDiv.classList.add('row', 'mb-2');
-                productoDiv.innerHTML = `
-                    <div class="col-6">${producto.descripcion}</div>
-                    <div class="col-3">${producto.precioEntero}</div>
-                    <div class="col-2">${producto.cantidad}</div>
-                    <div class="col-1">
-                        <button class="btn btn-danger btn-sm eliminarProducto" data-index="${index}">Eliminar</button>
-                    </div>
-                `;
-                productosCarrito.appendChild(productoDiv);
-                total += producto.precioEntero * producto.cantidad;
-            });
-            totalCarrito.querySelector('strong').textContent = `Lps.${total.toFixed(2)}`;
-        };
-
-        const addProductToCart = () => {
-            const descripcion = document.getElementById('productDescripcion').textContent.trim();
-            const precioString = document.getElementById('productPrecio').textContent.trim(); // Elemento q capture del div pero es un string
-            const precioNumerico = precioString.replace(/[^0-9.-]+/g, '');
-            // Convertir a número entero 
-            const precioEntero = parseInt(precioNumerico, 10);
-            const cantidad = 1; 
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            carrito.push({ descripcion, precioEntero, cantidad });
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-        };
-
-        const vaciarCarrito = () => {
-            localStorage.removeItem('carrito');
-            updateCarritoModal();
-        };
-
-        const eliminarProducto = (index) => {
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            carrito.splice(index, 1);
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            updateCarritoModal();
-        };
-
-        addToCartButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            addProductToCart();
-            updateCarritoModal();
-        });
-
-        iconoCarrito.addEventListener('click', () => {
-            updateCarritoModal();
-            carritoModal.show();
-        });
-
-        vaciarCarritoButton.addEventListener('click', () => {
-            vaciarCarrito();
-        });
-
-        productosCarrito.addEventListener('click', (e) => {
-            if (e.target.classList.contains('eliminarProducto')) {
-                const index = e.target.getAttribute('data-index');
-                eliminarProducto(index);
-            }
-        });
-
-        comprarCarritoButton.addEventListener('click', () => {
-          
-        });
-    });
-</script>
-<script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
+    <script src="{{ asset ('/assets/JavaScript/carritoProducto.js') }}"></script>
 </body>
 </html>
      

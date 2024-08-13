@@ -34,14 +34,6 @@ class UsuarioController extends Controller
 
     }
 
-    /**
-     * Obtiene la lista de favoritos de un usuario, se envía el usuario y recibe su lista de productos
-     * @param idUsuario Refiere al id del usuario a enviar para recibir su lista
-     * @return listaFavoritos Refiere a la lista de productos asociada al usuario
-     */
-    public function obtenerListaFavoritos($idUsuario){
-
-    }
 
     /**
      * Funcion crear nuevo usuario

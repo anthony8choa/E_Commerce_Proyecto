@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar datos</title>
+    <title>Pagina Principal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
@@ -57,7 +57,7 @@
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Transacciones</a></li>
                                 <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
-                                <li><a class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
+                                <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
                                 <!-- Invitado (generado por js) -->
@@ -88,54 +88,21 @@
         </nav>
     </div>
 
-    <section id="categoriasProductosPrincipalContainer" class="container bg-primary rounded">
+    <section class="container bg-primary rounded mt-4 text-white ">
         
+        <!-- Un usuario tiene
+                - codigousuario
+                - nombre
+                - apellido
+                - correo
+                - contrasenia
+                - codigolugar (pueden ser varios) -> lugares tiene codigoLugar, nombrepais, departamento, codigopostal
+                - fecha_creacion
+                - (falta la tarjeta asociada)    -->
         
-    
-    <section id="categoriaContainer" class="row m-3">
-        <section class="row mt-3 mb-2">
-            <section class="col-6 fw-bold fs-4">
-                <!-- nombre categoria 1 -->
-                @if ($productosEnCategoria)
-                    {{$productosEnCategoria[0]['categorias']['nombreCategoria']}}
-                @else
-                    
-                @endif
-                
-            </section>
+        <!-- VISTA EN CONSTRUCCION -->
 
-        </section>
-        <section class="row fs-6 mb-5">
 
-            @if ($productosEnCategoria)
-                @foreach ($productosEnCategoria as $producto)
-                    <!-- Producto  -->
-                    <section class="col-md-3">
-                        <div class="card h-100">
-                            <!-- Imagen del producto -->
-                            <img src="{{ $producto['imagenProducto'] }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <!-- Nombre del producto -->
-                                <h5 class="card-title">{{ $producto['nombreProducto'] }}</h5>
-                                <p class="card-text">
-                                    <!-- Precio del producto -->
-                                    <div>
-                                        Precio: <div> {{ $producto['precioUnitario'] }} </div>
-                                    </div>
-                                </p>
-                                <a href="{{ route('producto.visualizar',$producto['codigoProducto']) }}" class="btn btn-primary">Ir al producto</a>
-                            </div>
-                        </div>
-                    </section>
-                @endforeach
-            @else
-                <section class="col-md-3 text-center">
-                    <div class="fs-2">NO HAY PRODUCTOS A MOSTRAR</div>
-                </section>
-            @endif
-            
-            
-        </section>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -148,5 +115,7 @@
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
 
+
+    
 </body>
 </html>
