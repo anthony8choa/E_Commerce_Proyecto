@@ -34,6 +34,15 @@
             background-color: red; /* Cambia el fondo a rojo */
         }
 
+        .modal .modal-dialog {
+            max-width: 80%;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+        }
+
     </style>
 </head>
 <body>
