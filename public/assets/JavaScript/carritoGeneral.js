@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
     const carritoModal = new bootstrap.Modal(document.getElementById('carritoModal'));
+    const productosCarrito = document.getElementById('productosCarrito');
+    const totalCarrito = document.getElementById('totalCarrito');
+    const vaciarCarritoButton = document.getElementById('vaciarCarrito');
+    const comprarCarritoButton = document.getElementById('comprarCarrito');
 
     const updateCarritoModal = () => {
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         productosCarrito.innerHTML = '';
         let total = 0;
+        //Aqui se leen todos los datos del carrito en localStorage
         carrito.forEach((producto, index) => {
             const productoDiv = document.createElement('div');
             productoDiv.classList.add('row', 'mb-2');
@@ -25,6 +30,33 @@ document.addEventListener('DOMContentLoaded', function () {
     iconoCarrito.addEventListener('click', () => {
         updateCarritoModal();
         carritoModal.show();
+    });
+
+    const vaciarCarrito = () => {
+        localStorage.removeItem('carrito');
+        updateCarritoModal();
+    };
+
+    const eliminarProducto = (index) => {
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.splice(index, 1);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        updateCarritoModal();
+    };
+
+    vaciarCarritoButton.addEventListener('click', () => {
+        vaciarCarrito();
+    });
+
+    productosCarrito.addEventListener('click', (e) => {
+        if (e.target.classList.contains('eliminarProducto')) {
+            const index = e.target.getAttribute('data-index');
+            eliminarProducto(index);
+        }
+    });
+
+    comprarCarritoButton.addEventListener('click', () => {
+        
     });
 
 });

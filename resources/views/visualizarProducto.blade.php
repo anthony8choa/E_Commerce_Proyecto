@@ -34,10 +34,6 @@
             background-color: red; /* Cambia el fondo a rojo */
         }
 
-        .modal .modal-dialog {
-            max-width: 80%;
-        }
-
         .modal-body img {
             max-width: 100%;
             height: auto;
@@ -130,7 +126,7 @@
                     </section>
                     <!-- Carrito -->
                     <section class="row mt-3 align-items-center">
-                        <a href="#" id="addToCart" class="btn btn-light">Agregar al carrito</a>
+                        <a href="#" id="addToCart" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#agregadoExitosamenteModal">Agregar al carrito</a>
                     </section>
                 </section>
             </section>
@@ -186,8 +182,8 @@
     </section>
 
     <!-- Ventana Emergente del Carrito -->
-    <div class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div style="max-width: 100%;" class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+        <div style="max-width: 80%;" class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="carritoModalLabel">Carrito de Compras</h3>
@@ -203,6 +199,25 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal de agregado exitoso al carrito -->
+    <div class="modal fade" id="agregadoExitosamenteModal" tabindex="-1" aria-labelledby="agregadoExitosamenteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="agregadoExitosamenteModalLabel">Confirmación</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Se ha agregado exitosamente el producto al carrito
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
         </div>
     </div>
 

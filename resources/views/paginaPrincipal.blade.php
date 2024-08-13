@@ -34,10 +34,6 @@
             background-color: red; /* Cambia el fondo a rojo */
         }
 
-        .modal .modal-dialog {
-            max-width: 80%;
-        }
-
         .modal-body img {
             max-width: 100%;
             height: auto;
@@ -106,8 +102,8 @@
     <section class="row mt-3">
 
     <!-- Ventana Emergente del Carrito -->
-    <div class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div style="max-width: 100%;" class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+        <div style="max-width: 80%;" class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="carritoModalLabel">Carrito de Compras</h3>

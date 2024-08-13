@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     addToCartButton.addEventListener('click', (e) => {
-        alert("Se ha agregado exitosamente");
         e.preventDefault();
         addProductToCart();
         updateCarritoModal();
