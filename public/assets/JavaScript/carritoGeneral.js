@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const carritoModal = new bootstrap.Modal(document.getElementById('carritoModal'));
     const productosCarrito = document.getElementById('productosCarrito');
     const totalCarrito = document.getElementById('totalCarrito');
-    const addToCartButton = document.getElementById('addToCart');
-    const iconoCarrito = document.getElementById('iconoCarrito');
     const vaciarCarritoButton = document.getElementById('vaciarCarrito');
     const comprarCarritoButton = document.getElementById('comprarCarrito');
 
@@ -11,12 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         productosCarrito.innerHTML = '';
         let total = 0;
+        //Aqui se leen todos los datos del carrito en localStorage
         carrito.forEach((producto, index) => {
             const productoDiv = document.createElement('div');
             productoDiv.classList.add('row', 'mb-2');
             productoDiv.innerHTML = `
-                <div class="col-6">${producto.descripcion}</div>
-                <div class="col-3">Lps.${producto.precioEntero}</div>
+                <div class="col-5">${producto.descripcion}</div>
+                <div class="col-3">${producto.precioEntero}</div>
                 <div class="col-2">${producto.cantidad}</div>
                 <div class="col-1">
                     <button class="btn btn-danger btn-sm eliminarProducto" data-index="${index}">Eliminar</button>
@@ -28,18 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
         totalCarrito.querySelector('strong').textContent = `Lps.${total.toFixed(2)}`;
     };
 
-    const addProductToCart = () => {
-        const descripcion = document.getElementById('productDescripcion').textContent.trim();
-        const precioString = document.getElementById('productPrecio').textContent.trim(); // Elemento q capture del div pero es un string
-        const precioNumerico = precioString.replace(/[^0-9.-]+/g, '');
-        // Convertir a número entero 
-        const precioEntero = parseFloat(precioNumerico);
-        console.log(precioEntero);
-        const cantidad = 1; 
-        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        carrito.push({ descripcion, precioEntero, cantidad });
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-    };
+    iconoCarrito.addEventListener('click', () => {
+        updateCarritoModal();
+        carritoModal.show();
+    });
 
     const vaciarCarrito = () => {
         localStorage.removeItem('carrito');
@@ -52,17 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('carrito', JSON.stringify(carrito));
         updateCarritoModal();
     };
-
-    addToCartButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        addProductToCart();
-        updateCarritoModal();
-    });
-
-    iconoCarrito.addEventListener('click', () => {
-        updateCarritoModal();
-        carritoModal.show();
-    });
 
     vaciarCarritoButton.addEventListener('click', () => {
         vaciarCarrito();
@@ -78,4 +58,5 @@ document.addEventListener('DOMContentLoaded', function () {
     comprarCarritoButton.addEventListener('click', () => {
         
     });
+
 });

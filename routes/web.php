@@ -29,10 +29,24 @@ Route::get('/producto/visualizar/{idProducto}',
     [ProductosController::class, 'mostrarProductoPorId']
     )->name('producto.visualizar');
 
-//prueba para probar redirect a paginaPrincipal, luego se cambiara
+/*prueba para probar redirect a paginaPrincipal, luego se cambiara
 Route::get('/usuario/verificar', function(){
     return redirect()->route('principal');
 })->name('usuario.verificar');
+*/
+
+////////////////////////////////////////////////
+//Hacer peticion al BackEnd de la existencia de un usuario
+Route::get('/usuario/verificar',
+    [ProductosController::class, 'verificarUsuarioLogin']
+    )->name('usuario.verificar');
+
+//usuario.obtener.nombre
+Route::get('/usuario/obtener/por/nombre/{nombre}',
+    [ProductosController::class, 'obtenerPorNombre']
+    )->name('usuario.obtener.nombre');
+
+////////////////////////////////
 
 Route::get('/favoritos', function(){
     return view('listaFavoritos');
