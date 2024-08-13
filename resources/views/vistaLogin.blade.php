@@ -47,12 +47,12 @@
             <!-- Peticion get al backend para verificar si el usuario y contraseña se encuentra registrado -->
             <form action="{{route('usuario.verificar')}}" method="GET" id="loginForm">
                 <div class="form-group">
-                    <label for="username">Usuario</label>
-                    <input id="usuarioCampo" type="text" class="form-control" id="username" placeholder="Ingresa tu usuario" required>
+                    <label for="nombre">Usuario</label>
+                    <input name="nombre" id="usuarioCampo" type="text" class="form-control" id="nombre" placeholder="Ingresa tu usuario" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
+                    <label for="nombre">Contraseña</label>
+                    <input name="contrasenia" type="contrasenia" class="form-control" id="contrasenia" placeholder="Ingresa tu contraseña" required>
                 </div>
                 <button id="BotonIngresar" type="submit" class="btn boton btn-block">Ingresar</button>
             </form>
@@ -78,6 +78,12 @@
     </div>
 
     <script src="{{ asset ('/assets/JavaScript/GuardarALocalStorage.js') }}"></script>
+    <script>
+        //Info necesaria para la navbar dinamica
+        window.appConfig = {
+                            urlObtenerUsuarioPorNombre: "{{ route('usuario.obtener.nombre', ['nombre' => '1']) }}"
+                            };
+    </script>
 
 </body>
 </html>

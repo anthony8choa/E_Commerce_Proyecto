@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             productoDiv.classList.add('row', 'mb-2');
             productoDiv.innerHTML = `
                 <div class="col-6">${producto.descripcion}</div>
-                <div class="col-3">${producto.precioEntero}</div>
+                <div class="col-3">Lps.${producto.precioEntero}</div>
                 <div class="col-2">${producto.cantidad}</div>
                 <div class="col-1">
                     <button class="btn btn-danger btn-sm eliminarProducto" data-index="${index}">Eliminar</button>
@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const precioString = document.getElementById('productPrecio').textContent.trim(); // Elemento q capture del div pero es un string
         const precioNumerico = precioString.replace(/[^0-9.-]+/g, '');
         // Convertir a número entero 
-        const precioEntero = parseInt(precioNumerico, 10);
+        const precioEntero = parseFloat(precioNumerico);
+        console.log(precioEntero);
         const cantidad = 1; 
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         carrito.push({ descripcion, precioEntero, cantidad });
