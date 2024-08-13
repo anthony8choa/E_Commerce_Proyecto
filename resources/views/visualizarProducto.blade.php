@@ -34,6 +34,15 @@
             background-color: red; /* Cambia el fondo a rojo */
         }
 
+        .modal .modal-dialog {
+            max-width: 80%;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+        }
+
     </style>
 </head>
 <body>
@@ -75,7 +84,7 @@
                         </li>
                         <li class="nav-item ms-1">
                             <nav class="navbar">
-                                <a class="navbar-brand" href="#">
+                                <a id="iconoCarrito" class="navbar-brand" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                                     </svg>
@@ -99,7 +108,7 @@
             <section class="col mt-3 pt-3 pb-3 pd-4 ps-4">
                 <section class="row fs-1 mb-2">
                     <!-- Descripcion del producto -->
-                    <div>
+                    <div id="productDescripcion">
                         {{$producto['nombreProducto']}}
                     </div>
                 </section>
@@ -109,7 +118,7 @@
                         <div>{{$producto['descripcion']}}</div>
                     </div>
                     <!-- Precio del producto -->
-                    <div class="fs-3 fw-bold mt-3">
+                    <div id="productPrecio" class="fs-3 fw-bold mt-3">
                         {{$producto['precioUnitario']}}
                         Lps.
                     </div>
@@ -121,7 +130,7 @@
                     </section>
                     <!-- Carrito -->
                     <section class="row mt-3 align-items-center">
-                        <a href="#" class="btn btn-light">Agregar al carrito</a>
+                        <a href="#" id="addToCart" class="btn btn-light">Agregar al carrito</a>
                     </section>
                 </section>
             </section>
@@ -176,6 +185,27 @@
         </section>
     </section>
 
+    <!-- Ventana Emergente del Carrito -->
+    <div class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="carritoModalLabel">Carrito de Compras</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="productosCarrito"></div>
+                    <div id="totalCarrito" class="fs-4 mt-3">Total: <strong>Lps.0</strong></div>
+                    <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="comprarCarrito">Comprar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
     <script>
@@ -185,6 +215,7 @@
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
+    <script src="{{ asset ('/assets/JavaScript/carritoProducto.js') }}"></script>
 </body>
 </html>
 

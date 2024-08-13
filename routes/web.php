@@ -20,23 +20,18 @@ Route::get('/registro', function () {
     return view('vistaRegistro');
 })->name('registro');
 
-Route::get('/principal', function(){
+Route::get('/index', function(){
     return view('paginaPrincipal');
 })->name('principal');
 
-//Comentada mientras se implementa funcionalidad
+//Obtiene el id del producto y redirige a la vista con ese producto asociado
 Route::get('/producto/visualizar/{idProducto}', 
     [ProductosController::class, 'mostrarProductoPorId']
     )->name('producto.visualizar');
 
-///visualizar/producto PRUEBA
-/*Route::get('/producto/visualizar', function(){
-    return view('visualizarProducto');
-})->name('visualizar.producto');*/
-
 //prueba para probar redirect a paginaPrincipal, luego se cambiara
 Route::get('/usuario/verificar', function(){
-    return redirect('principal');
+    return redirect()->route('principal');
 })->name('usuario.verificar');
 
 Route::get('/favoritos', function(){
@@ -51,4 +46,12 @@ Route::get('categorias/obtener/nombre',
 Route::get('categorias/obtener/productos/{idCategoria}',
     [CategoriaController::class, 'obtenerProductosDeCategoria']
     )->name("obtener.productos.categoria");
+
+Route::get('usuario/ver/cuenta',function(){
+    return view('verCuenta');
+})->name("usuario.ver.cuenta");
+
+Route::get('antony',function(){
+    return view('vistaAntony');
+});
 
