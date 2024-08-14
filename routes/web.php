@@ -49,7 +49,7 @@ Route::get('/usuario/obtener/por/nombre/{nombre}',
 ////////////////////////////////
 
 Route::get('/favoritos', function(){
-    return view('listaFavoritos');
+    return view('listaFavoritosUsuario');
 })->name('favoritos');
 
 Route::get('categorias/obtener/nombre',
@@ -65,7 +65,7 @@ Route::get('usuario/ver/cuenta',function(){
     return view('verCuenta');
 })->name("usuario.ver.cuenta");
 
-Route::get('antony',function(){
-    return view('vistaAntony');
-});
+Route::get('login/comerciante', function(){
+    return view('loginComerciante');
+})->name("login.comerciante");
 

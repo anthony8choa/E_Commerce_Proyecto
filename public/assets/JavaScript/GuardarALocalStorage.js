@@ -38,6 +38,7 @@ class GuardarALocalStorage{
         })
         .catch((error) => {
             console.warn("Error:"+ error);
+            alert("Su contraseña o usuario es incorrecto")
             localStorage.setItem("codigoUsuario",null);
         });
 
