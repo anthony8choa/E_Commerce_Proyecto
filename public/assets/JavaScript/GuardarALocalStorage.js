@@ -10,12 +10,6 @@ class GuardarALocalStorage{
     agregarALocalStorageUsuario(event){
         let usuario = document.getElementById("usuarioCampo").value;
         //localStorage.clear();
-        const esInvitado = "no";
-        localStorage.setItem("esInvitado",esInvitado);
-        localStorage.setItem("nombreUsuario",usuario);
-        //console.log(localStorage.getItem("esInvitado"));
-
-
         const url = window.appConfig.urlObtenerUsuarioPorNombre.replace("/1",`/${usuario}`);
         console.log(url);
 
@@ -33,6 +27,9 @@ class GuardarALocalStorage{
 
             if(data!=null){
                 localStorage.setItem("codigoUsuario",`${data.codigoUsuario}`);
+                const esInvitado = "no";
+                localStorage.setItem("esInvitado",esInvitado);
+                localStorage.setItem("nombreUsuario",usuario);
             }
         
         })

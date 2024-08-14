@@ -67,7 +67,7 @@
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Transacciones</a></li>
                                 <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
-                                <li><a class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
+                                <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
                                 <!-- Invitado (generado por js) -->
@@ -76,7 +76,7 @@
                         
                         <li class="nav-item">
                             <nav class="navbar ms-4">
-                                <a class="navbar-brand" href="{{route('favoritos')}}">
+                                <a id="botonListaFavoritos" class="navbar-brand" href="{{route('favoritos', '1') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
                                     </svg>
@@ -123,7 +123,7 @@
                     <section class="col-md-3">
                         <div class="shadow-lg card h-100">
                             <!-- Imagen del producto -->
-                            <img src="{{ $producto['imagenProducto'] }}" class="card-img-top" alt="...">
+                            <img src="{{ $producto['imagenProducto'] }}" height="300" width="300" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <!-- Nombre del producto -->
                                 <h5 class="card-title">{{ $producto['nombreProducto'] }}</h5>
@@ -170,12 +170,17 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
     <script>
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
-                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1']) }}"    
+                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1']) }}",
+                            urlLogin: "{{route('login')}}"
                             };
+    </script>
+    <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
+    <script>
+        // Borra el localStorage al hacer click en cerrar sesion
+        document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/carritoGeneral.js') }}"></script>

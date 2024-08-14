@@ -7,6 +7,8 @@ class LeerLocalStorage{
         let tipoIngresoDropdown = document.getElementById("tipoIngresoDropdown");
         let dropdownInvitado = document.getElementById("dropdownInvitado");
 
+        
+
         if(localStorage.getItem("esInvitado") === "si" || localStorage.getItem("esInvitado") === null){
             dropdownInvitado.innerHTML = "Invitado";
 
@@ -26,8 +28,23 @@ class LeerLocalStorage{
         }else{
             console.warn("Advertencia");
         }
+
+        this.insertarLinkDinamicoListaFavoritos();
+    }
+
+    insertarLinkDinamicoListaFavoritos(){
+        //Añadir dinamicamente el href del boton de lista de favoritos
+        let botonListaFavoritos = document.getElementById("botonListaFavoritos");
+        if(localStorage.getItem("codigoUsuario") != null){
+            let idUsuario = localStorage.getItem("codigoUsuario");
+            botonListaFavoritos.href = botonListaFavoritos.href.replace("/1",`/${idUsuario}`);
+        }else{
+            console.log(window.appConfig.urlLogin);
+            botonListaFavoritos.href = window.appConfig.urlLogin;
+        }
     }
 
 }
 
 let leerLocalStorage = new LeerLocalStorage();
+

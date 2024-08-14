@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ListaFavoritos extends Controller
 {
@@ -11,8 +12,16 @@ class ListaFavoritos extends Controller
      * @param idUsuario Refiere al id del usuario a enviar para recibir su lista
      * @return listaFavoritos Refiere a la lista de productos asociada al usuario
      */
-    public function obtenerListaFavoritos($idUsuario){
+    public function obtenerListaFavoritoPorUsuario($idUsuario){
+        if($idUsuario!=null){
+            $datoConvertir = Http::get('localhost:8091/api/productos/obtener/listafavoritos/'.$idUsuario);
+            $listaFavoritos = $datoConvertir->Json();
 
+            return view('listaFavoritosUsuario', compact('listaFavoritos'));
+
+        }else{
+            return view('welcome');
+        }
     }
 
     /**

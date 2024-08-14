@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DireccionesController;
 use App\Http\Controllers\MetodoPagoController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ListaFavoritos;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,13 +30,8 @@ Route::get('/producto/visualizar/{idProducto}',
     [ProductosController::class, 'mostrarProductoPorId']
     )->name('producto.visualizar');
 
-/*prueba para probar redirect a paginaPrincipal, luego se cambiara
-Route::get('/usuario/verificar', function(){
-    return redirect()->route('principal');
-})->name('usuario.verificar');
-*/
 
-////////////////////////////////////////////////
+
 //Hacer peticion al BackEnd de la existencia de un usuario
 Route::get('/usuario/verificar',
     [ProductosController::class, 'verificarUsuarioLogin']
@@ -46,11 +42,16 @@ Route::get('/usuario/obtener/por/nombre/{nombre}',
     [ProductosController::class, 'obtenerPorNombre']
     )->name('usuario.obtener.nombre');
 
-////////////////////////////////
-
+//Lista favoritos
+/*
 Route::get('/favoritos', function(){
     return view('listaFavoritosUsuario');
-})->name('favoritos');
+})->name('favoritos');*/
+
+//Lista favoritos
+Route::get('/favoritos/{codigoUsuario}',
+    [ListaFavoritos::class, 'obtenerListaFavoritoPorUsuario']
+    )->name('favoritos');
 
 Route::get('categorias/obtener/nombre',
     [CategoriaController::class, 'obtenerNombreDeCategorias']

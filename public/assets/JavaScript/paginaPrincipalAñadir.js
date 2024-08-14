@@ -32,7 +32,7 @@ fetch(window.appConfig.urlCategorias, {
                         <section class="col-md-3">
                             <div id="imagenProductoPPContainer${i}" class="shadow-lg card h-100">
                                 <!-- Imagen del producto -->
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Jersei-coll-alt.jpg" class="card-img-top" alt="Sueter">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Jersei-coll-alt.jpg" height="300" width="300" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
                                     <!-- Nombre del producto -->
                                     <h5 id="nombreProductoPPContainer${i}" class="card-title">Sueter</h5>
@@ -49,7 +49,7 @@ fetch(window.appConfig.urlCategorias, {
                         <!-- Producto 2, notar que esta secuencia html se repite -->
                         <section class="col-md-3">
                             <div class="shadow-lg card h-100">
-                                <img src="https://yazbek.com.mx/cdn/shop/products/C0651-pantalon-mezclilla-caballero-100algodon-indigo-oscuro_1.jpg?v=1693281330" class="card-img-top" alt="Sueter">
+                                <img src="https://yazbek.com.mx/cdn/shop/products/C0651-pantalon-mezclilla-caballero-100algodon-indigo-oscuro_1.jpg?v=1693281330" height="300" width="300" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -60,7 +60,7 @@ fetch(window.appConfig.urlCategorias, {
                         <!-- Producto 3, notar que esta secuencia html se repite -->
                         <section class="col-md-3">
                             <div class="shadow-lg card h-100">
-                                <img src="https://paylesshn.vtexassets.com/arquivos/ids/409161/195826_1.jpg?v=638180565815400000" class="card-img-top" alt="Sueter">
+                                <img src="https://paylesshn.vtexassets.com/arquivos/ids/409161/195826_1.jpg?v=638180565815400000" height="300" width="300" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -71,7 +71,7 @@ fetch(window.appConfig.urlCategorias, {
                         <!-- Producto 4, notar que esta secuencia html se repite -->
                         <section class="col-md-3">
                             <div class="shadow-lg card h-100">
-                                <img src="https://www.repuestostotal.com/wp-content/uploads/MJC0112_MLS2N3XL-CHUMPA-BRIGHTON-MAN-LS2-NEGRO-A.jpg" class="card-img-top" alt="Sueter">
+                                <img src="https://www.repuestostotal.com/wp-content/uploads/MJC0112_MLS2N3XL-CHUMPA-BRIGHTON-MAN-LS2-NEGRO-A.jpg" height="300" width="300" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

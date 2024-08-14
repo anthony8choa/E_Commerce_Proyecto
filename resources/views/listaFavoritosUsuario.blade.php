@@ -105,7 +105,7 @@
                         
                         <li class="nav-item">
                             <nav class="navbar ms-4">
-                                <a class="navbar-brand" href="{{route('favoritos')}}">
+                                <a id="botonListaFavoritos" class="navbar-brand" href="{{route('favoritos', '1')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
                                     </svg>
@@ -145,40 +145,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                           <!--  aqui podrias hacer un  @ foreach para iterar lo que hay en la tabla podria ser  -->
-                         <!-- Ejemplos que meti para ver como se veia  -->
-                        <td><img src="https://hushpuppies.hn/cdn/shop/products/300450171.jpg?v=1679272084" alt="Producto" class="img-fluid"></td>
-                        <td>Producto de Ejemplo</td>
-                        <td> Hombre marca Hush Puppies</td>
-                        <td>L.1999</td>
-                        <td>
-                            <a href="#" class="btn btn-ir-producto mb-2">Ir al producto</a>
-                        </td>
-                        <td>
-                            <button class="btn btn-eliminar">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="https://hushpuppies.hn/cdn/shop/products/300450172.jpg?v=1679272085" alt="Producto" class="img-fluid"></td>
-                        <td>Producto de Ejemplo </td>
-                        <td>Zapato de Mujer marca Hush Puppies</td>
-                        <td>L.1459</td>
-                        <td>
-                            <a href="#" class="btn btn-ir-producto mb-2">Ir al producto</a>
+
+                    <!-- Bucle foreach para iterar la lista de favoritos recibida, producto por producto  -->
+                    @foreach ($listaFavoritos as $favorito)
+
+                        <tr>
                             
-                        </td>
-                        <td>
-                            <button class="btn btn-eliminar">Eliminar</button>
-                        </td>
-                    </tr>
-                   
+                            <td><img src="{{$favorito['imagenProducto']}}" alt="Producto" height="700" width="400" class="img-fluid"></td>
+                            <td>{{$favorito['nombreProducto']}}</td>
+                            <td>{{$favorito['descripcion']}}</td>
+                            <td>L.{{$favorito['precioUnitario']}}</td>
+                            <td>
+                                <a href="{{ route('producto.visualizar',$favorito['codigoProducto']) }}" class="btn btn-ir-producto mb-2">Ir al producto</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-eliminar">Eliminar</button>
+                            </td>
+                        </tr>
+
+                    @endforeach
+
                 </tbody>
             </table>
             <button class="btn btn-vaciar">Vaciar lista de favoritos</button>
         </div>
+        
     </div>
-    
+    <div class="mb-5"></div>
 
     <!-- Ventana Emergente del Carrito -->
     <div style="max-width: 100%;" class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
@@ -202,15 +195,20 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
     <script>
         //Info necesaria para la navbar dinamica
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
-                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1']) }}"    
+                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1']) }}",
+                            urlLogin: "{{route('login')}}"
                             };
     </script>
+    <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
+    <script>
+        // Borra el localStorage al hacer click en cerrar sesion
+        document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
+    </script>
     <script>
         // Borra el localStorage al hacer click en cerrar sesion
         document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
