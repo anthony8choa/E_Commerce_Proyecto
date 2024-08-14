@@ -7,7 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color:  rgb(35,47,62);
             font-family: 'Arial', sans-serif;
         }
         .register-container {
@@ -37,7 +37,7 @@
     <div>
         <div class="col-md-12 bg-warning d-flex justify counting-center p-3"> 
             <div>
-                <h4><a class="" href="#">E-commerce UNAH</a></h4>
+                <h4 class="" style="color: #0056b3">E-commerce UNAH</h4>
             </div>
             
         </div>
@@ -46,6 +46,8 @@
     <div class="container d-flex justify-content-center">
         <div class="register-container">
             <h4 class="text-center mb-4">Registro de Usuario</h4>
+            
+            
             <form id="registerForm" action="/register" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-12">
@@ -58,7 +60,7 @@
                         <label for="telefono">Teléfono</label>
                         <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingresa tu número de teléfono" required>
                     </div>
-              
+            
                 
                     <div class="form-group col-md-6">
                         <label for="pais">Pais</label>
@@ -111,8 +113,11 @@
 
                 <button type="submit" class="btn btn-custom btn-block">Registrar</button>
             </form>
+
+
         </div>
     </div>
+    <div class="mb-5"></div>
 
  
 </body>

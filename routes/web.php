@@ -39,7 +39,7 @@ Route::get('/usuario/verificar',
 
 //usuario.obtener.nombre
 Route::get('/usuario/obtener/por/nombre/{nombre}',
-    [ProductosController::class, 'obtenerPorNombre']
+    [UsuarioController::class, 'obtenerPorNombre']
     )->name('usuario.obtener.nombre');
 
 //Lista favoritos
@@ -69,4 +69,8 @@ Route::get('usuario/ver/cuenta',function(){
 Route::get('login/comerciante', function(){
     return view('loginComerciante');
 })->name("login.comerciante");
+
+Route::get('favoritos/eliminar/producto/{codigoUsuario}/{codigoProducto}',
+    [ListaFavoritos::class, 'eliminarProductoDeListaFavoritos']
+    )->name("favoritos.eliminar.producto");
 

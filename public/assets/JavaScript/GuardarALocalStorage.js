@@ -9,7 +9,9 @@ class GuardarALocalStorage{
 
     agregarALocalStorageUsuario(event){
         let usuario = document.getElementById("usuarioCampo").value;
-        //localStorage.clear();
+        if(localStorage.length>0){
+            localStorage.clear();
+        }
         const url = window.appConfig.urlObtenerUsuarioPorNombre.replace("/1",`/${usuario}`);
         console.log(url);
 
@@ -34,7 +36,7 @@ class GuardarALocalStorage{
         
         })
         .catch((error) => {
-            console.warn("Error:"+ error);
+            //Si entra a este catch es porque el usuario no existe
             alert("Su contraseña o usuario es incorrecto")
             localStorage.setItem("codigoUsuario",null);
         });

@@ -12,12 +12,12 @@ class ListaFavoritos extends Controller
      * @param idUsuario Refiere al id del usuario a enviar para recibir su lista
      * @return listaFavoritos Refiere a la lista de productos asociada al usuario
      */
-    public function obtenerListaFavoritoPorUsuario($idUsuario){
-        if($idUsuario!=null){
-            $datoConvertir = Http::get('localhost:8091/api/productos/obtener/listafavoritos/'.$idUsuario);
+    public function obtenerListaFavoritoPorUsuario($codigoUsuario){
+        if($codigoUsuario!=null){
+            $datoConvertir = Http::get('localhost:8091/api/productos/obtener/listafavoritos/'.$codigoUsuario);
             $listaFavoritos = $datoConvertir->Json();
 
-            return view('listaFavoritosUsuario', compact('listaFavoritos'));
+            return view('listaFavoritosUsuario', compact('listaFavoritos','codigoUsuario'));
 
         }else{
             return view('welcome');
@@ -30,8 +30,15 @@ class ListaFavoritos extends Controller
      * @param idProducto Refiere al producto a registrar en la lista de favoritos del usuario
      * @return listaFavoritos Refiere a la lista de productos asociada al usuario
      */
-    public function añadirAListaFavoritos($idUsuario,$idProducto){
+    public function añadirAListaFavoritos($codigoUsuario, $codigoProducto){
 
+    }
+
+    public function eliminarProductoDeListaFavoritos($codigoUsuario, $codigoProducto){
+        $respuesta = Http::delete('localhost:8091/api/usuarios/eliminar/producto/listaFavorito/'.$codigoUsuario.'?codigoproducto='.$codigoProducto);
+        $respuestaListaFavoritos = $respuesta->Json();
+        $listaFavoritos = $respuestaListaFavoritos['listaproductos'];
+        return view('listaFavoritosUsuario', compact('listaFavoritos','codigoUsuario'));
     }
 
 }

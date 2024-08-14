@@ -159,7 +159,7 @@
                                 <a href="{{ route('producto.visualizar',$favorito['codigoProducto']) }}" class="btn btn-ir-producto mb-2">Ir al producto</a>
                             </td>
                             <td>
-                                <button class="btn btn-eliminar">Eliminar</button>
+                                <a href="{{ route('favoritos.eliminar.producto', ['codigoUsuario' => $codigoUsuario, 'codigoProducto' => $favorito['codigoProducto']]) }}" class="btn btn-eliminar">Eliminar</a>
                             </td>
                         </tr>
 

@@ -45,4 +45,12 @@ class UsuarioController extends Controller
     public function registrarUsuario(Request $request){
 
     }
+
+    //Obtiene el usuario completo mediante su nombre de usuario
+    public function obtenerPorNombre($nombre){
+        $datoConvertir = Http::get('localhost:8091/api/usuarios/obtener/por/nombre/'.$nombre);
+        $respuesta = $datoConvertir->Json();
+
+        return $respuesta;
+    }
 }
