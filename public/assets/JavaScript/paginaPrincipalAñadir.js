@@ -6,7 +6,7 @@ fetch(window.appConfig.urlCategorias, {
 })
 .then(response => response.json())
 .then(data => {
-    console.log("Success:", data);
+    //console.log("Success:", data);
     let i = 1;
 
     let rutaCategoriaEspecifica = window.appConfig.urlProductosCategorias;
@@ -28,9 +28,9 @@ fetch(window.appConfig.urlCategorias, {
                         </section>
                     </section>
                     <section class="row fs-6 mb-5">
-                        <!-- Producto 1, notar que esta secuencia html se repite -->
+                        <!-- Producto, notar que esta secuencia html se repite -->
                         <section class="col-md-3">
-                            <div id="imagenProductoPPContainer${i}" class="card h-100">
+                            <div id="imagenProductoPPContainer${i}" class="shadow-lg card h-100">
                                 <!-- Imagen del producto -->
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Jersei-coll-alt.jpg" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
@@ -48,7 +48,7 @@ fetch(window.appConfig.urlCategorias, {
                         </section>
                         <!-- Producto 2, notar que esta secuencia html se repite -->
                         <section class="col-md-3">
-                            <div class="card h-100">
+                            <div class="shadow-lg card h-100">
                                 <img src="https://yazbek.com.mx/cdn/shop/products/C0651-pantalon-mezclilla-caballero-100algodon-indigo-oscuro_1.jpg?v=1693281330" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
@@ -59,7 +59,7 @@ fetch(window.appConfig.urlCategorias, {
                         </section>
                         <!-- Producto 3, notar que esta secuencia html se repite -->
                         <section class="col-md-3">
-                            <div class="card h-100">
+                            <div class="shadow-lg card h-100">
                                 <img src="https://paylesshn.vtexassets.com/arquivos/ids/409161/195826_1.jpg?v=638180565815400000" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
@@ -70,7 +70,7 @@ fetch(window.appConfig.urlCategorias, {
                         </section>
                         <!-- Producto 4, notar que esta secuencia html se repite -->
                         <section class="col-md-3">
-                            <div class="card h-100">
+                            <div class="shadow-lg card h-100">
                                 <img src="https://www.repuestostotal.com/wp-content/uploads/MJC0112_MLS2N3XL-CHUMPA-BRIGHTON-MAN-LS2-NEGRO-A.jpg" class="card-img-top" alt="Sueter">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
@@ -81,6 +81,7 @@ fetch(window.appConfig.urlCategorias, {
                         </section>
                     </section>
                 </section>
+                <section class="m-3 border border-secondary"></section"
         `
         i++;
     }

@@ -7,7 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color:  rgb(35,47,62);
             font-family: 'Arial', sans-serif;
         }
         .contenedor-login {
@@ -32,7 +32,7 @@
     <div>
         <div class="col-md-12 bg-warning d-flex justify counting-center p-3"> 
             <div>
-                <h4><a class="" href="#">E-commerce UNAH</a></h4>
+                <h4 class="" style="color: #0056b3">E-commerce UNAH</h4>
             </div>
             
         </div>
@@ -62,7 +62,7 @@
 
     <div class="container">
         <div class="row m-3 d-flex justify-content-center">
-            <div class="text-center mb-4"> 
+            <div class="text-center mb-4 text-white"> 
                 <h5>¿No tienes una cuenta de Usuario? 
                     <a href="">Registrarse</a>
                 </h5>
@@ -71,6 +71,8 @@
                 </h5>
                 <h5>
                     Ingresar como <a id="invitadoBoton" href="{{route('principal')}}">invitado</a>
+                    |
+                    Ingresar como <a id="invitadoBoton" href="{{route('login.comerciante')}}">comerciante</a>
                 </h5>
             </div>
         </div>
