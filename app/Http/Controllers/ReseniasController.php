@@ -13,7 +13,7 @@ class ReseniasController extends Controller
         $comentario = $request->comentario;
 
         $respuesta = Http::post('localhost:8091/api/resenias/crear/resenia/'.$idUsuario.'/'.$idProducto, [
-            "cantidadEstrelas" => $cantidadEstrelas,
+            "cantidadEstrellas" => $cantidadEstrelas,
             "comentario" => $comentario
         ]);
 

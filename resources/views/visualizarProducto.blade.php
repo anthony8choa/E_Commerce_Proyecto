@@ -111,7 +111,7 @@
                 <section class="row fs-1 mb-2">
                     <!-- Nombre del producto -->
                     <div>
-                        {{$producto['nombreProducto']}}
+                        {{$producto['nombreProducto']}} <span id="codigoProductoSpan" class="d-none">{{$producto['codigoProducto']}}</span>
                     </div>
                 </section>
                 <section class="row border-top"></section>
@@ -192,9 +192,14 @@
                                     
                                         {{$resenias['nombreUsuario']}} · 
 
-                                        @for ($i = 0; $i < $resenias['cantidadEstrellas']; $i++)
+                                        @if ($resenias['cantidadEstrellas'] > 0)
+                                            @for ($i = 0; $i < $resenias['cantidadEstrellas']; $i++)
                                             ⭐
-                                        @endfor
+                                            @endfor
+                                        @else
+                                            (0 estrellas)
+                                        @endif
+                                        
                                         
                                     </div>
                                 </section>
@@ -233,6 +238,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!-- Cabecera de la "tabla" -->
+                    <div class="row font-weight-bold fw-bold mb-2">
+                        <div class="col-6">Descripción</div>
+                        <div class="col-3">Precio</div>
+                        <div class="col-2">Cantidad</div>
+                        <div class="col-1"></div> <!-- Columna para el botón de eliminar -->
+                    </div>
+                    <!-- Aquí se van a insertar dinámicamente los productos -->
                     <div id="productosCarrito"></div>
                     <div id="totalCarrito" class="fs-4 mt-3">Total: <strong>Lps.0</strong></div>
                     <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>
@@ -255,25 +268,6 @@
             </div>
             <div class="modal-body">
                 Se ha agregado exitosamente el producto al carrito
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-            </div>
-        </div>
-        </div>
-    </div>
-
-    <!-- Modal de agregado exitoso a la lista de favoritos -->
-    <div class="modal fade" id="agregadoExitosamenteFavoritosModal" tabindex="-1" aria-labelledby="agregadoExitosamenteFavoritosModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="agregadoExitosamenteFavoritosModalLabel">Confirmación</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Se ha agregado exitosamente el producto a la lista de favoritos
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -309,7 +303,7 @@
             let formularioComentarios = document.getElementById("formularioComentarios");
             formularioComentarios.action = formularioComentarios.action.replace("/999",`/${localStorage.getItem("codigoUsuario")}`);
 
-        } //999
+        }
 
     </script>
 </body>

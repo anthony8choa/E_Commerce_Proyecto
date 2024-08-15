@@ -12,33 +12,71 @@ document.addEventListener('DOMContentLoaded', function () {
         productosCarrito.innerHTML = '';
         let total = 0;
         carrito.forEach((producto, index) => {
+
             const productoDiv = document.createElement('div');
             productoDiv.classList.add('row', 'mb-2');
+
+            const precioTotalProducto = producto.precioEntero;
+
+            let mensaje = "";
+
+            if(producto.cantidad > 1){
+                mensaje = `(Precio unitario: Lps.${producto.precioEntero/producto.cantidad})`;
+            }
+
             productoDiv.innerHTML = `
-                <div class="col-6">${producto.descripcion}</div>
-                <div class="col-3">Lps.${producto.precioEntero}</div>
-                <div class="col-2">${producto.cantidad}</div>
-                <div class="col-1">
+                <div id="productoDescripcionCarrito" class="col-6">${producto.descripcion} (codigo de producto: ${producto.codigoProducto})</div>
+                <div id="productoPrecioCarrito" class="col-3">Lps.${producto.precioEntero} ${mensaje}</div>
+                <div id="productoCantidadCarrito" class="col-2">${producto.cantidad}</div>
+                <div id="productoBotonEliminarProductoCarrito" class="col-1">
                     <button class="btn btn-danger btn-sm eliminarProducto" data-index="${index}">Eliminar</button>
                 </div>
             `;
             productosCarrito.appendChild(productoDiv);
-            total += producto.precioEntero * producto.cantidad;
+            total += precioTotalProducto;
         });
         totalCarrito.querySelector('strong').textContent = `Lps.${total.toFixed(2)}`;
     };
 
     const addProductToCart = () => {
+        /*
         const descripcion = document.getElementById('productDescripcion').textContent.trim();
         const precioString = document.getElementById('productPrecio').textContent.trim(); // Elemento q capture del div pero es un string
+        const codigoProducto = document.getElementById('codigoProductoSpan').innerText;
         const precioNumerico = precioString.replace(/[^0-9.-]+/g, '');
-        // Convertir a número entero 
+        // Convertir a número 
         const precioEntero = parseFloat(precioNumerico);
         console.log(precioEntero);
         const cantidad = 1; 
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        carrito.push({ descripcion, precioEntero, cantidad });
+        carrito.push({ codigoProducto, descripcion, precioEntero, cantidad });
+        localStorage.setItem('carrito', JSON.stringify(carrito)); */
+
+        const descripcion = document.getElementById('productDescripcion').textContent.trim();
+        const precioString = document.getElementById('productPrecio').textContent.trim(); // Elemento q capture del div pero es un string
+        const codigoProducto = document.getElementById('codigoProductoSpan').innerText;
+        const precioNumerico = precioString.replace(/[^0-9.-]+/g, '');
+        const precioEntero = parseFloat(precioNumerico);
+        
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    
+        // Buscar si el producto ya existe en el carrito
+        const productoExistente = carrito.find(producto => 
+            producto.codigoProducto === codigoProducto && 
+            producto.descripcion === descripcion
+        );
+    
+        if (productoExistente) {
+            // Si el producto ya existe, incrementar la cantidad y actualizar el precio
+            productoExistente.cantidad += 1;
+            productoExistente.precioEntero = productoExistente.cantidad * precioEntero;
+        } else {
+            // Si el producto no existe, agregarlo al carrito
+            carrito.push({ codigoProducto, descripcion, precioEntero, cantidad: 1 });
+        }
+    
         localStorage.setItem('carrito', JSON.stringify(carrito));
+        
     };
 
     const vaciarCarrito = () => {
