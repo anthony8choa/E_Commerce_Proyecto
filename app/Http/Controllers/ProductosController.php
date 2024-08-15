@@ -30,6 +30,8 @@ class ProductosController extends Controller
         $datoConvertir = Http::get('localhost:8091/api/usuarios/validar/login/'.$nombre.'/'.$contrasenia);
         $respuesta = $datoConvertir->Json();
 
+        session()->flash('respuestaLogin', $respuesta);
+
         if($respuesta === true){
             return redirect()->route('principal');
         }else{
@@ -40,12 +42,7 @@ class ProductosController extends Controller
         //$request -> contrasenia;
     }
 
-    public function obtenerPorNombre($nombre){
-        $datoConvertir = Http::get('localhost:8091/api/usuarios/obtener/por/nombre/'.$nombre);
-        $respuesta = $datoConvertir->Json();
 
-        return $respuesta;
-    }
 
 
 }

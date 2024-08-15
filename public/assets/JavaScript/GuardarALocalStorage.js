@@ -9,14 +9,12 @@ class GuardarALocalStorage{
 
     agregarALocalStorageUsuario(event){
         let usuario = document.getElementById("usuarioCampo").value;
-        if(localStorage.length>0){
-            localStorage.clear();
-        }
-        const url = window.appConfig.urlObtenerUsuarioPorNombre.replace("/1",`/${usuario}`);
-        console.log(url);
+        let contraseniaCampo = document.getElementById("contraseniaCampo").value;
 
-        //Se guarda el idUsuario al hacer el logeo correcto
-        fetch(url, {
+        const urlInicial = window.appConfig.urlObtenerUsuarioPorNombreLogin.replace("/nombreEjemplo",`/${usuario}`);
+        const urlFinal = urlInicial.replace("/contrasenia",`/${contraseniaCampo}`);
+        
+        fetch(urlFinal, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -24,27 +22,26 @@ class GuardarALocalStorage{
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Success:", data);
-            console.log(url);
 
             if(data!=null){
+                
                 localStorage.setItem("codigoUsuario",`${data.codigoUsuario}`);
                 const esInvitado = "no";
                 localStorage.setItem("esInvitado",esInvitado);
                 localStorage.setItem("nombreUsuario",usuario);
+
             }
         
         })
         .catch((error) => {
-            //Si entra a este catch es porque el usuario no existe
-            alert("Su contraseña o usuario es incorrecto")
-            localStorage.setItem("codigoUsuario",null);
+            alert("Su contraseña o usuario es incorrecto");
+            localStorage.clear();
         });
 
     }
 
     agregarALocalStorageInvitado(event){
-        localStorage.clear;
+        localStorage.clear();
         const esInvitado = "si";
         localStorage.setItem("esInvitado",esInvitado);
         localStorage.setItem("nombreUsuario",null);

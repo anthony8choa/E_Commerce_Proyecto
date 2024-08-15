@@ -99,23 +99,25 @@
     </div>
 
     <!-- Vista del producto -->
-    <section class="container bg-body-secondary rounded mt-4 text-dark ">
-        <!-- Descripcion del producto -->
+    <section class="container bg-body-secondary rounded mt-4 mb-5 text-dark ">
         <section class="row p-2">
             <section class="col-6 p-3 h-100" style="width: 500px;">
                 <!-- Imagen del producto -->
-                <img src="{{ $producto['imagenProducto'] }}" class="img-fluid" height="900" width="500" alt="...">
+                <section class="m-3 border border-secondary">
+                    <img src="{{ $producto['imagenProducto'] }}" class="img-fluid" height="900" width="500" alt="...">
+                </section>
             </section>
             <section class="col mt-3 pt-3 pb-3 pd-4 ps-4">
                 <section class="row fs-1 mb-2">
-                    <!-- Descripcion del producto -->
-                    <div id="productDescripcion">
+                    <!-- Nombre del producto -->
+                    <div>
                         {{$producto['nombreProducto']}}
                     </div>
                 </section>
                 <section class="row border-top"></section>
                 <section class="row mt-2">
                     <div class="fs-3">
+                        <!-- Descripcion del producto -->
                         <div>{{$producto['descripcion']}}</div>
                     </div>
                     <!-- Precio del producto -->
@@ -127,17 +129,18 @@
                 <section class="row fs-5 fw-bold">
                     <!-- Favoritos -->
                     <section class="row mt-3 align-items-center">
-                        <a href="#" class="btn btn-light">Agregar a favoritos</a>
+                        <!-- Inicialmente tiene el valor de 1 al enviar codigoProducto, pero con js se cambian automaticamente al user logeado -->
+                        <a id="botonAgregarAFavoritos" href="{{ route('favoritos.agregar.producto', ['codigoUsuario' => '1', 'codigoProducto' => $producto['codigoProducto'] ]) }}" class="btn btn-primary">Agregar a favoritos</a>
                     </section>
                     <!-- Carrito -->
                     <section class="row mt-3 align-items-center">
-                        <a href="#" id="addToCart" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#agregadoExitosamenteModal">Agregar al carrito</a>
+                        <a href="#" id="addToCart" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregadoExitosamenteModal">Agregar al carrito</a>
                     </section>
                 </section>
             </section>
         </section>
 
-        <section class="row border-top"></section>
+        <section class="m-3 border border-secondary"></section>
         <!-- Seccion de comentarios -->
         <section class="row p-2">
             <section class="row">
@@ -226,12 +229,32 @@
         </div>
     </div>
 
+    <!-- Modal de agregado exitoso a la lista de favoritos -->
+    <div class="modal fade" id="agregadoExitosamenteFavoritosModal" tabindex="-1" aria-labelledby="agregadoExitosamenteFavoritosModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="agregadoExitosamenteFavoritosModalLabel">Confirmación</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Se ha agregado exitosamente el producto a la lista de favoritos
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1']) }}",
-                            urlLogin: "{{route('login')}}"
+                            urlLogin: "{{route('login')}}",
+                            urlAñadirProductoAFavoritos: "{{ route('favoritos.agregar.producto', ['codigoUsuario' => '1', 'codigoProducto' => '1']) }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
@@ -241,6 +264,7 @@
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/carritoProducto.js') }}"></script>
+    <script src="{{ asset ('/assets/JavaScript/añadirFavoritoBotonFuncionalidad.js') }}"></script>
 </body>
 </html>
 

@@ -51,8 +51,8 @@
                     <input name="nombre" id="usuarioCampo" type="text" class="form-control" id="nombre" placeholder="Ingresa tu usuario" required>
                 </div>
                 <div class="form-group">
-                    <label for="nombre">Contraseña</label>
-                    <input name="contrasenia" type="contrasenia" class="form-control" id="contrasenia" placeholder="Ingresa tu contraseña" required>
+                    <label for="contrasenia">Contraseña</label>
+                    <input name="contrasenia" type="contrasenia" class="form-control" id="contraseniaCampo" placeholder="Ingresa tu contraseña" required>
                 </div>
                 <button id="BotonIngresar" type="submit" class="btn boton btn-block">Ingresar</button>
             </form>
@@ -79,13 +79,16 @@
             
     </div>
 
-    <script src="{{ asset ('/assets/JavaScript/GuardarALocalStorage.js') }}"></script>
     <script>
         //Info necesaria para la navbar dinamica
         window.appConfig = {
-                            urlObtenerUsuarioPorNombre: "{{ route('usuario.obtener.nombre', ['nombre' => '1']) }}"
+                            //Obtener los datos del usuario que se logeo (primero se verifica si se encuentra registrado mediante esta ruta)
+                            //Los parametros se cambian luego en un js
+                            urlObtenerUsuarioPorNombreLogin: "{{ route('usuario.obtener.nombre.login', ['nombre' => 'nombreEjemplo', 'contrasenia' => 'contrasenia']) }}",
                             };
+
     </script>
+    <script src="{{ asset ('/assets/JavaScript/GuardarALocalStorage.js') }}"></script>
 
 </body>
 </html>

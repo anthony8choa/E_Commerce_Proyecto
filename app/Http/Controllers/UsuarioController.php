@@ -47,10 +47,21 @@ class UsuarioController extends Controller
     }
 
     //Obtiene el usuario completo mediante su nombre de usuario
-    public function obtenerPorNombre($nombre){
-        $datoConvertir = Http::get('localhost:8091/api/usuarios/obtener/por/nombre/'.$nombre);
+    public function obtenerPorNombreLogin($nombre, $contrasenia){
+
+        //Ya que lo usará el login, para obtener el usuario, primero se debe validar el login
+        $datoConvertir = Http::get('localhost:8091/api/usuarios/validar/login/'.$nombre.'/'.$contrasenia);
         $respuesta = $datoConvertir->Json();
 
-        return $respuesta;
+        if($respuesta){
+
+            $datoConvertir = Http::get('localhost:8091/api/usuarios/obtener/por/nombre/'.$nombre);
+            $datoRespuesta = $datoConvertir->Json();
+
+            return $datoRespuesta;
+
+        }else{
+            return null;
+        }
     }
 }

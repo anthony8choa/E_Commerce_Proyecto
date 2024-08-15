@@ -41,4 +41,15 @@ class ListaFavoritos extends Controller
         return view('listaFavoritosUsuario', compact('listaFavoritos','codigoUsuario'));
     }
 
+    public function agregarProductoAListaFavoritos($codigoUsuario, $codigoProducto){
+        $respuesta = Http::post('localhost:8091/api/productos/agregar/listafavoritos', [
+            "codigousuario" => $codigoUsuario,
+            "codigoproducto" => $codigoProducto
+        ]);
+        $respuestaConvertir = $respuesta->Json();
+        if($respuestaConvertir){
+            return redirect()->route('producto.visualizar', $codigoProducto);
+        }
+    }
+
 }

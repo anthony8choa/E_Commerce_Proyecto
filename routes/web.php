@@ -38,9 +38,9 @@ Route::get('/usuario/verificar',
     )->name('usuario.verificar');
 
 //usuario.obtener.nombre
-Route::get('/usuario/obtener/por/nombre/{nombre}',
-    [UsuarioController::class, 'obtenerPorNombre']
-    )->name('usuario.obtener.nombre');
+Route::get('/usuario/obtener/por/nombre/{nombre}/{contrasenia}',
+    [UsuarioController::class, 'obtenerPorNombreLogin']
+    )->name('usuario.obtener.nombre.login');
 
 //Lista favoritos
 /*
@@ -73,4 +73,12 @@ Route::get('login/comerciante', function(){
 Route::get('favoritos/eliminar/producto/{codigoUsuario}/{codigoProducto}',
     [ListaFavoritos::class, 'eliminarProductoDeListaFavoritos']
     )->name("favoritos.eliminar.producto");
+
+Route::get('favoritos/agregar/producto/{codigoUsuario}/{codigoProducto}',
+    [ListaFavoritos::class, 'agregarProductoAListaFavoritos']
+    )->name("favoritos.agregar.producto");
+
+Route::get('/usuario/verificar/js/{nombre}/{contrasenia}',
+    [UsuarioController::class, 'verificarUsuarioLoginJS']
+    )->name('usuario.verificar.js');
 
