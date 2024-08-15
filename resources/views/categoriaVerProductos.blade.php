@@ -121,12 +121,21 @@
                 @foreach ($productosEnCategoria as $producto)
                     <!-- Producto  -->
                     <section class="col-md-3">
-                        <div class="shadow-lg card h-100">
+                        <div class="shadow-lg card h-100"> 
                             <!-- Imagen del producto -->
                             <img src="{{ $producto['imagenProducto'] }}" height="300" width="300" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <!-- Nombre del producto -->
-                                <h5 class="card-title">{{ $producto['nombreProducto'] }}</h5>
+                                <h5 class="card-title">
+                                    {{ $producto['nombreProducto'] }} 
+                                    @if ($listaDeFavUsuario != null)
+                                        @foreach ($listaDeFavUsuario as $productoFav)
+                                            @if ($productoFav['codigoProducto'] == $producto['codigoProducto'])
+                                                ❤️
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </h5>
                                 <p class="card-text">
                                     <!-- Precio del producto -->
                                     <div>
@@ -173,7 +182,7 @@
     <script>
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
-                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1']) }}",
+                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{route('login')}}"
                             };
     </script>

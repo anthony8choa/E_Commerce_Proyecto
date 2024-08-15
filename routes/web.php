@@ -59,7 +59,7 @@ Route::get('categorias/obtener/nombre',
     )->name('obtener.nombre.categorias');
 
 //Obtiene todos los productos de una categoria enviando el idCategoria (Comentada mientras se implementa su funcionalidad)
-Route::get('categorias/obtener/productos/{idCategoria}',
+Route::get('categorias/obtener/productos/{idCategoria}/{idUsuario}',
     [CategoriaController::class, 'obtenerProductosDeCategoria']
     )->name("obtener.productos.categoria");
 

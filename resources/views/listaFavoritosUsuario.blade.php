@@ -199,7 +199,7 @@
         //Info necesaria para la navbar dinamica
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
-                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1']) }}",
+                            urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{route('login')}}"
                             };
     </script>
