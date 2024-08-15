@@ -11,7 +11,6 @@ fetch(window.appConfig.urlCategorias, {
 
     let rutaCategoriaEspecifica = window.appConfig.urlProductosCategorias;
     rutaCategoriaEspecifica.replace("/1","");
-    console.log(rutaCategoriaEspecifica);
 
     for(const datos of data){
         document.querySelector("#categoriasProductosPrincipalContainer").innerHTML +=

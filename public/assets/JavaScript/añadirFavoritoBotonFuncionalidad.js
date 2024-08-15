@@ -15,8 +15,8 @@ class BotonFavoritos{
     }
 
     mostrarModalExito(){
-        let agregadoExitosamenteFavoritosModal = new bootstrap.Modal(document.getElementById('agregadoExitosamenteFavoritosModal'));
-        agregadoExitosamenteFavoritosModal.show();
+        alert("Se ha agregado exitosamente el producto a la lista de favoritos");
+        
     }
 
 }

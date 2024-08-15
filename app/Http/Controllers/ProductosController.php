@@ -14,12 +14,18 @@ class ProductosController extends Controller
      * @return view refiere a la vista a la cual se le enviará todos los datos de ese producto
      */
     public function mostrarProductoPorId($idProducto){
-        $datoConvertir = Http::get('http://localhost:8091/api/productos/mostrar/'.$idProducto);
-        //^ ejemplo de ruta a buscar para recibir el producto
+        $datoConvertirReseñasProducto = Http::get('http://localhost:8091/api/productos/mostrar/resenias/'.$idProducto);
+        $datoConvertirProductoInfo = Http::get('http://localhost:8091/api/productos/mostrar/'.$idProducto);
 
-        $producto = $datoConvertir->Json();
+        $producto = $datoConvertirProductoInfo->Json();
+        $reseniasDeProductoConvertir = $datoConvertirReseñasProducto->Json();
 
-        return view('visualizarProducto', compact('producto'));
+        $reseniasDeProducto = null;
+        if($reseniasDeProductoConvertir!=null){
+            $reseniasDeProducto = $reseniasDeProductoConvertir['listarReseniaDTOs'];
+        }
+
+        return view('visualizarProducto', compact('producto','reseniasDeProducto'));
     }
 
     public function verificarUsuarioLogin(Request $request){

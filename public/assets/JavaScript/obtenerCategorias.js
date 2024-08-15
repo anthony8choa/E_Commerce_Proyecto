@@ -10,7 +10,6 @@ fetch(window.appConfig.urlCategorias, {
 })
 .then(response => response.json())
 .then(data => {
-    console.log("Success:", data);
 
     window.appConfig.urlProductosCategorias = window.appConfig.urlProductosCategorias.replace("/1","");
 
@@ -20,7 +19,6 @@ fetch(window.appConfig.urlCategorias, {
 
         let ancleLink = document.createElement("a");
         ancleLink.classList.add("nav-link");
-        console.log(window.appConfig.urlProductosCategorias);
         
         ancleLink.href = `${window.appConfig.urlProductosCategorias}/${datos.codigoCategoria}`;
         ancleLink.innerText = `${datos.nombreCategoria}`;

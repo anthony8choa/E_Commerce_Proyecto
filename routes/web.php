@@ -7,6 +7,7 @@ use App\Http\Controllers\DireccionesController;
 use App\Http\Controllers\MetodoPagoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ListaFavoritos;
+use App\Http\Controllers\ReseniasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -81,4 +82,8 @@ Route::get('favoritos/agregar/producto/{codigoUsuario}/{codigoProducto}',
 Route::get('/usuario/verificar/js/{nombre}/{contrasenia}',
     [UsuarioController::class, 'verificarUsuarioLoginJS']
     )->name('usuario.verificar.js');
+
+Route::post('/resenias/crear/{idUsuario}/{idProducto}',
+    [ReseniasController::class, 'crearResenia']
+    )->name('resenias.crear');
 

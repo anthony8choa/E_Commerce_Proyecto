@@ -116,14 +116,17 @@
                 </section>
                 <section class="row border-top"></section>
                 <section class="row mt-2">
-                    <div class="fs-3">
+                    <div id="productDescripcion" class="fs-3">
                         <!-- Descripcion del producto -->
                         <div>{{$producto['descripcion']}}</div>
                     </div>
                     <!-- Precio del producto -->
-                    <div id="productPrecio" class="fs-3 fw-bold mt-3">
-                        {{$producto['precioUnitario']}}
-                        Lps.
+                    <div class="mt-3 fs-3 fw-bold">
+                        Lps. 
+                        <span id="productPrecio" class="fs-3 fw-bold">
+                            {{$producto['precioUnitario']}}
+                            
+                        </span>
                     </div>
                 </section>
                 <section class="row fs-5 fw-bold">
@@ -143,48 +146,80 @@
         <section class="m-3 border border-secondary"></section>
         <!-- Seccion de comentarios -->
         <section class="row p-2">
-            <section class="row">
-                <section class="row fs-2 fw-bold text-center">
-                    <div>Comentarios</div>
-                </section>
+            <section class="col">
+                    <section class="row fs-2 fw-bold text-center">
+                        <div>Comentarios</div>
+                    </section>
 
-                <!-- Seccion de comentarios recursiva -->
-                <section class="row mb-4">
-                    <section class="row">
-                        <section class="row fw-bold fs-5">
-                            <!-- Nombre de usuario -->
-                            <div>
-                                Alejandro Baca
-                            </div>
+                    <!-- Con JS se cambian los parametros de la ruta -->
+                    <form id="formularioComentarios" method="POST" class="d-none" action="{{ route('resenias.crear',  ['idUsuario' => '999', 'idProducto' => $producto['codigoProducto'] ])}}">
+                        @csrf
+                        <div class="form-floating">
+                            <select name="cantidadEstrellas" class="form-select" id="floatingSelect" aria-label="Floating label select example" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="0">0</option>
+                            <option value="1">⭐</option>
+                            <option value="2">⭐⭐</option>
+                            <option value="3">⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                            <option value="5">⭐⭐⭐⭐⭐</option>
+                            </select>
+                            <label for="floatingSelect">Estrellas</label>
+                        </div>
+                        <div id="dejarComentarioContainer" class="mt-3 mb-2 form-floating">
+                            <textarea name="comentario" id="dejarComentario" class="form-control" style="height:100%;" placeholder="Deja un comentario aqui" id="floatingTextarea" required></textarea>
+                            <label for="floatingTextarea">Deja un comentario aqui</label>
+                        </div>
+
+                        <input class="btn btn-primary" type="submit" value="Añadir reseña">
+                    </form>
+
+                    <div class="mt-5"></div>
+
+                    <a id="mensajeRegistroComentario" href="{{route('login')}}" class="row mt-4 mb-4 ms-1">
+                        Registrate o inicia sesión aquí si quieres comentar
+                    </a>
+
+                    
+                    @if ($reseniasDeProducto!=null)
+                        @foreach($reseniasDeProducto as $resenias)
+                        <!-- Seccion de comentarios recursiva -->
+                        <section class="row mb-4">
+                            <section class="row">
+                                <section class="row fw-bold fs-5">
+                                    <!-- Nombre de usuario -->
+                                    <div> 
+                                    
+                                        {{$resenias['nombreUsuario']}} · 
+
+                                        @for ($i = 0; $i < $resenias['cantidadEstrellas']; $i++)
+                                            ⭐
+                                        @endfor
+                                        
+                                    </div>
+                                </section>
+                            </section>
+                            <section class="row">
+                                <section class="row fs-5">
+                                    <!-- Comentario texto -->
+                                    <div>
+                                        {{$resenias['comentario']}}
+                                    </div>
+                                </section>
+                            </section>
                         </section>
-                    </section>
-                    <section class="row">
-                        <section class="row fs-5">
-                            <!-- Comentario texto -->
-                            <div>
-                                Muy buen producto!
-                            </div>
+                        @endforeach
+                    @else
+                        <section class="row mb-4">
+                            <section class="row">
+                                <section class="row fw-bold fs-5">
+                                    <div>
+                                        Este producto aún no tiene reseñas
+                                    </div>
+                                </section>
+                            </section>
                         </section>
-                    </section>
-                </section>
-                
-                <!-- Seccion de comentarios recursiva -->
-                <section class="row mb-4">
-                    <section class="row">
-                        <section class="row fw-bold fs-5">
-                            <div>
-                                Alejandro Baca
-                            </div>
-                        </section>
-                    </section>
-                    <section class="row">
-                        <section class="row fs-5">
-                            <div>
-                                Muy buen producto!
-                            </div>
-                        </section>
-                    </section>
-                </section>
+                    @endif
             </section>
         </section>
     </section>
@@ -265,6 +300,18 @@
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/carritoProducto.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/añadirFavoritoBotonFuncionalidad.js') }}"></script>
+    <script>
+
+        if(localStorage.getItem("esInvitado") === "no"){
+            document.getElementById("formularioComentarios").classList.toggle("d-none");
+            document.getElementById("mensajeRegistroComentario").classList.add("d-none");
+
+            let formularioComentarios = document.getElementById("formularioComentarios");
+            formularioComentarios.action = formularioComentarios.action.replace("/999",`/${localStorage.getItem("codigoUsuario")}`);
+
+        } //999
+
+    </script>
 </body>
 </html>
 
