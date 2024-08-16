@@ -42,6 +42,10 @@ Route::get('/agregar/tarjeta', function () {
     return view('agregarTarjeta');
 })->name('agregartarjeta');
 
+//solo visualizar recibo 
+Route::get('/recibo/cliente', function () {
+    return view('reciboCliente');
+})->name('recibo');
 
 Route::get('/index', function(){
     return view('paginaPrincipal');
