@@ -23,6 +23,26 @@ Route::get('/registro', function () {
     return view('vistaRegistro');
 })->name('registro');
 
+//solo para visualizar perfil de la cuenta
+Route::get('/perfil/cuenta', function () {
+    return view('perfilCuenta');
+})->name('perfil');
+//solo visualizar editar datos personales
+Route::get('/editar/datosPersonales', function () {
+    return view('editarDatosPersonales');
+})->name('editardatos');
+
+//solo visualizar agregar direccion
+Route::get('/agregar/nuevadireccion', function () {
+    return view('agregarDireccion');
+})->name('agregardir');
+
+//solo visualizar agregar tarjeta 
+Route::get('/agregar/tarjeta', function () {
+    return view('agregarTarjeta');
+})->name('agregartarjeta');
+
+
 Route::get('/index', function(){
     return view('paginaPrincipal');
 })->name('principal');
