@@ -55,7 +55,7 @@ class UsuarioController extends Controller
 
         if($respuesta){
 
-            $datoConvertir = Http::get('localhost:8091/api/usuarios/obtener/por/nombre/'.$nombre);
+            $datoConvertir = Http::get('localhost:8091/api/usuarios/obtener/porNombre/'.$nombre);
             $datoRespuesta = $datoConvertir->Json();
 
             return $datoRespuesta;

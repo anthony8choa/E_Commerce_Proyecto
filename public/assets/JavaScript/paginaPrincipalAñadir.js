@@ -12,6 +12,12 @@ fetch(window.appConfig.urlCategorias, {
     let rutaCategoriaEspecifica = window.appConfig.urlProductosCategorias;
     rutaCategoriaEspecifica.replace("/1","");
 
+    let idUsuario = "0";
+
+    if(localStorage.getItem("codigoUsuario")!=null){
+        idUsuario = localStorage.getItem("codigoUsuario");
+    }
+
     for(const datos of data){
         document.querySelector("#categoriasProductosPrincipalContainer").innerHTML +=
         `
@@ -23,7 +29,7 @@ fetch(window.appConfig.urlCategorias, {
                             ${datos.nombreCategoria}
                         </section>
                         <section class="col text-end fs-4">
-                            <a type="button" href="${rutaCategoriaEspecifica}/${i}" class="btn btn-primary">Ver mas</a>
+                            <a type="button" href="${rutaCategoriaEspecifica}/${i}/${idUsuario}" class="btn btn-primary">Ver mas</a>
                         </section>
                     </section>
                     <section class="row fs-6 mb-5">

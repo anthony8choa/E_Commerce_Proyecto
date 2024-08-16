@@ -176,9 +176,11 @@
 
                     <div class="mt-5"></div>
 
-                    <a id="mensajeRegistroComentario" href="{{route('login')}}" class="row mt-4 mb-4 ms-1">
+                    <a id="mensajeRegistroComentario" href="{{route('login')}}" class="fs-4 fw-bold mt-4 mb-4 ms-1">
                         Registrate o inicia sesión aquí si quieres comentar
                     </a>
+
+                    <div class="mb-3"></div>
 
                     
                     @if ($reseniasDeProducto!=null)

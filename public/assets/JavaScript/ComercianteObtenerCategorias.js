@@ -11,9 +11,10 @@ fetch(window.appConfig.urlCategorias, {
 .then(response => response.json())
 .then(data => {
 
-    window.appConfig.urlProductosCategorias = window.appConfig.urlProductosCategorias.replace("/0","");
-    window.appConfig.urlProductosCategorias = window.appConfig.urlProductosCategorias.replace("/1","");
-    let url = window.appConfig.urlProductosCategorias;
+    window.appConfig.urlComercianteProductosCategorias = window.appConfig.urlComercianteProductosCategorias.replace("/0","");
+    window.appConfig.urlComercianteProductosCategorias = window.appConfig.urlComercianteProductosCategorias.replace("/1","");
+    let url = window.appConfig.urlComercianteProductosCategorias;
+    
 
     for(const datos of data){
         let li = document.createElement("li");
@@ -27,7 +28,7 @@ fetch(window.appConfig.urlCategorias, {
             idUsuario = localStorage.getItem("codigoUsuario");
         }
         
-        ancleLink.href = `${window.appConfig.urlProductosCategorias}/${datos.codigoCategoria}/${idUsuario}`;
+        ancleLink.href = `${window.appConfig.urlComercianteProductosCategorias}/${datos.codigoCategoria}/${idUsuario}`;
         ancleLink.innerText = `${datos.nombreCategoria}`;
 
         li.appendChild(ancleLink);
@@ -40,11 +41,5 @@ fetch(window.appConfig.urlCategorias, {
 .catch((error) => {
     console.warn("Error:"+ error);
 });
-
-/*
-    <li class="nav-item">
-        <a class="nav-link" href="#">categoria</a>
-    </li>
-*/
 
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\MetodoPagoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ListaFavoritos;
 use App\Http\Controllers\ReseniasController;
+use App\Http\Controllers\ComercianteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,10 +68,6 @@ Route::get('usuario/ver/cuenta',function(){
     return view('verCuenta');
 })->name("usuario.ver.cuenta");
 
-Route::get('login/comerciante', function(){
-    return view('loginComerciante');
-})->name("login.comerciante");
-
 Route::get('favoritos/eliminar/producto/{codigoUsuario}/{codigoProducto}',
     [ListaFavoritos::class, 'eliminarProductoDeListaFavoritos']
     )->name("favoritos.eliminar.producto");
@@ -86,4 +83,29 @@ Route::get('/usuario/verificar/js/{nombre}/{contrasenia}',
 Route::post('/resenias/crear/{idUsuario}/{idProducto}',
     [ReseniasController::class, 'crearResenia']
     )->name('resenias.crear');
+
+
+
+//Comerciante
+Route::get('/comerciante/principal',function(){
+    return view("comercianteVistaPrincipal");
+})->name('comerciante.principal');
+
+Route::get('/comerciante/login', function(){
+    return view('loginComerciante');
+})->name("comerciante.login");
+
+Route::get('/comerciante/categorias/obtener/productos/{idCategoria}/{idUsuario}', 
+    [ComercianteController::class, 'comercianteObtenerProductosDeCategoria']
+    )->name("comerciante.obtener.productos.categoria");
+
+Route::get('/comerciante/producto/visualizar/{idProducto}', 
+    [ComercianteController::class, 'comercianteMostrarProductoPorId']
+    )->name('comerciante.producto.visualizar');
+
+Route::get('/comerciante/producto/editar/{idProducto}', 
+    [ComercianteController::class, 'comercianteEditarProductoPorId']
+    )->name('comerciante.producto.editar');
+
+
 

@@ -72,7 +72,7 @@
                 <h5>
                     Ingresar como <a id="invitadoBoton" href="{{route('principal')}}">invitado</a>
                     |
-                    Ingresar como <a id="invitadoBoton" href="{{route('login.comerciante')}}">comerciante</a>
+                    Ingresar como <a id="comercianteBoton" href="{{route('comerciante.login')}}">comerciante</a>
                 </h5>
             </div>
         </div>
@@ -86,6 +86,10 @@
                             //Los parametros se cambian luego en un js
                             urlObtenerUsuarioPorNombreLogin: "{{ route('usuario.obtener.nombre.login', ['nombre' => 'nombreEjemplo', 'contrasenia' => 'contrasenia']) }}",
                             };
+
+        document.getElementById("comercianteBoton").addEventListener("click", function borrarLocalStorage() {
+            localStorage.clear();
+        })
 
     </script>
     <script src="{{ asset ('/assets/JavaScript/GuardarALocalStorage.js') }}"></script>

@@ -53,7 +53,7 @@
                     <label for="password">Contraseña </label>
                     <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
                 </div>
-                <button id="BotonIngresar" type="submit" class="btn boton btn-block" >Ingresar</button>
+                <a id="BotonIngresar" type="submit" class="btn boton btn-block" href="{{ route('comerciante.principal') }}">Ingresar</a>
             </form>
 
         </div>
