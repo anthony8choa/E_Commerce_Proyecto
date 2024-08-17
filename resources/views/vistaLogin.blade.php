@@ -64,7 +64,7 @@
         <div class="row m-3 d-flex justify-content-center">
             <div class="text-center mb-4 text-white"> 
                 <h5>¿No tienes una cuenta de Usuario? 
-                    <a href="">Registrarse</a>
+                    <a href="{{route('registro')}}">Registrarse</a>
                 </h5>
                 <h5>
                     O

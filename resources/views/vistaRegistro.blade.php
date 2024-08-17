@@ -48,67 +48,57 @@
             <h4 class="text-center mb-4">Registro de Usuario</h4>
             
             
-            <form id="registerForm" action="/register" method="POST">
+            <form id="registerForm" action="{{route('registro.confirmacion')}}" method="POST">
+                @csrf
+
+
+                <div class="section-title">Crear Usuario y Contraseña</div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="username">Nombre de Usuario</label>
+                        <input type="text" class="form-control" id="nombreusuario" name="nombreusuario" placeholder="Ingresa un nombre de usuario" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password">Contraseña</label>
+                        <input type="password" class="form-control" id="contrasenia" name="contrasenia" placeholder="Crea una contraseña" required>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="nombre">Nombre Completo</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
+                        <input type="text" class="form-control" id="nombrecompleto" name="nombrecompleto" placeholder="Ingresa tu nombre completo" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="telefono">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingresa tu número de teléfono" required>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su teléfono" pattern="[0-9]{1,15}" title="Ingrese un número de teléfono válido (maximo de 15 dígitos)" required>
                     </div>
-            
-                
                     <div class="form-group col-md-6">
-                        <label for="pais">Pais</label>
-                        <input type="text" class="form-control" id="pais" name="pais" placeholder="Ingresa el pais" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="departamento">Departamento</label>
-                        <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingresa el departamento " required>
-                    </div>
-
-               
-                    <div class="form-group col-md-6">
-                        <label for="codigo">Codigo Postal</label>
-                        <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Ingresa el codigo postal" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
                         <label for="correo">Correo Electrónico</label>
                         <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingresa tu correo electrónico" required>
                     </div>
                 </div>
 
-                <div class="section-title">Información de la Tarjeta</div>
+                <div class="section-title">Información de la Direccion</div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="tarjeta">Número de Tarjeta</label>
-                        <input type="text" class="form-control" id="tarjeta" name="tarjeta" placeholder="Ingresa tu número de tarjeta" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="fecha_vencimiento">Fecha de Vencimiento</label>
-                        <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento" required>
-                    </div>
-                </div>
 
-       
-                <div class="section-title">Crear Usuario y Contraseña</div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="username">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa un nombre de usuario" required>
+                    <div class="form-group col-md-4">
+                        <label for="pais">Pais</label>
+                        <input type="text" class="form-control" id="nombrePais" name="nombrePais" placeholder="Ingresa el pais" required>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Crea una contraseña" required>
+
+                    <div class="form-group col-md-4">
+                        <label for="departamento">Departamento</label>
+                        <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingresa el departamento " required>
                     </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="codigo">Codigo Postal</label>
+                        <input type="number" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="Ingrese su código postal" min="0" step="1" required>
+                    </div>
+
                 </div>
 
                 <button type="submit" class="btn btn-custom btn-block">Registrar</button>
@@ -118,6 +108,40 @@
         </div>
     </div>
     <div class="mb-5"></div>
+
+    <!-- Modal a mostrar si ya existe el usuario o correo registrado en otra cuenta -->
+    <div class="modal fade" id="userExistsModal" tabindex="-1" aria-labelledby="userExistsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userExistsModalLabel">Atención</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Usuario o correo ya registrado.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        @if(session('usuarioExiste'))
+            var userExistsModal = new bootstrap.Modal(document.getElementById('userExistsModal'));
+            userExistsModal.show();
+            // Borra el valor de la sesión para evitar que la alerta se muestre en futuras visitas
+            @php session()->forget('usuarioExiste'); @endphp
+        @endif
+
+        @if(session('telefonoIngresadoConLetras'))
+            alert('Ingrese un numero telefonico valido');
+            @php session()->forget('telefonoIngresadoConLetras'); @endphp
+        @endif
+
+    </script>
+    
 
  
 </body>

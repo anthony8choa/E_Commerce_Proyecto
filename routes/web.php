@@ -9,19 +9,25 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ListaFavoritos;
 use App\Http\Controllers\ReseniasController;
 use App\Http\Controllers\ComercianteController;
+use App\Http\Controllers\RegistroController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-// visualizar prueba del login
+
 Route::get('/login', function () {
     return view('vistaLogin');
 })->name('login');
 
 //vizualizar vista de registro
-Route::get('/registro', function () {
-    return view('vistaRegistro');
-})->name('registro');
+Route::get('/registro', 
+    [RegistroController::class, 'mostrarRegistro']
+)->name('registro');
+
+//ver.registro
+Route::post('/registro/confirmacion',
+    [RegistroController::class, 'confirmarRegistro']
+    )->name('registro.confirmacion');
 
 //solo para visualizar perfil de la cuenta
 Route::get('/perfil/cuenta', function () {

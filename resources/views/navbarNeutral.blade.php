@@ -7,6 +7,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
+        body {
+            background-color:  rgb(35,47,62);
+            font-family: 'Arial', sans-serif;
+        }
+        .contenedor-favoritos {
+            margin-top: 50px;
+            max-width: 800px;
+            background-color: rgb(245, 245, 245);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .tabla-favoritos th, .tabla-favoritos td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .btn-vaciar {
+            background-color: #007bff;
+            color: white;
+            margin-top: 20px;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-eliminar {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-ir-producto {
+            background-color: #28a745;
+            color: white;
+        }
+
         .navbar{
             background-color: #ffc107; /* Azul */
             color: #fff;
@@ -93,22 +127,10 @@
         </nav>
     </div>
 
-    <section class="container bg-primary rounded mt-4 text-white ">
-        
-        <!-- Un usuario tiene
-                - codigousuario
-                - nombre
-                - apellido
-                - correo
-                - contrasenia
-                - codigolugar (pueden ser varios) -> lugares tiene codigoLugar, nombrepais, departamento, codigopostal
-                - fecha_creacion
-                - (falta la tarjeta asociada)    -->
-        
-        <!-- VISTA EN CONSTRUCCION -->
+
+    <!-- Seccion del contenido -->
 
 
-    </section>
 
     <!-- Ventana Emergente del Carrito -->
     <div style="max-width: 100%;" class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
@@ -131,8 +153,10 @@
         </div>
     </div>
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        //Info necesaria para la navbar dinamica
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
@@ -140,11 +164,15 @@
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
+    <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
     <script>
         // Borra el localStorage al hacer click en cerrar sesion
         document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
     </script>
-    <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
+    <script>
+        // Borra el localStorage al hacer click en cerrar sesion
+        document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
+    </script>
     <script src="{{ asset ('/assets/JavaScript/carritoGeneral.js') }}"></script>
     
 </body>
