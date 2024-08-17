@@ -152,5 +152,14 @@ Route::get('/comerciante/producto/agregar',function(){
     return view('comercianteAgregarProducto');
 })->name('comerciante.producto.agregar.prueba');
 
+Route::get('/comerciante/login/confirmacion',
+    [ComercianteController::class, 'verificarLogin']
+    )->name('comerciante.login.confirmacion');
+
+//Antes de obtener al comerciante, se hace una doble verificacion del login
+Route::get('/comerciante/obtener/por/nombre/{codigoComerciante}/{contrasenia}',
+    [ComercianteController::class, 'obtenerComerciantePorNombre']
+    )->name('comerciante.obtener.por.nombre');
+
 
 

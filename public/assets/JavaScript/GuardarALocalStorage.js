@@ -35,16 +35,18 @@ class GuardarALocalStorage{
         })
         .catch((error) => {
             alert("Su contraseña o usuario es incorrecto");
-            localStorage.clear();
+            
         });
 
     }
 
     agregarALocalStorageInvitado(event){
-        localStorage.clear();
         const esInvitado = "si";
         localStorage.setItem("esInvitado",esInvitado);
         localStorage.setItem("nombreUsuario",null);
+        localStorage.setItem("codigoUsuario",null);
+        localStorage.removeItem("codigoUsuario");
+        localStorage.removeItem("nombreUsuario");
         console.log(localStorage.getItem("esInvitado"));
     }
 

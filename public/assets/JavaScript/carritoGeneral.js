@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const carritoModal = new bootstrap.Modal(document.getElementById('carritoModal'));
     const productosCarrito = document.getElementById('productosCarrito');
     const totalCarrito = document.getElementById('totalCarrito');
+    const iconoCarrito = document.getElementById('iconoCarrito');
     const vaciarCarritoButton = document.getElementById('vaciarCarrito');
     const comprarCarritoButton = document.getElementById('comprarCarrito');
 
@@ -9,20 +10,29 @@ document.addEventListener('DOMContentLoaded', function () {
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         productosCarrito.innerHTML = '';
         let total = 0;
-        //Aqui se leen todos los datos del carrito en localStorage
         carrito.forEach((producto, index) => {
+
             const productoDiv = document.createElement('div');
             productoDiv.classList.add('row', 'mb-2');
+
+            const precioTotalProducto = producto.precioEntero;
+
+            let mensaje = "";
+
+            if(producto.cantidad > 1){
+                mensaje = `(Precio unitario: Lps.${producto.precioEntero/producto.cantidad})`;
+            }
+
             productoDiv.innerHTML = `
-                <div class="col-5">${producto.descripcion}</div>
-                <div class="col-3">${producto.precioEntero}</div>
-                <div class="col-2">${producto.cantidad}</div>
-                <div class="col-1">
+                <div id="productoDescripcionCarrito" class="col-6">${producto.descripcion} (codigo de producto: ${producto.codigoProducto})</div>
+                <div id="productoPrecioCarrito" class="col-3">Lps.${producto.precioEntero} ${mensaje}</div>
+                <div id="productoCantidadCarrito" class="col-2">${producto.cantidad}</div>
+                <div id="productoBotonEliminarProductoCarrito" class="col-1">
                     <button class="btn btn-danger btn-sm eliminarProducto" data-index="${index}">Eliminar</button>
                 </div>
             `;
             productosCarrito.appendChild(productoDiv);
-            total += producto.precioEntero * producto.cantidad;
+            total += precioTotalProducto;
         });
         totalCarrito.querySelector('strong').textContent = `Lps.${total.toFixed(2)}`;
     };

@@ -39,7 +39,6 @@ class LeerLocalStorage{
             let idUsuario = localStorage.getItem("codigoUsuario");
             botonListaFavoritos.href = botonListaFavoritos.href.replace("/1",`/${idUsuario}`);
         }else{
-            console.log(window.appConfig.urlLogin);
             botonListaFavoritos.href = window.appConfig.urlLogin;
         }
     }

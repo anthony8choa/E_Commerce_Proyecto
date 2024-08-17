@@ -235,7 +235,8 @@
             </div>
         </div>
     </div>
-    <!-- Ventana Emergente del Carrito -->
+
+    <!-- Ventana emergente del carrito -->
     <div style="max-width: 100%;" class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
         <div style="max-width: 80%;" class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -244,6 +245,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!-- Cabecera de la "tabla" -->
+                    <div class="row font-weight-bold fw-bold mb-2">
+                        <div class="col-6">Descripción</div>
+                        <div class="col-3">Precio</div>
+                        <div class="col-2">Cantidad</div>
+                        <div class="col-1"></div> <!-- Columna para el botón de eliminar -->
+                    </div>
+                    <!-- Aquí se van a insertar dinámicamente los productos -->
                     <div id="productosCarrito"></div>
                     <div id="totalCarrito" class="fs-4 mt-3">Total: <strong>Lps.0</strong></div>
                     <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>

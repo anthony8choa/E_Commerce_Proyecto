@@ -44,16 +44,16 @@
             <h4 class="text-center mb-4">como Comerciante</h4>
 
             <!-- Peticion get al backend para verificar si el usuario y contraseña se encuentra registrado -->
-            <form action="{{route('usuario.verificar')}}" method="GET" id="loginForm">
+            <form action="{{route('comerciante.login.confirmacion')}}" method="GET" id="loginForm">
                 <div class="form-group">
-                    <label for="username">Nombre del Comercio</label>
-                    <input id="usuarioCampo" type="text" class="form-control" id="username" placeholder="Ingresar Comercio" required>
+                    <label for="nombreComercio">Nombre del Comercio</label>
+                    <input name="nombreComercio" id="usuarioCampo" type="text" class="form-control" id="username" placeholder="Ingresar Comercio" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Contraseña </label>
-                    <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
+                    <label for="nombreComercio">Contraseña </label>
+                    <input name="contrasenia" type="password" class="form-control" id="contraseniaCampo" placeholder="Ingresa tu contraseña" required>
                 </div>
-                <a id="BotonIngresar" type="submit" class="btn boton btn-block" href="{{ route('comerciante.principal') }}">Ingresar</a>
+                <button id="BotonIngresar" type="submit" class="btn boton btn-block">Ingresar</button>
             </form>
 
         </div>
@@ -68,8 +68,12 @@
             
     </div>
 
-
-    <script src="{{ asset ('/assets/JavaScript/GuardarALocalStorage.js') }}"></script>
+    <script>
+        window.appConfig = {
+                            urlObtenerComerciantePorNombreLogin: "{{ route('comerciante.obtener.por.nombre', ['codigoComerciante' => '0', 'contrasenia' => 'contrasenia'] ) }}"
+                            };
+    </script>
+    <script src="{{ asset ('/assets/JavaScript/ComercianteGuardarAlLS.js') }}"></script>
 
 </body>
 </html>

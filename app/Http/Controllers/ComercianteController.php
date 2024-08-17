@@ -47,4 +47,33 @@ class ComercianteController extends Controller
 
     }
 
+    public function verificarLogin(Request $request){
+
+        $nombreComercio = $request->nombreComercio;
+        $contrasenia = $request->contrasenia;
+
+        $dato = Http::get('http://localhost:8091/api/comercios/verificar/login/'.$nombreComercio.'/'.$contrasenia);
+        $respuesta = $dato->Json();
+        if($respuesta == true){
+            return redirect()->route('comerciante.principal');
+        }else{
+            return redirect()->route('comerciante.login');
+        }
+    }
+
+    //Antes de obtener al comerciante, se hace una doble verificacion del login
+    public function obtenerComerciantePorNombre($nombreComercio,$contrasenia){
+        $datoBoolean = Http::get('http://localhost:8091/api/comercios/verificar/login/'.$nombreComercio.'/'.$contrasenia);
+        $respuesta = $datoBoolean->Json();
+
+        $dato = Http::get('http://localhost:8091/api/comercios/obtener/por/nombre/'.$nombreComercio);
+        $comercio = $dato->Json();
+
+        if($respuesta == true){
+            return $comercio;
+        }else{
+            return null;
+        }
+    }
+
 }

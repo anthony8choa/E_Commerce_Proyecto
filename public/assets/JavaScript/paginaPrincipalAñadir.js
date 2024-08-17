@@ -14,7 +14,7 @@ fetch(window.appConfig.urlObtenerProductosDeTodasCategorias, {
 
     let idUsuario = "0";
 
-    if(localStorage.getItem("codigoUsuario")!=null){
+    if(localStorage.getItem("codigoUsuario") != null){
         idUsuario = localStorage.getItem("codigoUsuario");
     }
 
@@ -52,7 +52,6 @@ fetch(window.appConfig.urlObtenerProductosDeTodasCategorias, {
             }
 
             CrearTarjetaInformacion(producto, j);
-            console.log(j);
             
             i++;
         }

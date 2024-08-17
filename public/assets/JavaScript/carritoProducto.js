@@ -43,18 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const addProductToCart = () => {
-        /*
-        const descripcion = document.getElementById('productDescripcion').textContent.trim();
-        const precioString = document.getElementById('productPrecio').textContent.trim(); // Elemento q capture del div pero es un string
-        const codigoProducto = document.getElementById('codigoProductoSpan').innerText;
-        const precioNumerico = precioString.replace(/[^0-9.-]+/g, '');
-        // Convertir a número 
-        const precioEntero = parseFloat(precioNumerico);
-        console.log(precioEntero);
-        const cantidad = 1; 
-        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        carrito.push({ codigoProducto, descripcion, precioEntero, cantidad });
-        localStorage.setItem('carrito', JSON.stringify(carrito)); */
 
         const descripcion = document.getElementById('productDescripcion').textContent.trim();
         const precioString = document.getElementById('productPrecio').textContent.trim(); // Elemento q capture del div pero es un string
