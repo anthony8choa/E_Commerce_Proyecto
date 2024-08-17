@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Inicializa la ventana modal
     const carritoModal = new bootstrap.Modal(document.getElementById('carritoModal'));
+    //obtiene los productos del carrito
     const productosCarrito = document.getElementById('productosCarrito');
     const totalCarrito = document.getElementById('totalCarrito');
     const addToCartButton = document.getElementById('addToCart');
@@ -32,6 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     <button class="btn btn-danger btn-sm eliminarProducto" data-index="${index}">Eliminar</button>
                 </div>
             `;
+
+            // Agrega el producto al contenedor de productos en la ventana modal
             productosCarrito.appendChild(productoDiv);
             total += precioTotalProducto;
         });
@@ -74,7 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Si el producto no existe, agregarlo al carrito
             carrito.push({ codigoProducto, descripcion, precioEntero, cantidad: 1 });
         }
-    
+        
+        // Guarda el carrito actualizado en localStorage
         localStorage.setItem('carrito', JSON.stringify(carrito));
         
     };

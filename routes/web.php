@@ -53,6 +53,12 @@ Route::get('/recibo/cliente', function () {
     return view('reciboCliente');
 })->name('recibo');
 
+
+//solo visualizar realizarCompra
+Route::get('/realizar/compra', function () {
+    return view('realizarCompra');
+})->name('compra');
+
 Route::get('/index', function(){
     return view('paginaPrincipal');
 })->name('principal');
