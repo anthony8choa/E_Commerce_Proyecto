@@ -131,8 +131,7 @@
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlComercianteProductosCategorias: "{{ route('comerciante.obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{route('login')}}",
-                            urlAñadirProductoAFavoritos: "{{ route('favoritos.agregar.producto', ['codigoUsuario' => '1', 'codigoProducto' => '1']) }}"
+                            urlLogin: "{{route('login')}}"
                             };
     </script>
 

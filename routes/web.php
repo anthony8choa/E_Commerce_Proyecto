@@ -147,10 +147,19 @@ Route::get('/comerciante/producto/editar/{idProducto}',
     [ComercianteController::class, 'comercianteEditarProductoPorId']
     )->name('comerciante.producto.editar');
 
-//prueba
-Route::get('/comerciante/producto/agregar',function(){
-    return view('comercianteAgregarProducto');
-})->name('comerciante.producto.agregar.prueba');
+Route::get('/comerciante/producto/editar/confirmar/{idProducto}', 
+    [ComercianteController::class, 'comercianteEditarProductoPorIdConfirmacion']
+    )->name('comerciante.producto.editar.confirmar');
+
+//
+Route::get('/comerciante/producto/agregar/{idCategoria}/{nombreCategoria}',
+    [ComercianteController::class, 'comercianteMostrarAgregarProductoACategoria']
+    )->name('comerciante.producto.agregar');
+
+//
+Route::post('/comerciante/producto/agregar/confirmar/{idComercio}/{idCategoria}',
+    [ComercianteController::class, 'comercianteAgregarProductoACategoriaConfirmar']
+    )->name('comerciante.producto.agregar.confirmar');
 
 Route::get('/comerciante/login/confirmacion',
     [ComercianteController::class, 'verificarLogin']

@@ -91,7 +91,7 @@
                         {{$productosEnCategoria[0]['categorias']['nombreCategoria']}}
                     </section>
                     <section class="col text-end fs-4">
-                        <a type="button" href="${rutaCategoriaEspecifica}/${i}" class="btn btn-primary">Añadir producto a esta categoria</a>
+                        <a type="button" href="{{route('comerciante.producto.agregar', ['idCategoria' =>  $productosEnCategoria[0]['categorias']['codigoCategoria'],'nombreCategoria' => $productosEnCategoria[0]['categorias']['nombreCategoria'] ] )}}" class="btn btn-primary">Añadir producto a esta categoria</a>
                     </section>
                 @else
                 
@@ -103,33 +103,31 @@
 
             @if ($productosEnCategoria)
                 @foreach ($productosEnCategoria as $producto)
-                    <!-- Producto  -->
-                    <section class="col-md-3">
-                        <div class="shadow-lg card h-100"> 
-                            <!-- Imagen del producto -->
-                            <img src="{{ $producto['imagenProducto'] }}" height="300" width="300" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <!-- Nombre del producto -->
-                                <h5 class="card-title">
-                                    {{ $producto['nombreProducto'] }} 
-                                    @if ($listaDeFavUsuario != null)
-                                        @foreach ($listaDeFavUsuario as $productoFav)
-                                            @if ($productoFav['codigoProducto'] == $producto['codigoProducto'])
-                                                ❤️
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </h5>
-                                <p class="card-text">
-                                    <!-- Precio del producto -->
-                                    <div class="mt-2">
-                                        Precio: <div class="mt-1">Lps.{{ $producto['precioUnitario'] }} </div>
-                                    </div>
-                                </p>
-                                <a href="{{ route('comerciante.producto.visualizar',$producto['codigoProducto']) }}" class="btn btn-primary">Ir al producto</a>
+                    @if ($idComerciante == $producto['comercio']['codigoComercio'])                
+                        <!-- Producto  -->
+                        <section class="col-md-3">
+                            <div class="shadow-lg card h-100"> 
+                                <!-- Imagen del producto -->
+                                <img src="{{ $producto['imagenProducto'] }}" height="300" width="300" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <!-- Nombre del producto -->
+                                    <h5 class="card-title">
+                                        {{ $producto['nombreProducto'] }}
+                                    </h5>
+                                    <p class="card-text">
+                                        <!-- Precio del producto -->
+                                        <div class="mt-2">
+                                            Precio: <div class="mt-1">Lps.{{ $producto['precioUnitario'] }} </div>
+                                        </div>
+                                    </p>
+                                    <a href="{{ route('comerciante.producto.visualizar',$producto['codigoProducto']) }}" class="btn btn-primary">Ir al producto</a>
+                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    @else    
+                    
+
+                    @endif
                 @endforeach
             @else
                 <section class="col-md-3 text-center">
@@ -149,12 +147,8 @@
                             urlLogin: "{{route('login')}}"
                             };
     </script>
-    <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
     <script>
         // Borra el localStorage al hacer click en cerrar sesion
-        document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
-    </script>
-    <script>
         document.getElementById("botonSalirComerciante").addEventListener('click', () => {localStorage.clear();});
     </script>
     

@@ -85,7 +85,8 @@
         <section class="row p-5">
             <section class="col">
                 <div class="text-center mb-4 fs-2 fw-bold">Producto con id: {{$producto['codigoProducto']}}</div>
-                <form>
+                <form action="{{route('comerciante.producto.editar.confirmar', $producto['codigoProducto'] )}}" method="GET">
+                @csrf
                     <table class="table table-bordered">
                         <thead class="table-dark">
                             <tr>
@@ -115,7 +116,7 @@
                             <tr>
                                 <td style="width: 50%">Precio unitario: <strong>Lps.{{$producto['precioUnitario']}}</strong></td>
                                 <td style="width: 50%">
-                                    <input type="number" class="form-control" name="precioUnitario" placeholder="Nuevo precio unitario" required>
+                                    <input type="number" step="0.01" class="form-control" name="precioUnitario" placeholder="Nuevo precio unitario" required>
                                 </td style="50%">
                             </tr>
                             <tr>

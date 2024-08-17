@@ -111,7 +111,7 @@
                 <section class="row fs-1 mb-2">
                     <!-- Nombre del producto -->
                     <div>
-                        {{$producto['nombreProducto']}} <span id="codigoProductoSpan" class="d-none">{{$producto['codigoProducto']}}</span>
+                        {{$producto['nombreProducto']}} (en stock: {{$producto['cantidadDisponible']}}) <span id="codigoProductoSpan" class="d-none">{{$producto['codigoProducto']}}</span>
                     </div>
                 </section>
                 <section class="row border-top"></section>

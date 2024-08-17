@@ -84,12 +84,18 @@
     <section class="bg-body-secondary container rounded mt-4 mb-5">
         <section class="row p-5">
             <section class="col">
-                <div class="text-center mb-4 fs-2 fw-bold">Agregar nuevo producto</div>
-                <form>
+                <div class="text-center mb-4 fs-2 fw-bold">Agregar nuevo producto a 
+                    <div> 
+                        <strong>{{ $nombreCategoria }}</strong>
+                    </div>
+                </div>
+                
+                <form id="agregarProductoForm" action="{{ route('comerciante.producto.agregar.confirmar', ['idComercio' => '-1', 'idCategoria' => $idCategoria]) }}" method="POST">
+                    @csrf
                     <table class="table table-bordered">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col">Datos Nuevos</th>
+                                <th scope="col">Nuevo producto</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,8 +116,8 @@
                             </tr>
                             <tr>
                                 <td >
-                                    <input type="number" class="form-control" name="precioUnitario" placeholder="Precio unitario" required>
-                                </td style="50%">
+                                    <input type="number" step="0.01" class="form-control" name="precioUnitario" placeholder="Precio unitario" required>
+                                </td>
                             </tr>
                             <tr>
                                 <td >
@@ -139,6 +145,12 @@
                             urlComercianteProductosCategorias: "{{ route('comerciante.obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{ route('login') }}"
                             };
+    </script>
+
+    <script>
+        if(localStorage.getItem("codigoComercio") != null){
+            document.getElementById("agregarProductoForm").action = document.getElementById("agregarProductoForm").action.replace("/-1",`/${localStorage.getItem("codigoComercio")}`);
+        }
     </script>
     
     <script>

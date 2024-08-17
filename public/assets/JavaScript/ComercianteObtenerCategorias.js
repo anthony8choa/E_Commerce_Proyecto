@@ -23,12 +23,12 @@ fetch(window.appConfig.urlCategorias, {
         let ancleLink = document.createElement("a");
         ancleLink.classList.add("nav-link");
 
-        let idUsuario = 0;
-        if(localStorage.getItem("codigoUsuario") != null){
-            idUsuario = localStorage.getItem("codigoUsuario");
+        let idComercio = 0;
+        if(localStorage.getItem("codigoComercio") != null){
+            idComercio = localStorage.getItem("codigoComercio");
         }
         
-        ancleLink.href = `${window.appConfig.urlComercianteProductosCategorias}/${datos.codigoCategoria}/${idUsuario}`;
+        ancleLink.href = `${window.appConfig.urlComercianteProductosCategorias}/${datos.codigoCategoria}/${idComercio}`;
         ancleLink.innerText = `${datos.nombreCategoria}`;
 
         li.appendChild(ancleLink);

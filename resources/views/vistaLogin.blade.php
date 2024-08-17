@@ -19,7 +19,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         .boton {
-            background-color: #007bff;
+            background-color: #ffc107;
             color: white;
         }
     </style>

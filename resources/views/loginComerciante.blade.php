@@ -7,7 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: rgb(35,47,62);
+            background-color: rgb(2, 2, 2);
             font-family: 'Arial', sans-serif;
         }
         .contenedor-login {
@@ -19,8 +19,12 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         .boton {
-            background-color: #ffee00;
+            background-color: #0056b3;
             color: white;
+        }
+
+        #navbarLoginComerciante{
+            background-color: #0056b3;
         }
        
     </style>
@@ -29,9 +33,9 @@
 <body>
 
     <div>
-        <div class="col-md-12 bg-warning d-flex justify counting-center p-3"> 
+        <div id="navbarLoginComerciante" class="col-md-12 d-flex justify counting-center p-3"> 
             <div>
-                <h4 class="" style="color: #0056b3">E-commerce UNAH</h4>
+                <h4 class="" style="color: #ffc107">E-commerce UNAH</h4>
             </div>
             
         </div>

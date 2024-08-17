@@ -7,21 +7,51 @@ use Illuminate\Support\Facades\Http;
 
 class ComercianteController extends Controller
 {
-    public function comercianteObtenerProductosDeCategoria($idCategoria, $idUsuario){
+
+    public function comercianteMostrarAgregarProductoACategoria($idCategoria, $nombreCategoria){
+        return view('comercianteAgregarProducto', compact('idCategoria','nombreCategoria'));
+    }
+
+    public function comercianteAgregarProductoACategoriaConfirmar(Request $request, $idComercio, $idCategoria){
+
+        $datoCategoria = Http::get('http://localhost:8091/api/categorias/buscar/'.$idCategoria);
+        $categoria = $datoCategoria->Json();
+
+        $codigoCategoria = $categoria['codigoCategoria'];
+        $nombreCategoria = $categoria['nombreCategoria'];
+
+        $datoProducto = Http::post('localhost:8091/api/productos/crear/nvoCompleto',[
+            "nombreProducto" => $request->nombreProducto,
+            "precioUnitario" => $request->precioUnitario,
+            "descripcion" => $request->descripcion,
+            "cantidadDisponible" => $request->cantidadDisponible,
+            "imagenProducto" => $request->imagenProducto,
+            "comercio" =>   [
+                "codigoComercio" => $idComercio
+            ],
+            "categorias" => [
+                "codigoCategoria" => $codigoCategoria,
+                "nombreCategoria" => $nombreCategoria
+            ]
+        ]);
+
+        $producto = $datoProducto->Json();
+        if($producto!=null){
+            return redirect()->route('comerciante.obtener.productos.categoria', ['idCategoria' => $codigoCategoria, 'idUsuario' => $idComercio]);
+        }else{
+            return view('comerciante.login');
+        }
+
+    }
+
+    public function comercianteObtenerProductosDeCategoria($idCategoria, $idComerciante){
         $datoConvertirProductos = Http::get('http://localhost:8091/api/productos/mostrar/porCategoria/'.$idCategoria);
-        $datoConvertirListaFav = Http::get('http://localhost:8091/api/usuarios/ver?codigousuario='.$idUsuario);
 
         $productosEnCategoria = $datoConvertirProductos->Json();
-        $productosEnListaFav = $datoConvertirListaFav->Json();
 
         //dd($productosEnCategoria);
 
-        $listaDeFavUsuario = null;
-        if($productosEnListaFav != null){
-            $listaDeFavUsuario = $productosEnListaFav['listaproductos'];
-        }
-
-        return view('comercianteCategoriaVerProductos', compact('productosEnCategoria', 'listaDeFavUsuario'));
+        return view('comercianteCategoriaVerProductos', compact('productosEnCategoria', 'idComerciante'));
     }
 
     public function comercianteMostrarProductoPorId($idProducto){
@@ -44,6 +74,32 @@ class ComercianteController extends Controller
         $producto = $datoConvertirProductoInfo->Json();
 
         return view('comercianteEditarProducto', compact('producto'));
+
+    }
+
+    //Cuando se pulse boton de confirmar cambios, se ejecuta este metodo
+    public function comercianteEditarProductoPorIdConfirmacion(Request $request, $codigoProducto){
+        $dato = Http::put('http://localhost:8091/api/productos/actualizar?codigoProducto='.$codigoProducto,[
+            "nombreProducto" => $request->nombreProducto,
+            "descripcion" => $request->descripcion,
+            "imagenProducto" => $request->imagenProducto,
+            "cantidadDisponible" => $request->cantidadDisponible,
+            "precioUnitario" => $request->precioUnitario
+        ]);
+
+        $respuesta = $dato->Json();
+
+        if($respuesta!=null){
+
+            $idCategoria = $respuesta['categorias']['codigoCategoria'];
+            $idComerciante = $respuesta['comercio']['codigoComercio'];
+
+            return redirect()->route('comerciante.obtener.productos.categoria', ['idCategoria' => $idCategoria, 'idUsuario' => $idComerciante]);
+        }else{
+
+            return redirect()->route('login');
+
+        }
 
     }
 
