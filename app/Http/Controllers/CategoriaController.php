@@ -38,8 +38,11 @@ class CategoriaController extends Controller
      * categorias con su nombre de categoria asociado, por ejemplo de la categoria zapatos quiero todos sus productos,
      * de la categoria camisetas quiero todos sus productos y asi sucesivamente
      */
-    public function obtenerProductosDeTodasCategorias(){
+    public function obtenerTodosProductos(){
+        $datoConvertirProductos = Http::get('http://localhost:8091/api/categorias/obtener/productos/todas');
+        $productoEnTodasCategorias = $datoConvertirProductos->Json();
 
+        return $productoEnTodasCategorias;
     }
 
     //CONTROLADOR DE PRUEBA, NO HACER

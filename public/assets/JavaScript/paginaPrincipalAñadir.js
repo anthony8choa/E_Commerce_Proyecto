@@ -1,4 +1,4 @@
-fetch(window.appConfig.urlCategorias, {
+fetch(window.appConfig.urlObtenerProductosDeTodasCategorias, {
     method: "GET",
     headers: {
         "Content-Type": "application/json",
@@ -9,8 +9,8 @@ fetch(window.appConfig.urlCategorias, {
     //console.log("Success:", data);
     let i = 1;
 
+    window.appConfig.urlProductosCategorias = window.appConfig.urlProductosCategorias.replace("/1/0","")
     let rutaCategoriaEspecifica = window.appConfig.urlProductosCategorias;
-    rutaCategoriaEspecifica.replace("/1","");
 
     let idUsuario = "0";
 
@@ -18,72 +18,23 @@ fetch(window.appConfig.urlCategorias, {
         idUsuario = localStorage.getItem("codigoUsuario");
     }
 
-    for(const datos of data){
+    
+    for(const categoria of data){
         document.querySelector("#categoriasProductosPrincipalContainer").innerHTML +=
         `
             <section id="categoriaContainer${i}" class="row m-3">
 
                     <section class="row mt-3 mb-2">
-                        <section class="col-6 fw-bold fs-4">
+                        <section id="nombreCateogoria${i}" class="col-6 fw-bold fs-4">
                             <!-- nombre categoria 1 -->
-                            ${datos.nombreCategoria}
+                            ${categoria.nombreCategoria}
                         </section>
                         <section class="col text-end fs-4">
                             <a type="button" href="${rutaCategoriaEspecifica}/${i}/${idUsuario}" class="btn btn-primary">Ver mas</a>
                         </section>
                     </section>
-                    <section class="row fs-6 mb-5">
-                        <!-- Producto, notar que esta secuencia html se repite -->
-                        <section class="col-md-3">
-                            <div id="imagenProductoPPContainer${i}" class="shadow-lg card h-100">
-                                <!-- Imagen del producto -->
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Jersei-coll-alt.jpg" height="300" width="300" class="card-img-top" alt="Sueter">
-                                <div class="card-body">
-                                    <!-- Nombre del producto -->
-                                    <h5 id="nombreProductoPPContainer${i}" class="card-title">Sueter</h5>
-                                    <p class="card-text">
-                                        <!-- Precio del producto -->
-                                        <div>
-                                            Precio: <div id="precioProductoPPContainer${i}"> 500Lps.</div>
-                                        </div>
-                                    </p>
-                                    <a href="#" class="btn btn-primary">Ir al producto</a>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Producto 2, notar que esta secuencia html se repite -->
-                        <section class="col-md-3">
-                            <div class="shadow-lg card h-100">
-                                <img src="https://yazbek.com.mx/cdn/shop/products/C0651-pantalon-mezclilla-caballero-100algodon-indigo-oscuro_1.jpg?v=1693281330" height="300" width="300" class="card-img-top" alt="Sueter">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Producto 3, notar que esta secuencia html se repite -->
-                        <section class="col-md-3">
-                            <div class="shadow-lg card h-100">
-                                <img src="https://paylesshn.vtexassets.com/arquivos/ids/409161/195826_1.jpg?v=638180565815400000" height="300" width="300" class="card-img-top" alt="Sueter">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Producto 4, notar que esta secuencia html se repite -->
-                        <section class="col-md-3">
-                            <div class="shadow-lg card h-100">
-                                <img src="https://www.repuestostotal.com/wp-content/uploads/MJC0112_MLS2N3XL-CHUMPA-BRIGHTON-MAN-LS2-NEGRO-A.jpg" height="300" width="300" class="card-img-top" alt="Sueter">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </section>
+                    <section id="productosDeUnaCategoriaContainer${i}" class="row fs-6 mb-5">
+                        
                     </section>
                 </section>
                 <section class="m-3 border border-secondary"></section"
@@ -91,10 +42,85 @@ fetch(window.appConfig.urlCategorias, {
         i++;
     }
 
+    var j = 1;
+    for(const categoria of data){
 
+        let i = 1;
+        for(const producto of categoria.productos){
+            if(i > 4){
+                break;
+            }
+
+            CrearTarjetaInformacion(producto, j);
+            console.log(j);
+            
+            i++;
+        }
+    
+    j++;
+
+    }
+
+    
 
 })
 .catch((error) => {
     console.warn("Error:" + error);
 });
+
+function CrearTarjetaInformacion(producto, j){
+    let contenedorPorProducto = document.createElement("section");
+    contenedorPorProducto.classList.add("col-md-3");
+
+    let imagenProductoPPContainer = document.createElement("div");
+    imagenProductoPPContainer.classList.add("shadow-lg","card","h-100");
+
+    let imagenProducto = document.createElement("img");
+    imagenProducto.src = `${producto.imagenProducto}`;
+    imagenProducto.height = "300";
+    imagenProducto.width = "300";
+    imagenProducto.classList.add("card-img-top");
+    imagenProducto.alt = "...";
+
+    let cuerpoCard = document.createElement("div");
+    cuerpoCard.classList.add("card-body");
+
+    let nombreProducto = document.createElement("h5");
+    nombreProducto.classList.add("card-title");
+    nombreProducto.innerText = `${producto.nombreProducto}`;
+
+    let textoCard = document.createElement("p");
+    textoCard.classList.add("card-text");
+
+    let precioProductoDiv = document.createElement("div");
+    precioProductoDiv.classList.add("mt-2");
+    precioProductoDiv.innerText = "Precio:";
+
+    let precioProducto = document.createElement("div");
+    precioProducto.innerText = `Lps.${producto.precioUnitario}`;
+
+    let irProducto = document.createElement("a");
+    irProducto.href = `${window.appConfig.urlProductoVisualizar.replace("/0",`/${producto.codigoProducto}`)}`; //ir al producto
+    irProducto.classList.add("btn","btn-primary");
+    irProducto.innerText = "Ir al producto";
+
+    precioProductoDiv.appendChild(precioProducto);
+
+    textoCard.appendChild(precioProductoDiv);
+
+    cuerpoCard.appendChild(nombreProducto);
+    cuerpoCard.appendChild(textoCard);
+    cuerpoCard.appendChild(irProducto);
+
+    imagenProductoPPContainer.appendChild(imagenProducto);
+    imagenProductoPPContainer.appendChild(cuerpoCard);
+
+    contenedorPorProducto.appendChild(imagenProductoPPContainer);
+
+    let todo = document.createElement("div");
+    todo.appendChild(contenedorPorProducto);
+
+    document.getElementById("productosDeUnaCategoriaContainer"+j).innerHTML += todo.innerHTML;
+}
+
 

@@ -83,7 +83,7 @@ Route::get('categorias/obtener/nombre',
     [CategoriaController::class, 'obtenerNombreDeCategorias']
     )->name('obtener.nombre.categorias');
 
-//Obtiene todos los productos de una categoria enviando el idCategoria (Comentada mientras se implementa su funcionalidad)
+//Obtiene todos los productos de una categoria enviando el idCategoria
 Route::get('categorias/obtener/productos/{idCategoria}/{idUsuario}',
     [CategoriaController::class, 'obtenerProductosDeCategoria']
     )->name("obtener.productos.categoria");
@@ -108,6 +108,10 @@ Route::post('/resenias/crear/{idUsuario}/{idProducto}',
     [ReseniasController::class, 'crearResenia']
     )->name('resenias.crear');
 
+Route::get('/categorias/productos/obtener/todos',
+    [CategoriaController::class, 'obtenerTodosProductos']
+    )->name('categorias.productos.obtener.todos');
+
 
 
 //Comerciante
@@ -130,6 +134,11 @@ Route::get('/comerciante/producto/visualizar/{idProducto}',
 Route::get('/comerciante/producto/editar/{idProducto}', 
     [ComercianteController::class, 'comercianteEditarProductoPorId']
     )->name('comerciante.producto.editar');
+
+//prueba
+Route::get('/comerciante/producto/agregar',function(){
+    return view('comercianteAgregarProducto');
+})->name('comerciante.producto.agregar.prueba');
 
 
 

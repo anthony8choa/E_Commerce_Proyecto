@@ -127,23 +127,27 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         //Info necesaria para la navbar dinamica
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{ route('login') }}"
+                            urlLogin: "{{ route('login') }}",
+                            urlObtenerProductosDeTodasCategorias: "{{route('categorias.productos.obtener.todos')}}",
+                            urlProductoVisualizar: "{{ route('producto.visualizar', '0')}}"
                             };
     </script>
+    <script src="{{ asset ('/assets/JavaScript/paginaPrincipalAñadir.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
-    <script src="{{ asset ('/assets/JavaScript/paginaPrincipalAñadir.js') }}"></script>
     <script>
         // Borra el localStorage al hacer click en cerrar sesion
         document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
     </script>
     <script src="{{ asset ('/assets/JavaScript/carritoGeneral.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
 </body>
 </html>
