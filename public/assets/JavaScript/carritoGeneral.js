@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             productoDiv.innerHTML = `
-                <div id="productoDescripcionCarrito" class="col-6">${producto.descripcion} (codigo de producto: ${producto.codigoProducto})</div>
+                <div id="productoNombreCarrito" class="col-6">${producto.nombreProducto} (codigo de producto: ${producto.codigoProducto})</div>
                 <div id="productoPrecioCarrito" class="col-3">Lps.${producto.precioEntero} ${mensaje}</div>
                 <div id="productoCantidadCarrito" class="col-2">${producto.cantidad}</div>
                 <div id="productoBotonEliminarProductoCarrito" class="col-1">
@@ -65,8 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    comprarCarritoButton.addEventListener('click', () => {
-        
-    });
+    if(localStorage.getItem("codigoUsuario") != null){
+        console.log(comprarCarritoButton);
+        comprarCarritoButton.href = comprarCarritoButton.href.replace("/0", `/${localStorage.getItem("codigoUsuario")}`)
+    }else{
+        comprarCarritoButton.href = window.appConfig.urlLogin;  
+    }
 
 });

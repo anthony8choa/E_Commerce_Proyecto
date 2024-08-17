@@ -12,7 +12,6 @@
             font-family: 'Arial', sans-serif;
         }
         .contenedor-favoritos {
-            margin-top: 50px;
             max-width: 800px;
             background-color: rgb(245, 245, 245);
             padding: 20px;
@@ -129,7 +128,7 @@
 
     <!-- Favoritos -->
     <div>
-        <h1 class="display-4 mt-4 text-center text-white ">Mi lista de Favoritos</h1>
+        <h1 class="display-4 mt-5 text-center text-white ">Mi lista de Favoritos</h1>
     </div>
     <div class="container d-flex justify-content-center">
         <div class="contenedor-favoritos">
@@ -195,7 +194,7 @@
                     <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="comprarCarrito">Comprar</button>
+                    <a href="{{route('realizar.compra', '0')}}" type="button" class="btn btn-primary" id="comprarCarrito">Comprar</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>

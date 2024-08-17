@@ -104,10 +104,16 @@
                 <button type="submit" class="btn btn-custom btn-block">Registrar</button>
             </form>
 
-
         </div>
     </div>
-    <div class="mb-5"></div>
+
+
+    <div class="mb-2"></div>
+        <div class="row m-3 d-flex justify-content-center">
+            <div class="text-center mb-4 text-white"> 
+                <h5>Regresar a login <a href="{{route('login')}}">usuario</a></h5>
+            </div>
+        </div>
 
     <!-- Modal a mostrar si ya existe el usuario o correo registrado en otra cuenta -->
     <div class="modal fade" id="userExistsModal" tabindex="-1" aria-labelledby="userExistsModalLabel" aria-hidden="true">

@@ -116,7 +116,7 @@
                             <tr>
                                 <td style="width: 50%">Precio unitario: <strong>Lps.{{$producto['precioUnitario']}}</strong></td>
                                 <td style="width: 50%">
-                                    <input type="number" step="0.01" class="form-control" name="precioUnitario" placeholder="Nuevo precio unitario" required>
+                                    <input type="number" step="0.01" min="0" class="form-control" name="precioUnitario" placeholder="Nuevo precio unitario" required>
                                 </td style="50%">
                             </tr>
                             <tr>

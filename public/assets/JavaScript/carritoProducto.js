@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             productoDiv.innerHTML = `
-                <div id="productoDescripcionCarrito" class="col-6">${producto.descripcion} (codigo de producto: ${producto.codigoProducto})</div>
+                <div id="productoNombreCarrito" class="col-6">${producto.nombreProducto} (codigo de producto: ${producto.codigoProducto})</div>
                 <div id="productoPrecioCarrito" class="col-3">Lps.${producto.precioEntero} ${mensaje}</div>
                 <div id="productoCantidadCarrito" class="col-2">${producto.cantidad}</div>
                 <div id="productoBotonEliminarProductoCarrito" class="col-1">
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const addProductToCart = () => {
 
-        const descripcion = document.getElementById('productDescripcion').textContent.trim();
+        const nombreProducto = document.getElementById('productName').textContent.trim();
         const precioString = document.getElementById('productPrecio').textContent.trim(); // Elemento q capture del div pero es un string
         const codigoProducto = document.getElementById('codigoProductoSpan').innerText;
         const precioNumerico = precioString.replace(/[^0-9.-]+/g, '');
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Buscar si el producto ya existe en el carrito
         const productoExistente = carrito.find(producto => 
             producto.codigoProducto === codigoProducto && 
-            producto.descripcion === descripcion
+            producto.nombreProducto === nombreProducto
         );
     
         if (productoExistente) {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             productoExistente.precioEntero = productoExistente.cantidad * precioEntero;
         } else {
             // Si el producto no existe, agregarlo al carrito
-            carrito.push({ codigoProducto, descripcion, precioEntero, cantidad: 1 });
+            carrito.push({ codigoProducto, nombreProducto, precioEntero, cantidad: 1 });
         }
         
         // Guarda el carrito actualizado en localStorage
@@ -106,7 +106,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    comprarCarritoButton.addEventListener('click', () => {
-        
-    });
+    if(localStorage.getItem("codigoUsuario") != null){
+        comprarCarritoButton.href = comprarCarritoButton.href.replace("/0", `/${localStorage.getItem("codigoUsuario")}`)
+    }else{
+        comprarCarritoButton.href = window.appConfig.urlLogin;  
+    }
+
 });

@@ -111,7 +111,10 @@
                 <section class="row fs-1 mb-2">
                     <!-- Nombre del producto -->
                     <div>
-                        {{$producto['nombreProducto']}} (en stock: {{$producto['cantidadDisponible']}}) <span id="codigoProductoSpan" class="d-none">{{$producto['codigoProducto']}}</span>
+                        <span id="productName">{{$producto['nombreProducto']}}</span>
+                        <strong>
+                            (en stock:  <span id="cantidadDisponible">{{$producto['cantidadDisponible']}}</span>) <span id="codigoProductoSpan" class="d-none">{{$producto['codigoProducto']}}</span>
+                        </strong>
                     </div>
                 </section>
                 <section class="row border-top"></section>
@@ -253,7 +256,7 @@
                     <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="comprarCarrito">Comprar</button>
+                    <a href="{{route('realizar.compra', '0')}}" type="button" class="btn btn-primary" id="comprarCarrito">Comprar</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -307,6 +310,16 @@
 
         }
 
+    </script>
+    <script>
+        let cantidadDisponible = document.getElementById("cantidadDisponible").innerText;
+        if(cantidadDisponible == 0){
+            let añadirACarritoBoton = document.getElementById("addToCart");
+            añadirACarritoBoton.classList.add('disabled');
+            // Cambia el estilo del enlace para hacerlo parecer deshabilitado
+            añadirACarritoBoton.style.pointerEvents = 'none';
+            añadirACarritoBoton.style.cursor = 'not-allowed';
+        }
     </script>
 </body>
 </html>

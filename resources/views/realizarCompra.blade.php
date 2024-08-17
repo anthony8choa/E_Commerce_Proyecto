@@ -86,7 +86,7 @@
                         
                         <li class="nav-item">
                             <nav class="navbar ms-4">
-                                <a id="botonListaFavoritos" class="navbar-brand" href="{{route('favoritos', '1') }}">
+                                <a id="botonListaFavoritos" class="navbar-brand" href="{{route('favoritos', '1')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
                                     </svg>
@@ -109,22 +109,22 @@
     </div>
      
 
-    <div class="container form-container">
+    <div class="mb-5 container form-container">
         <div class="bordered-container">
-            <h1 class="text-center">Realizar Compra</h1>
+            <h1 class="text-center">Resumen Compra</h1>
             <form>
                 <table class="table table-bordered">
                     <tr>
                         <td>
                             <label for="cliente" class="form-label">Nombre de Usuario</label>
-                            <input type="text" class="form-control" id="cliente" placeholder="Nombre asociado">
+                            <input type="text" class="form-control" id="cliente" placeholder="Nombre asociado" readonly>
                         </td>
                     </tr>
                     <tr>
                         <td>
                         <!-- puse el correo porq por lo gneral cuando compraas algo te cae un correo-->
                             <label for="correo" class="form-label">Correo Asociado</label>
-                            <input type="email" class="form-control" id="correo" placeholder="Correo asociado">
+                            <input type="email" class="form-control" id="correo" placeholder="Correo asociado" readonly>
                         </td>
                     </tr>
                     <tr>
@@ -153,26 +153,22 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>Codigo</th>
                             <th>Nombre</th>
-                            <th>Descripción</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
-                            <th>Eliminar</th>
+                            <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody id="productos">
                         <tr>
-                            <td>Producto 1 </td>
-                            <td>Descripción del Producto </td>
-                            <td>1</td>
-                            <td>L. 100.00</td>
-                            <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">Eliminar</button></td>
+                            
                         </tr>
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-primary">Seguir comprando</button>  <!--este boton lo va llevar al index-->
-                    <button type="submit" class="btn btn-success">Realizar compra</button> <!--este boton le va decir compra exitosa y lo va mandar a la base de datos-->
+                <div class="mt-4 d-flex justify-content-between">
+                    <a href="{{route('principal')}}" type="button" class="btn btn-primary">Seguir comprando</a>  <!--este boton lo va llevar al index-->
+                    <button id="realizarCompraBoton" type="submit" class="btn btn-success">Realizar compra</button> <!--este boton le va decir compra exitosa y lo va mandar a la base de datos-->
                 </div>
             </form>
         </div>
@@ -192,28 +188,20 @@
                     <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="comprarCarrito">Comprar</button>
+                    <a href="{{route('realizar.compra', '0')}}" type="button" class="btn btn-primary" id="comprarCarrito">Comprar</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        //podrias agregar una funcion q los elimine del localstorague seria como lo del carrito
-        // lo agrgue eso de eliminar por si el usuario se arrepiente a ultimo momento asi no tiene q ir hasta al carrito para eliminarlo 
-        function eliminarProducto(button) {
-            const row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{route('login')}}"
+                            urlLogin: "{{route('login')}}",
+                            urlProductoVisualizar: "{{route('producto.visualizar', '0')}}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
@@ -223,6 +211,23 @@
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/carritoGeneral.js') }}"></script>
+    <script src="{{ asset ('/assets/JavaScript/realizarCompra.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Obtén el valor del carrito desde localStorage
+        let carrito = localStorage.getItem("carrito");
+
+        // Obtén una referencia al botón
+        let realizarCompraBoton = document.getElementById('realizarCompraBoton');
+
+        // Verifica si el carrito es null
+        if (carrito === null) {
+            // Deshabilita el botón si es asi
+            realizarCompraBoton.disabled = true;
+
+        }
+    });
+    </script>
 
 </body>
 </html>

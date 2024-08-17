@@ -120,7 +120,7 @@
             @if ($productosEnCategoria)
                 @foreach ($productosEnCategoria as $producto)
                     <!-- Producto  -->
-                    <section class="col-md-3">
+                    <section class="col-3 mt-3 md-3">
                         <div class="shadow-lg card h-100"> 
                             <!-- Imagen del producto -->
                             <img src="{{ $producto['imagenProducto'] }}" height="300" width="300" class="card-img-top" alt="...">
@@ -179,7 +179,7 @@
                     <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="comprarCarrito">Comprar</button>
+                    <a href="{{route('realizar.compra', '0')}}" type="button" class="btn btn-primary" id="comprarCarrito">Comprar</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>

@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <label for="contrasenia">Contraseña</label>
-                    <input name="contrasenia" type="contrasenia" class="form-control" id="contraseniaCampo" placeholder="Ingresa tu contraseña" required>
+                    <input name="contrasenia" type="password" class="form-control" id="contraseniaCampo" placeholder="Ingresa tu contraseña" required>
                 </div>
                 <button id="BotonIngresar" type="submit" class="btn boton btn-block">Ingresar</button>
             </form>

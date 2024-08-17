@@ -24,7 +24,7 @@ Route::get('/registro',
     [RegistroController::class, 'mostrarRegistro']
 )->name('registro');
 
-//ver.registro
+//confirmar registro
 Route::post('/registro/confirmacion',
     [RegistroController::class, 'confirmarRegistro']
     )->name('registro.confirmacion');
@@ -33,6 +33,7 @@ Route::post('/registro/confirmacion',
 Route::get('/perfil/cuenta', function () {
     return view('perfilCuenta');
 })->name('perfil');
+
 //solo visualizar editar datos personales
 Route::get('/editar/datosPersonales', function () {
     return view('editarDatosPersonales');
@@ -53,11 +54,6 @@ Route::get('/recibo/cliente', function () {
     return view('reciboCliente');
 })->name('recibo');
 
-
-//solo visualizar realizarCompra
-Route::get('/realizar/compra', function () {
-    return view('realizarCompra');
-})->name('compra');
 
 Route::get('/index', function(){
     return view('paginaPrincipal');
@@ -124,6 +120,10 @@ Route::get('/categorias/productos/obtener/todos',
     [CategoriaController::class, 'obtenerTodosProductos']
     )->name('categorias.productos.obtener.todos');
 
+Route::get('/realizar/compra/{idUsuario}', function () {
+        return view('realizarCompra');
+    })->name('realizar.compra');
+
 
 
 //Comerciante
@@ -151,12 +151,10 @@ Route::get('/comerciante/producto/editar/confirmar/{idProducto}',
     [ComercianteController::class, 'comercianteEditarProductoPorIdConfirmacion']
     )->name('comerciante.producto.editar.confirmar');
 
-//
 Route::get('/comerciante/producto/agregar/{idCategoria}/{nombreCategoria}',
     [ComercianteController::class, 'comercianteMostrarAgregarProductoACategoria']
     )->name('comerciante.producto.agregar');
 
-//
 Route::post('/comerciante/producto/agregar/confirmar/{idComercio}/{idCategoria}',
     [ComercianteController::class, 'comercianteAgregarProductoACategoriaConfirmar']
     )->name('comerciante.producto.agregar.confirmar');

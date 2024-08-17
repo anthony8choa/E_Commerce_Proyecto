@@ -132,7 +132,7 @@
                     <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="comprarCarrito">Comprar</button>
+                    <a href="{{route('realizar.compra', '0')}}" type="button" class="btn btn-primary" id="comprarCarrito">Comprar</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>

@@ -204,7 +204,7 @@
                                     <td>L. 300.00</td>
                                 </tr>
                                 <tr>
-                                    <td>Producto 2/td>
+                                    <td>Producto 2</td>
                                     <td>4</td>
                                     <td>L. 200.00</td>
                                     <td>L. 200.00</td>
@@ -258,7 +258,7 @@
                     <button class="btn btn-danger mt-3" id="vaciarCarrito">Vaciar Carrito</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="comprarCarrito">Comprar</button>
+                    <a href="{{route('realizar.compra', '0')}}" type="button" class="btn btn-primary" id="comprarCarrito">Comprar</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
