@@ -58,23 +58,24 @@
                 <h2>Registro de Ventas</h2>
             </div>
             <div class="card-body">
-                <form>
-          
+                
+                <form action="{{ route('obtener.historial.ventas.confirmar') }}" method="GET">
+                    @csrf
                     <div class="mb-3">
-                        <h5 class="titulo-seccion">Filtrar por Fecha y Hora de Inicio</h5>
+                        <h5 class="titulo-seccion">Filtrar por Fecha y Hora de Inicio <br>(Recuerde ingresar mes y dia con 2 digitos)</h5>
                         <div class="mb-3">
                             <label for="fecha-inicio">Fecha de Inicio:</label>
-                            <input type="date" id="fecha-inicio" name="fecha-inicio" class="form-control" value="2024-08-19" min="2018-01-01" max="2024-12-31" />
+                            <input type="date" id="fechaInicio" name="fechaInicio" class="form-control" value="2024-08-19" min="2018-01-01" max="2024-12-31" />
                         </div>
                         <div class="grupo-hora">
                             <div class="form-group">
                                 <label for="hora-inicio">Hora</label>
-                                <input type="tel" class="form-control" id="hora-inicio" name="hora-inicio" placeholder="HH" required>
+                                <input type="tel" class="form-control" id="hora-inicio" name="horaInicio" placeholder="HH" required>
                             </div>
                             <span>:</span>
                             <div class="form-group">
                                 <label for="minutos-inicio">Minutos</label>
-                                <input type="text" class="form-control" id="minutos-inicio" name="minutos-inicio" placeholder="MM" required>
+                                <input type="text" class="form-control" id="minutos-inicio" name="minutosInicio" placeholder="MM" required>
                             </div>
                         </div>
                     </div>
@@ -84,17 +85,17 @@
                         <h5 class="titulo-seccion">Filtrar por Fecha y Hora Final</h5>
                         <div class="mb-3">
                             <label for="fecha-final">Fecha Final:</label>
-                            <input type="date" id="fecha-final" name="fecha-final" class="form-control" value="2024-08-19" min="2018-01-01" max="2024-12-31" />
+                            <input type="date" id="fecha-final" name="fechaFinal" class="form-control" value="2024-08-19" min="2018-01-01" max="2024-12-31" />
                         </div>
                         <div class="grupo-hora">
                             <div class="form-group">
                                 <label for="hora-final">Hora</label>
-                                <input type="tel" class="form-control" id="hora-final" name="hora-final" placeholder="HH" required>
+                                <input type="tel" class="form-control" id="horaFinal" name="horaFinal" placeholder="HH" required>
                             </div>
                             <span>:</span>
                             <div class="form-group">
                                 <label for="minutos-final">Minutos</label>
-                                <input type="text" class="form-control" id="minutos-final" name="minutos-final" placeholder="MM" required>
+                                <input type="text" class="form-control" id="minutosFinal" name="minutosFinal" placeholder="MM" required>
                             </div>
                         </div>
                     </div>
@@ -106,6 +107,22 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('hora-inicio').addEventListener('input', function() {
+            let hora = this.value;
+            if (hora.length === 1 && hora >= 1 && hora <= 9) {
+                this.value = '0' + hora;
+            }
+        });
+
+        document.getElementById('minutos-inicio').addEventListener('input', function() {
+            let minutos = this.value;
+            if (minutos.length === 1 && minutos >= 1 && minutos <= 9) {
+                this.value = '0' + minutos;
+            }
+        });
+</script>
+    </script>
 </body>
 </html>
 

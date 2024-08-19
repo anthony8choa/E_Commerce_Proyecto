@@ -99,7 +99,13 @@ function CrearTarjetaInformacion(producto, j){
     precioProducto.innerText = `Lps.${producto.precioUnitario}`;
 
     let irProducto = document.createElement("a");
+    let codigoUsuario = localStorage.getItem("codigoUsuario");
+    if(codigoUsuario == null){
+        codigoUsuario = 0;
+    }
+
     irProducto.href = `${window.appConfig.urlProductoVisualizar.replace("/0",`/${producto.codigoProducto}`)}`; //ir al producto
+    irProducto.href = irProducto.href.replace("/-1",`/${codigoUsuario}`);
     irProducto.classList.add("btn","btn-primary");
     irProducto.innerText = "Ir al producto";
 

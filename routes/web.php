@@ -11,10 +11,21 @@ use App\Http\Controllers\ReseniasController;
 use App\Http\Controllers\ComercianteController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\HistorialVentasController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Historial de ventas
+Route::get('/obtener/historial/ventas',
+    [HistorialVentasController::class, 'obtenerHistorialVentas']
+    )->name('obtener.historial.ventas');
+
+Route::get('/obtener/historial/ventas/confirmar',
+    [HistorialVentasController::class, 'obtenerHistorialVentasConfirmar']
+    )->name('obtener.historial.ventas.confirmar');
+
 
 Route::get('/login', function () {
     return view('vistaLogin');

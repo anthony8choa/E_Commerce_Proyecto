@@ -11,6 +11,35 @@
             background-color:  rgb(35,47,62);
             font-family: 'Arial', sans-serif;
         }
+        .contenedor-favoritos {
+            margin-top: 50px;
+            max-width: 800px;
+            background-color: rgb(245, 245, 245);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .tabla-favoritos th, .tabla-favoritos td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .btn-vaciar {
+            background-color: #007bff;
+            color: white;
+            margin-top: 20px;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-eliminar {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-ir-producto {
+            background-color: #28a745;
+            color: white;
+        }
 
         .navbar{
             background-color: #ffc107; /* Azul */
@@ -98,13 +127,10 @@
         </nav>
     </div>
 
-    <!-- Pagina principal auto generada por JS -> archivo assets/JavaScript/paginaPrincipalAñadir.js -->
-    <section id="categoriasProductosPrincipalContainer" class="bg-body-secondary container rounded mt-4">
-        
-        
-    </section>
 
-    <section class="row mt-3">
+    <!-- Seccion del contenido -->
+
+
 
     <!-- Ventana emergente del carrito -->
     <div style="max-width: 100%;" class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
@@ -135,29 +161,29 @@
         </div>
     </div>
 
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         //Info necesaria para la navbar dinamica
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{ route('login') }}",
-                            urlObtenerProductosDeTodasCategorias: "{{route('categorias.productos.obtener.todos')}}",
-                            urlProductoVisualizar: "{{ route('producto.visualizar', ['idProducto' => '0', 'idUsuario' => '-1'])}}",
+                            urlLogin: "{{route('login')}}",
                             urlVerCuenta: "{{ route('usuario.perfil', '0') }}",
                             urlVerTransacciones: "{{ route('usuario.ver.transacciones', '0') }}"
                             };
     </script>
-    <script src="{{ asset ('/assets/JavaScript/paginaPrincipalAñadir.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
     <script>
         // Borra el localStorage al hacer click en cerrar sesion
         document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
     </script>
+    <script>
+        // Borra el localStorage al hacer click en cerrar sesion
+        document.getElementById("cerrarSesionBoton").addEventListener('click', () => {localStorage.clear();});
+    </script>
     <script src="{{ asset ('/assets/JavaScript/carritoGeneral.js') }}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
 </body>
 </html>
