@@ -8,41 +8,112 @@ use Illuminate\Support\Facades\Http;
 class UsuarioController extends Controller
 {
 
-    /**
-     * Vista asociada: vistaLogin
-     * 
-     * Esta funcion envia el nombre de usuario junto a su contraseña y va
-     * verificar si existe un usuario asociado a estos datos, retornando 
-     * un BOOLEANO
-     * @param Request Refiere al request que contiene el nombre de usuario y contraseña
-     * @return boolean Refiere a la respuesta de la verificacion, true si el usuario ingresado existe, false caso contrario
-     */
-    public function verificarUsuario(Request $request){
-        //$request->nombreUsuario,
-        //$request->contrasenia
-    }
+    public function verificarUsuarioLogin(Request $request){
+        
+        $nombre = $request -> nombre;
+        $contrasenia = $request -> contrasenia;
 
-    /**
-     * Esta funcion obtiene toda la información asociada al usuario, es decir:
-     * tabla usuario, sus lugares asociados,
-     * sus metodos de pago, las compras de ese usuario (osea todo lo que ha comprado)
-     * , en conclusion todo menos sus favoritos (ya que se mostrara en otra vista)
-     * @param idUsuario Refiere al idUsuario a mandar para recibir sus atributos
-     * @return . Refiere al retorno de dicho datos (nose muy bien como se hará este método, cualquier retorno es valido, ya sea lista o api personalizada con dichos valores)
-     */
-    public function obtenerUsuarioConAtributos($idUsuario){
+        $datoConvertir = Http::get('localhost:8091/api/usuarios/validar/login/'.$nombre.'/'.$contrasenia);
+        $respuesta = $datoConvertir->Json();
+
+        session()->flash('respuestaLogin', $respuesta);
+
+        if($respuesta === true){
+            return redirect()->route('principal');
+        }else{
+            return redirect()->route('login');
+        }
 
     }
 
+    public function obtenerInformacionPersonalDireccionesTarjetas($idUsuario){
+        $dato = Http::get('localhost:8091/api/usuarios/obtener/direcciones/tarjetas/'.$idUsuario);
+        $datosUsuario = $dato->Json();
+        if($datosUsuario!=null){
+            return view('perfilCuenta', compact('datosUsuario'));
+        }
+    }
 
-    /**
-     * Funcion crear nuevo usuario
-     * Esta funcion creará un nuevo usuario asociando todo de este al registrarse, es decir, toda la info del usuario,
-     * la info de su direccion (solo 1 se enviara en el registro), info de su tarjeta (1 se enviara en el registro).
-     * @param request Refiere al tipo de peticion post que contendra toda la informacion previamente mencionada
-     * @return boolean Retorna true si el usuario se registro exitosamente, false si el usuario ya existe
-     */
-    public function registrarUsuario(Request $request){
+    public function editarDatosPersonales($idUsuario){
+        $dato = Http::get('localhost:8091/api/usuarios/ver?codigousuario='.$idUsuario);
+        $datosUsuario = $dato->Json();
+
+        return view('editarDatosPersonales', compact('datosUsuario'));
+    }
+
+    public function editarDatosPersonalesConfirmar(Request $request, $idUsuario){
+        $dato = Http::put('localhost:8091/api/usuarios/actualizar/'.$idUsuario,[
+            "nombrecompleto" => $request->nombrecompleto,
+            "contrasenia" => $request->contrasenia,
+            "telefono" => $request->telefono
+        ]);
+
+        $datosUsuario = $dato->Json();
+        if($datosUsuario!=null){
+            return redirect()->route('usuario.perfil', $idUsuario);
+        }
+
+    }
+
+    public function agregarDireccion($idUsuario){
+        return view('agregarDireccion', compact('idUsuario'));
+    }
+
+    public function agregarDireccionConfirmar(Request $request, $idUsuario){
+        $dato = Http::post('localhost:8091/api/direccion/agregar/direcciones/'.$idUsuario.'?nombrePais='.$request->nombrePais.'&codigoPostal='.$request->codigoPostal.'&departamento='.$request->departamento);
+
+        $respuesta = $dato->Json();
+
+        if($respuesta === true){
+            return redirect()->route('usuario.perfil', $idUsuario);
+        }
+    }
+
+    public function editarDireccion($idLugar, $idUsuario){
+        return view('editarDireccion');
+    }
+
+    public function editarTarjeta($idTarjeta, $idUsuario){
+        $dato = Http::get('localhost:8091/api/tarjetasCredito/obtener/'.$idTarjeta);
+        $tarjetaEditar = $dato->Json();
+
+        return view('editarTarjeta', compact('tarjetaEditar','idTarjeta','idUsuario'));
+    }
+
+    public function editarTarjetaConfirmar(Request $request, $idTarjeta, $idUsuario){
+        $dato = Http::put('localhost:8091/api/tarjetasCredito/actualizar/'.$idUsuario.'/'.$idTarjeta,[
+            "numeroTarjeta" => $request->numeroTarjeta,
+            "anyoVencimiento" => $request->anyoVencimiento,
+            "mesVencimiento" => $request->mesVencimiento,
+            "cvv" => $request->cvv
+        ]);
+        $tarjetaConfirmar = $dato->Json();
+
+        if($tarjetaConfirmar != null){
+            return redirect()->route('usuario.perfil', $idUsuario);
+        }      
+    }
+
+    public function agregarTarjeta($idUsuario){
+        return view('agregarTarjeta', compact('idUsuario'));
+    }
+
+    public function agregarTarjetaConfirmar(Request $request, $idUsuario){
+        $datoRespuesta = Http::post('localhost:8091/api/tarjetasCredito/crear/'.$idUsuario,[
+            "numeroTarjeta" => $request->numeroTarjeta,
+            "anyoVencimiento" => $request->anyoVencimiento,
+            "mesVencimiento" => $request->mesVencimiento,
+            "cvv" => $request->cvv
+        ]);
+
+        $respuesta = $datoRespuesta->Json();
+        if($respuesta === true){
+            return redirect()->route('usuario.perfil', $idUsuario);
+        }else{
+            session()->flash('tarjetaExiste', true);
+            return redirect()->route('usuario.agregar.tarjeta', $idUsuario);
+        }
+
 
     }
 

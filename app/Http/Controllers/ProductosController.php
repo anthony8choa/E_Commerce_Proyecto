@@ -28,27 +28,4 @@ class ProductosController extends Controller
         return view('visualizarProducto', compact('producto','reseniasDeProducto'));
     }
 
-    public function verificarUsuarioLogin(Request $request){
-        
-        $nombre = $request -> nombre;
-        $contrasenia = $request -> contrasenia;
-
-        $datoConvertir = Http::get('localhost:8091/api/usuarios/validar/login/'.$nombre.'/'.$contrasenia);
-        $respuesta = $datoConvertir->Json();
-
-        session()->flash('respuestaLogin', $respuesta);
-
-        if($respuesta === true){
-            return redirect()->route('principal');
-        }else{
-            return redirect()->route('login');
-        }
-
-        //$request -> nombre;
-        //$request -> contrasenia;
-    }
-
-
-
-
 }

@@ -70,7 +70,7 @@
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Transacciones</a></li>
-                                <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+                                <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
@@ -101,39 +101,48 @@
             </div>
         </nav>
     </div>
-    <div class="container form-container">
+
+
+
+    <div class="container form-container mb-5">
         <div class="card">
             <div class="card-header text-center">
                 <h2>Editar Datos Personales</h2>
             </div>
             <div class="card-body">
                 
-                <form>
+                <form action="{{ route('usuario.editar.datos.personales.confirmar', $datosUsuario['codigoUsuario']) }}" method="GET">
+                    @csrf
                     <div class="mb-3">
                         <label for="username" class="form-label">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="username" value="UsuarioEjemplo" placeholder="Ingrese su nuevo nombre de usuario" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="lastname" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="lastname" value="ApellidoEjemplo" placeholder="Ingrese su nuevo apellido" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" value="*" placeholder="Ingrese su nueva contraseña" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" id="phone" value="+123456789" placeholder="Ingrese su nuevo número de teléfono" required>
+                        <input type="text" class="form-control" id="username" value="{{ $datosUsuario['nombreusuario'] }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" value="usuario@ejemplo.com" placeholder="Ingrese su  nuevo correo electrónico" required>
+                        <input type="email" class="form-control" id="email" value="{{ $datosUsuario['correo'] }}" placeholder="Ingrese su  nuevo correo electrónico" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="completeName" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" name="nombrecompleto" id="completeName" placeholder="Ingrese su nuevo nombre completo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" name="contrasenia" id="password" placeholder="Ingrese su nueva contraseña" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Teléfono</label>
+                        <input name="telefono" type="number" class="form-control" min="0" placeholder="Ingrese su nuevo número de teléfono" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
                 </form>
             </div>
         </div>
+        <div class="text-center mt-2 fs-6"><a href="{{ route('usuario.perfil', $datosUsuario['codigoUsuario']) }}">Volver</a></div>
     </div>
+    
+
+
+
 
     <!-- Ventana emergente del carrito -->
     <div style="max-width: 100%;" class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
@@ -170,7 +179,8 @@
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{route('login')}}"
+                            urlLogin: "{{route('login')}}",
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>

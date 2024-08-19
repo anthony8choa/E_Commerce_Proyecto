@@ -30,24 +30,47 @@ Route::post('/registro/confirmacion',
     )->name('registro.confirmacion');
 
 //solo para visualizar perfil de la cuenta
-Route::get('/perfil/cuenta', function () {
-    return view('perfilCuenta');
-})->name('perfil');
+Route::get('/usuario/perfil/{idUsuario}', 
+    [UsuarioController::class, 'obtenerInformacionPersonalDireccionesTarjetas']
+    )->name('usuario.perfil');
 
 //solo visualizar editar datos personales
-Route::get('/editar/datosPersonales', function () {
-    return view('editarDatosPersonales');
-})->name('editardatos');
+Route::get('/usuario/editar/datos/personales/{idUsuario}', 
+    [UsuarioController::class, 'editarDatosPersonales']
+    )->name('usuario.editar.datos.personales');
 
-//solo visualizar agregar direccion
-Route::get('/agregar/nuevadireccion', function () {
-    return view('agregarDireccion');
-})->name('agregardir');
+Route::get('/usuario/editar/datos/personales/confirmar/{idUsuario}', 
+    [UsuarioController::class, 'editarDatosPersonalesConfirmar']
+    )->name('usuario.editar.datos.personales.confirmar');
 
-//solo visualizar agregar tarjeta 
-Route::get('/agregar/tarjeta', function () {
-    return view('agregarTarjeta');
-})->name('agregartarjeta');
+
+Route::get('/usuario/agregar/direccion/{idUsuario}',
+    [UsuarioController::class, 'agregarDireccion']
+    )->name('usuario.agregar.direccion');
+
+Route::post('/usuario/agregar/direccion/confirmar/{idUsuario}',
+    [UsuarioController::class, 'agregarDireccionConfirmar']
+    )->name('usuario.agregar.direccion.confirmar');
+
+Route::get('/usuario/editar/direccion/{idLugar}/{idUsuario}',
+    [UsuarioController::class, 'editarDireccion']
+    )->name('editar.direccion');
+
+Route::get('/usuario/editar/tarjeta/{idTarjeta}/{idUsuario}', 
+    [UsuarioController::class, 'editarTarjeta']
+    )->name('usuario.editar.tarjeta');
+
+Route::get('/usuario/editar/tarjeta/confirmar/{idTarjeta}/{idUsuario}', 
+    [UsuarioController::class, 'editarTarjetaConfirmar']
+    )->name('usuario.editar.tarjeta.confirmar');
+
+Route::get('/usuario/agregar/tarjeta/{idUsuario}', 
+    [UsuarioController::class, 'agregarTarjeta']
+    )->name('usuario.agregar.tarjeta');
+
+Route::post('/usuario/agregar/tarjeta/confirmar/{idUsuario}', 
+    [UsuarioController::class, 'agregarTarjetaConfirmar']
+    )->name('usuario.agregar.tarjeta.confirmar');
 
 //solo visualizar recibo 
 Route::get('/recibo/cliente', function () {
@@ -74,7 +97,7 @@ Route::get('/producto/visualizar/{idProducto}',
 
 //Hacer peticion al BackEnd de la existencia de un usuario
 Route::get('/usuario/verificar',
-    [ProductosController::class, 'verificarUsuarioLogin']
+    [UsuarioController::class, 'verificarUsuarioLogin']
     )->name('usuario.verificar');
 
 //usuario.obtener.nombre
@@ -101,10 +124,6 @@ Route::get('categorias/obtener/nombre',
 Route::get('categorias/obtener/productos/{idCategoria}/{idUsuario}',
     [CategoriaController::class, 'obtenerProductosDeCategoria']
     )->name("obtener.productos.categoria");
-
-Route::get('usuario/ver/cuenta',function(){
-    return view('verCuenta');
-})->name("usuario.ver.cuenta");
 
 Route::get('favoritos/eliminar/producto/{codigoUsuario}/{codigoProducto}',
     [ListaFavoritos::class, 'eliminarProductoDeListaFavoritos']

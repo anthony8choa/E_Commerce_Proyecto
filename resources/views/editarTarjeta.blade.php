@@ -71,7 +71,7 @@
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Transacciones</a></li>
-                                <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+                                <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
@@ -136,27 +136,33 @@
     <div class="container form-container">
         <div class="card">
             <div class="card-header text-center">
-                <h2>EditarTarjeta</h2>
+                <h2>Editar Tarjeta</h2>
             </div>
             <div class="card-body">
                 
-                <form>
+                <form action="{{ route('usuario.editar.tarjeta.confirmar', ['idTarjeta' => $idTarjeta, 'idUsuario' => $idUsuario ]) }}" method="GET">
+                    @csrf
                     <div class="mb-3">
                         <label for="cardNumber" class="form-label">Número de Tarjeta</label>
-                        <input type="text" class="form-control" id="cardNumber" placeholder="Ingrese el número de la tarjeta" required>
+                        <input type="number" class="form-control" name="numeroTarjeta" id="cardNumber" placeholder="{{ $tarjetaEditar['numeroTarjeta'] }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="cvv" class="form-label">CVV</label>
-                        <input type="text" class="form-control" id="cvv" placeholder="Ingrese el CVV" required>
+                        <input type="number" class="form-control" name="cvv" id="cvv" placeholder="{{ $tarjetaEditar['cvv'] }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="expiryDate" class="form-label">Fecha de Vencimiento</label>
-                        <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA" required>
+                        <label class="form-label">Año de Vencimiento</label>
+                        <input type="number" class="form-control" name="anyoVencimiento" id="expiryDate" placeholder="{{ $tarjetaEditar['anyoVencimiento'] }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mes de Vencimiento</label>
+                        <input type="number" class="form-control" name="mesVencimiento" id="expiryDate" placeholder="{{ $tarjetaEditar['mesVencimiento'] }}" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
                 </form>
             </div>
         </div>
+        <div class="text-center mt-2 fs-6"><a href="{{ route('usuario.perfil', $idUsuario) }}">Volver</a></div>
     </div>
 
 
@@ -165,7 +171,8 @@
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{route('login')}}"
+                            urlLogin: "{{route('login')}}",
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>

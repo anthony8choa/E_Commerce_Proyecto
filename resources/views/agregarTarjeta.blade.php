@@ -71,7 +71,7 @@
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Transacciones</a></li>
-                                <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+                                <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
@@ -138,32 +138,57 @@
             </div>
             <div class="card-body">
                 
-                <form>
+                <form action="{{ route('usuario.agregar.tarjeta.confirmar', $idUsuario) }}" method="POST">
+                    @csrf
                     <div class="mb-3">
-                        <label for="cardNumber" class="form-label">Número de Tarjeta</label>
-                        <input type="text" class="form-control" id="cardNumber" placeholder="Ingrese el número de la tarjeta" required>
+                        <label class="form-label">Número de Tarjeta</label>
+                        <input type="number" min="0" class="form-control" name="numeroTarjeta" placeholder="Ingrese el número de la tarjeta" required>
                     </div>
                     <div class="mb-3">
-                        <label for="cvv" class="form-label">CVV</label>
-                        <input type="text" class="form-control" id="cvv" placeholder="Ingrese el CVV" required>
+                        <label class="form-label">CVV</label>
+                        <input type="number" min="0" class="form-control" name="cvv" placeholder="Ingrese el CVV" required>
                     </div>
                     <div class="mb-3">
-                        <label for="expiryDate" class="form-label">Fecha de Vencimiento</label>
-                        <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA" required>
+                        <label class="form-label">Año de Vencimiento</label>
+                        <input type="number" min="0" class="form-control" name="anyoVencimiento" placeholder="Ej. 2030" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mes de Vencimiento</label>
+                        <input type="number" min="0" class="form-control" name="mesVencimiento" placeholder="1 - 12" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Guardar Tarjeta</button>
                 </form>
             </div>
         </div>
+        <div class="text-center mt-2 fs-6"><a href="{{ route('usuario.perfil', $idUsuario) }}">Volver</a></div>
     </div>
 
+
+    <!-- Modal a mostrar si ya existe la tarjeta registrada en esta cuenta o en otra cuenta -->
+    <div class="modal fade" id="userExistsModal" tabindex="-1" aria-labelledby="userExistsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userExistsModalLabel">Atención</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tarjeta ya registrada en esta cuenta o en otra
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{route('login')}}"
+                            urlLogin: "{{route('login')}}",
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
@@ -173,6 +198,14 @@
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/carritoGeneral.js') }}"></script>
+    <script>
+        @if(session('tarjetaExiste'))
+            var tarjetaExisteModal = new bootstrap.Modal(document.getElementById('userExistsModal'));
+            tarjetaExisteModal.show();
+            // Borra el valor de la sesión para evitar que la alerta se muestre en futuras visitas
+            @php session()->forget('tarjetaExiste'); @endphp
+        @endif
+    </script>
 
 </body>
 </html>

@@ -66,7 +66,7 @@
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Transacciones</a></li>
-                                <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+                                <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
@@ -143,7 +143,8 @@
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{ route('login') }}",
                             urlObtenerProductosDeTodasCategorias: "{{route('categorias.productos.obtener.todos')}}",
-                            urlProductoVisualizar: "{{ route('producto.visualizar', '0')}}"
+                            urlProductoVisualizar: "{{ route('producto.visualizar', '0')}}",
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/paginaPrincipalAñadir.js') }}"></script>

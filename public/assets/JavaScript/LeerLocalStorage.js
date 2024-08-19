@@ -6,6 +6,8 @@ class LeerLocalStorage{
         let dropdownUsuario = document.getElementById("dropdownUsuario");
         let tipoIngresoDropdown = document.getElementById("tipoIngresoDropdown");
         let dropdownInvitado = document.getElementById("dropdownInvitado");
+        let verCuentaBoton = document.getElementById("verCuentaBoton");
+        let urlVerCuentaConvertir = window.appConfig.urlVerCuenta;
 
         
 
@@ -21,6 +23,9 @@ class LeerLocalStorage{
                 dropdownUsuario.classList.toggle('d-none');
 
                 dropdownInvitado.classList.add('d-none');
+
+                urlVerCuentaConvertir = urlVerCuentaConvertir.replace("/0",`/${localStorage.getItem("codigoUsuario")}`);
+                verCuentaBoton.href = urlVerCuentaConvertir;
 
             }else{
                 dropdownUsuarioBoton.innerHTML = "usuario";

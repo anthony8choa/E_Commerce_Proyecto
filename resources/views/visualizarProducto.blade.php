@@ -66,7 +66,7 @@
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Transacciones</a></li>
-                                <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+                                <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
@@ -288,7 +288,8 @@
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{route('login')}}",
-                            urlAñadirProductoAFavoritos: "{{ route('favoritos.agregar.producto', ['codigoUsuario' => '1', 'codigoProducto' => '1']) }}"
+                            urlAñadirProductoAFavoritos: "{{ route('favoritos.agregar.producto', ['codigoUsuario' => '1', 'codigoProducto' => '1']) }}",
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>

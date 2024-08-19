@@ -9,6 +9,8 @@ class RegistroController extends Controller
 {
     public function confirmarRegistro(Request $request){
 
+        $codigoTipoUsuario = 1;
+        $nombreTipoUsuario = "UsuarioCliente";
 
         $dato = Http::post('http://localhost:8091/api/usuarios/nuevo',[
             "nombreusuario" => $request->nombreusuario,
@@ -16,6 +18,10 @@ class RegistroController extends Controller
             "correo" => $request->correo,
             "contrasenia" => $request->contrasenia,
             "telefono" => $request->telefono,
+            "tipousuarios" => [
+                "codigoTipoUsuario" => $codigoTipoUsuario,
+                "nombreTipoUsuario" => $nombreTipoUsuario
+            ],
             "lugares" => [
                 "nombrePais" => $request->nombrePais,
                 "departamento" => $request->departamento,

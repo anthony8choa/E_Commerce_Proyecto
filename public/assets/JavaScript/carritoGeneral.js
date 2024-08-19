@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     if(localStorage.getItem("codigoUsuario") != null){
-        console.log(comprarCarritoButton);
         comprarCarritoButton.href = comprarCarritoButton.href.replace("/0", `/${localStorage.getItem("codigoUsuario")}`)
     }else{
         comprarCarritoButton.href = window.appConfig.urlLogin;  

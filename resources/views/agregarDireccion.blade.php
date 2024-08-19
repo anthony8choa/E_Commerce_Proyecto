@@ -70,7 +70,7 @@
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Transacciones</a></li>
-                                <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+                                <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
@@ -108,24 +108,26 @@
                 <h2>Agregar Nueva Direccion</h2>
             </div>
             <div class="card-body">
-              
-                <form>
+            
+                <form action="{{ route('usuario.agregar.direccion.confirmar', $idUsuario) }}" method="POST">
+                    @csrf
                     <div class="mb-3">
-                        <label for="country" class="form-label">Pais</label>
-                        <input type="text" class="form-control" id="country" placeholder="Ingrese su pais" required>
+                        <label class="form-label">Pais</label>
+                        <input type="text" class="form-control" name="nombrePais" placeholder="Ingrese su pais" required>
                     </div>
                     <div class="mb-3">
-                        <label for="state" class="form-label">Departamento</label>
-                        <input type="text" class="form-control" id="state" placeholder="Ingrese su departamento" required>
+                        <label class="form-label">Departamento</label>
+                        <input type="text" class="form-control" name="departamento" placeholder="Ingrese su departamento" required>
                     </div>
                     <div class="mb-3">
-                        <label for="postalCode" class="form-label">Codigo Postal</label>
-                        <input type="text" class="form-control" id="postalCode" placeholder="Ingrese su codigo postal" required>
+                        <label class="form-label">Codigo Postal</label>
+                        <input type="number" class="form-control" name="codigoPostal" placeholder="Ingrese su codigo postal" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Guardar Direccion</button>
                 </form>
             </div>
         </div>
+        <div class="text-center mt-2 fs-6"><a href="{{ route('usuario.perfil', $idUsuario) }}">Volver</a></div>
     </div>
 
     <!-- Ventana emergente del carrito -->
@@ -162,7 +164,8 @@
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{route('login')}}"
+                            urlLogin: "{{route('login')}}",
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>

@@ -107,18 +107,20 @@
         <!--Datos Personales -->
         <div class="card mb-4">
             <div class="card-header">
-                Datos Personales
+                <div class="row">
+                    <div class="col-6">Datos Personales</div>
+                    <div class="col text-end fw-bold">Cuenta creada el {{ $datosUsuario['usuarios']['fecha_creacion'] }}</div>
+                </div>                
             </div>
             <div class="card-body">
-                <p><strong>Nombre de Usuario:</strong> <span id="username">Brian </span></p>
-                <p><strong>Apellido:</strong> <span id="lastname">zepeda</span></p>
-                <p><strong>Contraseña:</strong> <span id="password" >*********</span></p>
-                <p><strong>Teléfono:</strong> <span id="phone">+504 8795845</span></p>
-                <p><strong>Correo Electrónico:</strong> <span id="email">antho@g.com</span></p>
+                <p><strong>Nombre de Usuario:</strong> <span id="username">{{ $datosUsuario['usuarios']['nombreusuario'] }} </span></p>
+                <p><strong>Nombre completo:</strong> <span id="lastname">{{ $datosUsuario['usuarios']['nombrecompleto'] }}</span></p>
+                <p><strong>Contraseña:</strong> <span id="password" >{{ $datosUsuario['usuarios']['contrasenia'] }}</span></p>
+                <p><strong>Teléfono:</strong> <span id="phone">{{ $datosUsuario['usuarios']['telefono'] }}</span></p>
+                <p><strong>Correo Electrónico:</strong> <span id="email">{{ $datosUsuario['usuarios']['correo'] }}</span></p>
             </div>
             <div class="card-footer text-end">
-                <button class="btn btn-primary">Editar</button>
-                <button class="btn btn-danger">Eliminar</button>
+                <a href="{{route('usuario.editar.datos.personales', $datosUsuario['usuarios']['codigoUsuario'])}}" class="btn btn-primary">Editar</a>
             </div>
         </div>
 
@@ -127,21 +129,41 @@
             <div class="card-header">
                 Direcciones
             </div>
+
             <div class="card-body">
-              
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Dirección 1:</strong>  Francisco morazan, tegus, hn
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Dirección 2:</strong>  cortes, san pedro, hn
-                    </li>
+
+            @php
+                $i = 1;
+            @endphp
+            @if ($datosUsuario['direcciones'] != null)
+
+                @foreach ($datosUsuario['direcciones'] as $lugares)
+                    
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Dirección {{$i}}:</strong> {{$lugares['lugar']['departamento']}}, {{$lugares['lugar']['codigoPostal']}}, {{$lugares['lugar']['nombrePais']}}
+                                </div>
+                                <div>
+                                    <a href="{{ route('editar.direccion', ['idLugar' => $lugares['lugar']['codigoLugar'], 'idUsuario' => $datosUsuario['usuarios']['codigoUsuario'] ]) }}" class="btn btn-primary btn-sm">Editar</a>
+                                    <a class="btn btn-danger btn-sm">Eliminar</a>
+                                </div>
+                            </li>
+
+                    @php
+                        $i+=1;
+                    @endphp
+                
+                @endforeach
+            @else
+                
+            @endif
+
                 </ul>
             </div>
+            
             <div class="card-footer text-end">
-                <button class="btn btn-secondary">Agregar direccion</button>
-                <button class="btn btn-primary">Editar</button>
-                <button class="btn btn-danger">Eliminar</button>
+                <a href="{{ route('usuario.agregar.direccion', $datosUsuario['usuarios']['codigoUsuario']) }}" class="btn btn-secondary">Agregar direccion</a>
             </div>
         </div>
 
@@ -150,23 +172,45 @@
             <div class="card-header">
                 Tarjetas
             </div>
+
             <div class="card-body">
-              
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Tarjeta 1:</strong> **** **** **** 1234
+
+                @php
+                $j = 1;
+                @endphp
+                @if ($datosUsuario['tarjetasCredito'] != null)
+    
+                    @foreach ($datosUsuario['tarjetasCredito'] as $tarjetas)
+
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Tarjeta {{$j}}: </strong><span>{{ $tarjetas['numeroTarjeta'] }}, {{ $tarjetas['mesVencimiento'] }}/{{ $tarjetas['anyoVencimiento'] }}, ***</span>
+                        </div>
+                        <div>
+                            <a href="{{ route('usuario.editar.tarjeta', ['idTarjeta' => $tarjetas['codigoTarjeta'], 'idUsuario' => $datosUsuario['usuarios']['codigoUsuario']  ]) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                        </div>
                     </li>
-                    <li class="list-group-item">
-                        <strong>Tarjeta 2:</strong> **** **** **** 5678
-                    </li>
+
+                    @php
+                    $j+=1;
+                    @endphp
+            
+                    @endforeach
+                @else
+                    
+                @endif
+
+
                 </ul>
             </div>
             <div class="card-footer text-end">
-                <button class="btn btn-secondary">Agregar tarjeta</button>
-                <button class="btn btn-primary">Editar</button>
-                <button class="btn btn-danger">Eliminar</button>
+                <a href="{{ route('usuario.agregar.tarjeta', $datosUsuario['usuarios']['codigoUsuario']) }}" class="btn btn-secondary">Agregar tarjeta</a>
             </div>
         </div>
+        
     </div>
 
     <!-- Ventana emergente del carrito -->
@@ -203,7 +247,8 @@
         window.appConfig = {
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
-                            urlLogin: "{{route('login')}}"
+                            urlLogin: "{{route('login')}}",
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
