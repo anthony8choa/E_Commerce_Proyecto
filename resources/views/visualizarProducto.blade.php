@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Principal</title>
+    <title>Ver Producto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
@@ -65,7 +65,7 @@
                                 <!-- Nombre de usuario autogenerado por js -->
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Transacciones</a></li>
+                                <li><a id="transaccionesBoton" class="dropdown-item" href="#">Transacciones</a></li>
                                 <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
@@ -289,7 +289,8 @@
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{route('login')}}",
                             urlAñadirProductoAFavoritos: "{{ route('favoritos.agregar.producto', ['codigoUsuario' => '1', 'codigoProducto' => '1']) }}",
-                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}",
+                            urlVerTransacciones: "{{ route('usuario.ver.transacciones', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>

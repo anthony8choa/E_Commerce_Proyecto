@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const iconoCarrito = document.getElementById('iconoCarrito');
     const vaciarCarritoButton = document.getElementById('vaciarCarrito');
     const comprarCarritoButton = document.getElementById('comprarCarrito');
+    const transaccionesBoton = document.getElementById("transaccionesBoton");
 
     const updateCarritoModal = () => {
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -107,7 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     if(localStorage.getItem("codigoUsuario") != null){
-        comprarCarritoButton.href = comprarCarritoButton.href.replace("/0", `/${localStorage.getItem("codigoUsuario")}`)
+        comprarCarritoButton.href = comprarCarritoButton.href.replace("/0", `/${localStorage.getItem("codigoUsuario")}`);
+        transaccionesBoton.href = window.appConfig.urlVerTransacciones.replace("/0",`/${localStorage.getItem("codigoUsuario")}`);
     }else{
         comprarCarritoButton.href = window.appConfig.urlLogin;  
     }

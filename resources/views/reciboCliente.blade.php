@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar datos</title>
+    <title>Recibo de Compra</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
@@ -134,7 +134,7 @@
                                 <!-- Nombre de usuario autogenerado por js -->
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Transacciones</a></li>
+                                <li><a id="transaccionesBoton" class="dropdown-item" href="#">Transacciones</a></li>
                                 <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
@@ -176,65 +176,60 @@
                         <div class="info-recibo">
                             <h3>Recibo de Compra</h3>
                             <div class="numero-recibo">
-                                <label for="numero-recibo">Número de Recibo:</label>
-                                <input type="text" id="numero-recibo" class="form-control form-control-sm" placeholder="0001">
-                                <p>Fecha: 16 de agosto de 2024</p>
+                                <label for="numero-recibo">Número de Factura:</label>
+                                <input type="text" id="numero-recibo" class="form-control form-control-sm" value="{{ $factura['codigoFactura'] }}" readonly>
+                                <p>Fecha de emisión: {{ $factura['fechaemision'] }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
+                        <p class="fs-5">Comprado usando la tarjeta: <strong>{{ $factura['tarjetasCredito']['numeroTarjeta'] }}, {{ $factura['tarjetasCredito']['anyoVencimiento'] }}/{{ $factura['tarjetasCredito']['mesVencimiento'] }}, ***</strong> </p>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">Nombre del Cliente:</label>
-                            <p>anthony ochoa</p>
+                            <label class="form-label fw-bold fs-5">Nombre del Cliente:</label>
+                            <p class="fs-5" >{{ $cliente['nombrecompleto'] }}</p>
+                            
                         </div>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered mt-4">
                             <thead>
                                 <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Unitario</th>
-                                    <th>Subtotal</th>
+                                    <th class="fw-bold fs-5">Descripción</th>
+                                    <th class="fw-bold fs-5">Valor</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Producto 1</td>
-                                    <td>2</td>
-                                    <td>L. 150.00</td>
-                                    <td>L. 300.00</td>
+                                    <td>Subtotal</td>
+                                    <td>L. {{ $factura['subTotal'] }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Producto 2</td>
-                                    <td>4</td>
-                                    <td>L. 200.00</td>
-                                    <td>L. 200.00</td>
+                                    <td>ISV (15%)</td>
+                                    <td>L. {{ $factura['isv'] }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Producto 3</td>
-                                    <td>8</td>
-                                    <td>L. 100.00</td>
-                                    <td>L. 300.00</td>
+                                    <td>Coste de Envío</td>
+                                    <td>L. {{ $factura['costoEnvio'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Monto Total</strong></td>
+                                    <td><strong>L. {{ $factura['montoTotal'] }}</strong></td>
                                 </tr>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="3" class="text-end fw-bold">Impuesto:</td>
-                                    <td>L. 120.00</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" class="text-end fw-bold">Total:</td>
-                                    <td>L. 920.00</td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
-                    <div class="card-footer text-end">
-                        <p>Gracias por su compra</p>
+                    <div class="row">
+                        <div class="mt-3 ms-3 card-footer text-start col-6">
+                            <p>Gracias por su compra</p>
+                        </div>
+                        <div class="mt-3 me-3 card-footer text-end col">
+                            <p><a class="btn btn-primary" role="button" href="{{ route('principal') }}">Regresar a pagina principal</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    
 
     <!-- Ventana emergente del carrito -->
     <div style="max-width: 100%;" class="modal fade bg-warning" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
@@ -271,7 +266,8 @@
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{route('login')}}",
-                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}",
+                            urlVerTransacciones: "{{ route('usuario.ver.transacciones', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>

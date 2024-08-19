@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\Http;
 class UsuarioController extends Controller
 {
 
+    public function verTransacciones($idUsuario){
+        $datoTransacciones = Http::get('localhost:8091/api/historiales/obtenerFacturas/'.$idUsuario);
+        $todasFacturas = $datoTransacciones->Json();
+
+        $cantidad = count($todasFacturas);
+
+        return view('transaccionesVer', compact('todasFacturas','cantidad'));
+
+    }
+
     public function verificarUsuarioLogin(Request $request){
         
         $nombre = $request -> nombre;
@@ -94,6 +104,15 @@ class UsuarioController extends Controller
         }      
     }
 
+    public function eliminarDireccion($idDireccion, $idUsuario){
+        $dato = Http::delete('localhost:8091/api/direccion/borrar/'.$idDireccion.'/'.$idUsuario);
+
+        $respuesta = $dato->Json();
+
+        return redirect()->route('usuario.perfil', $idUsuario);
+
+    }
+
     public function agregarTarjeta($idUsuario){
         return view('agregarTarjeta', compact('idUsuario'));
     }
@@ -113,7 +132,15 @@ class UsuarioController extends Controller
             session()->flash('tarjetaExiste', true);
             return redirect()->route('usuario.agregar.tarjeta', $idUsuario);
         }
+    }
 
+    //La tarjeta se desactiva de usuario con el fin de no afectar la factura asociada y mantener un registro del usuario
+    public function desactivarTarjeta($idUsuario, $idTarjeta){
+        $dato = Http::put('localhost:8091/api/tarjetasCredito/desactivar/'.$idTarjeta);
+
+        $respuesta = $dato->Json();
+
+        return redirect()->route('usuario.perfil', $idUsuario);
 
     }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar datos</title>
+    <title>Mi cuenta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
@@ -65,8 +65,8 @@
                                 <!-- Nombre de usuario autogenerado por js -->
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Transacciones</a></li>
-                                <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+                                <li><a id="transaccionesBoton" class="dropdown-item" href="#">Transacciones</a></li>
+                                <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
                             <a id="dropdownInvitado" class="nav-link" href="{{route('login')}}" id="navbarDropdown" role="button" aria-expanded="false">
@@ -146,7 +146,7 @@
                                 </div>
                                 <div>
                                     <a href="{{ route('editar.direccion', ['idLugar' => $lugares['lugar']['codigoLugar'], 'idUsuario' => $datosUsuario['usuarios']['codigoUsuario'] ]) }}" class="btn btn-primary btn-sm">Editar</a>
-                                    <a class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a href="{{ route('usuario.eliminar.direcion', ['idDireccion' => $lugares['codigoDireccion'], 'idUsuario' => $datosUsuario['usuarios']['codigoUsuario'] ]) }}" class="btn btn-danger btn-sm">Eliminar</a>
                                 </div>
                             </li>
 
@@ -186,11 +186,11 @@
 
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <strong>Tarjeta {{$j}}: </strong><span>{{ $tarjetas['numeroTarjeta'] }}, {{ $tarjetas['mesVencimiento'] }}/{{ $tarjetas['anyoVencimiento'] }}, ***</span>
+                            <strong>Tarjeta {{$j}}: </strong><span>{{ $tarjetas['numeroTarjeta'] }}, {{ $tarjetas['anyoVencimiento'] }}/{{ $tarjetas['mesVencimiento'] }}, ***</span>
                         </div>
                         <div>
                             <a href="{{ route('usuario.editar.tarjeta', ['idTarjeta' => $tarjetas['codigoTarjeta'], 'idUsuario' => $datosUsuario['usuarios']['codigoUsuario']  ]) }}" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="{{ route('usuario.eliminar.tarjeta', ['idTarjeta' => $tarjetas['codigoTarjeta'], 'idUsuario' => $datosUsuario['usuarios']['codigoUsuario'] ]) }}" class="btn btn-danger btn-sm">Eliminar</a>
                         </div>
                     </li>
 
@@ -248,7 +248,8 @@
                             urlCategorias: "{{ route('obtener.nombre.categorias') }}",
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{route('login')}}",
-                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}",
+                            urlVerTransacciones: "{{ route('usuario.ver.transacciones', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>

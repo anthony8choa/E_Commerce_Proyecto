@@ -10,6 +10,7 @@ use App\Http\Controllers\ListaFavoritos;
 use App\Http\Controllers\ReseniasController;
 use App\Http\Controllers\ComercianteController;
 use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\CarritoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -56,6 +57,10 @@ Route::get('/usuario/editar/direccion/{idLugar}/{idUsuario}',
     [UsuarioController::class, 'editarDireccion']
     )->name('editar.direccion');
 
+Route::get('/usuarios/eliminar/direccion/{idDireccion}/{idUsuario}',
+    [UsuarioController::class, 'eliminarDireccion']
+    )->name('usuario.eliminar.direcion');
+
 Route::get('/usuario/editar/tarjeta/{idTarjeta}/{idUsuario}', 
     [UsuarioController::class, 'editarTarjeta']
     )->name('usuario.editar.tarjeta');
@@ -72,10 +77,9 @@ Route::post('/usuario/agregar/tarjeta/confirmar/{idUsuario}',
     [UsuarioController::class, 'agregarTarjetaConfirmar']
     )->name('usuario.agregar.tarjeta.confirmar');
 
-//solo visualizar recibo 
-Route::get('/recibo/cliente', function () {
-    return view('reciboCliente');
-})->name('recibo');
+Route::get('/usuario/eliminar/tarjeta/{idUsuario}/{idTarjeta}',
+    [UsuarioController::class, 'desactivarTarjeta']
+    )->name('usuario.eliminar.tarjeta');
 
 //solo visualizar registroVentas
 Route::get('/registro/ventas', function () {
@@ -93,6 +97,9 @@ Route::get('/producto/visualizar/{idProducto}',
     [ProductosController::class, 'mostrarProductoPorId']
     )->name('producto.visualizar');
 
+Route::get('/usuario/ver/transacciones/{idUsuario}',
+    [UsuarioController::class, 'verTransacciones']
+    )->name('usuario.ver.transacciones');
 
 
 //Hacer peticion al BackEnd de la existencia de un usuario
@@ -105,13 +112,6 @@ Route::get('/usuario/obtener/por/nombre/{nombre}/{contrasenia}',
     [UsuarioController::class, 'obtenerPorNombreLogin']
     )->name('usuario.obtener.nombre.login');
 
-//Lista favoritos
-/*
-Route::get('/favoritos', function(){
-    return view('listaFavoritosUsuario');
-})->name('favoritos');*/
-
-//Lista favoritos
 Route::get('/favoritos/{codigoUsuario}',
     [ListaFavoritos::class, 'obtenerListaFavoritoPorUsuario']
     )->name('favoritos');
@@ -145,9 +145,13 @@ Route::get('/categorias/productos/obtener/todos',
     [CategoriaController::class, 'obtenerTodosProductos']
     )->name('categorias.productos.obtener.todos');
 
-Route::get('/realizar/compra/{idUsuario}', function () {
-        return view('realizarCompra');
-    })->name('realizar.compra');
+Route::get('/realizar/compra/{idUsuario}',
+    [CarritoController::class, 'realizarCompra']
+    )->name('realizar.compra');
+
+Route::post('/realizar/compra/confirmar/{idUsuario}',
+    [CarritoController::class, 'realizarCompraConfirmar']
+    )->name('realizar.compra.confirmar');
 
 
 
@@ -192,6 +196,10 @@ Route::get('/comerciante/login/confirmacion',
 Route::get('/comerciante/obtener/por/nombre/{codigoComerciante}/{contrasenia}',
     [ComercianteController::class, 'obtenerComerciantePorNombre']
     )->name('comerciante.obtener.por.nombre');
+
+Route::get('/comerciante/eliminar/producto/{idProducto}',
+    [ComercianteController::class, 'comercianteDesactivarProducto'] //Desactivar para seguir manteniendo un registro del producto, pero ya no le pertenece a comerciante
+    )->name('comerciante.eliminar.producto');
 
 
 

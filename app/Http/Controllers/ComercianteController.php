@@ -103,6 +103,17 @@ class ComercianteController extends Controller
 
     }
 
+    public function comercianteDesactivarProducto($idProducto){
+
+        $dato = Http::put('localhost:8091/api/productos/desactivar/'.$idProducto);
+
+        $respuesta = $dato->Json();
+
+        return redirect()->route('comerciante.principal');
+
+    }
+
+
     public function verificarLogin(Request $request){
 
         $nombreComercio = $request->nombreComercio;

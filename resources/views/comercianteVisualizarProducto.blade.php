@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Principal</title>
+    <title>Ver Producto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
@@ -113,14 +113,12 @@
                     </div>
                 </section>
                 <section class="row fs-5 fw-bold">
-                    <!-- Favoritos -->
                     <section class="row mt-3 align-items-center">
                         <!-- Inicialmente tiene el valor de 1 al enviar codigoProducto, pero con js se cambian automaticamente al user logeado -->
                         <a id="editarProductoBoton" class="btn btn-warning" href="{{route('comerciante.producto.editar', $producto['codigoProducto'])}}">Editar Producto</a>
                     </section>
-                    <!-- Carrito -->
                     <section class="row mt-3 align-items-center">
-                        <a href="#" id="elimiarProductoBoton" class="btn btn-danger">Eliminar Producto</a>
+                        <a href="{{ route('comerciante.eliminar.producto', $producto['codigoProducto'] ) }}" id="elimiarProductoBoton" class="btn btn-danger">Eliminar Producto</a>
                     </section>
                 </section>
             </section>

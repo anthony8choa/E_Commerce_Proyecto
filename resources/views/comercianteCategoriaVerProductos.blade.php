@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar datos</title>
+    <title>Ver Categoria</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
@@ -103,30 +103,33 @@
 
             @if ($productosEnCategoria)
                 @foreach ($productosEnCategoria as $producto)
-                    @if ($idComerciante == $producto['comercio']['codigoComercio'])                
-                        <!-- Producto  -->
-                        <section class="col-md-3">
-                            <div class="shadow-lg card h-100"> 
-                                <!-- Imagen del producto -->
-                                <img src="{{ $producto['imagenProducto'] }}" height="300" width="300" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <!-- Nombre del producto -->
-                                    <h5 class="card-title">
-                                        {{ $producto['nombreProducto'] }}
-                                    </h5>
-                                    <p class="card-text">
-                                        <!-- Precio del producto -->
-                                        <div class="mt-2">
-                                            Precio: <div class="mt-1">Lps.{{ $producto['precioUnitario'] }} </div>
-                                        </div>
-                                    </p>
-                                    <a href="{{ route('comerciante.producto.visualizar',$producto['codigoProducto']) }}" class="btn btn-primary">Ir al producto</a>
-                                </div>
-                            </div>
-                        </section>
-                    @else    
+                    @if ($producto['comercio'] != null)
                     
+                        @if ($idComerciante == $producto['comercio']['codigoComercio'])                
+                            <!-- Producto  -->
+                            <section class="col-md-3">
+                                <div class="shadow-lg card h-100"> 
+                                    <!-- Imagen del producto -->
+                                    <img src="{{ $producto['imagenProducto'] }}" height="300" width="300" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <!-- Nombre del producto -->
+                                        <h5 class="card-title">
+                                            {{ $producto['nombreProducto'] }}
+                                        </h5>
+                                        <p class="card-text">
+                                            <!-- Precio del producto -->
+                                            <div class="mt-2">
+                                                Precio: <div class="mt-1">Lps.{{ $producto['precioUnitario'] }} </div>
+                                            </div>
+                                        </p>
+                                        <a href="{{ route('comerciante.producto.visualizar',$producto['codigoProducto']) }}" class="btn btn-primary">Ir al producto</a>
+                                    </div>
+                                </div>
+                            </section>
+                        @else    
+                        
 
+                        @endif
                     @endif
                 @endforeach
             @else

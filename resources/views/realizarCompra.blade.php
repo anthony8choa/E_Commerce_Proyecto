@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar datos</title>
+    <title>Confirmar compra</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
@@ -75,7 +75,7 @@
                                 <!-- Nombre de usuario autogenerado por js -->
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Transacciones</a></li>
+                                <li><a id="transaccionesBoton" class="dropdown-item" href="#">Transacciones</a></li>
                                 <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
@@ -112,41 +112,67 @@
     <div class="mb-5 container form-container">
         <div class="bordered-container">
             <h1 class="text-center">Resumen Compra</h1>
-            <form>
+            <form action="{{ route('realizar.compra.confirmar', $usuario['usuarios']['codigoUsuario']) }}" method="POST">
+                @csrf
                 <table class="table table-bordered">
                     <tr>
                         <td>
                             <label for="cliente" class="form-label">Nombre de Usuario</label>
-                            <input type="text" class="form-control" id="cliente" placeholder="Nombre asociado" readonly>
+                            <input type="text" class="form-control" id="cliente" placeholder="{{ $usuario['usuarios']['nombreusuario'] }}" readonly>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                        <!-- puse el correo porq por lo gneral cuando compraas algo te cae un correo-->
                             <label for="correo" class="form-label">Correo Asociado</label>
-                            <input type="email" class="form-control" id="correo" placeholder="Correo asociado" readonly>
+                            <input type="email" class="form-control" id="correo" placeholder="{{ $usuario['usuarios']['correo'] }}" readonly>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="tarjetas" class="form-label">Tarjetas Asociadas</label>
-                            <select class="form-select" id="tarjetas">
-                                <option selected>Selecciona una tarjeta</option>
-                                <option value="1">Tarjeta 1</option>
-                                <option value="2">Tarjeta 2</option>
-                                <option value="3">Tarjeta 3</option>
-                            </select>
+
+                            @if ($usuario['tarjetasCredito']!=null)
+
+                                <label for="tarjetas" class="form-label">Tarjetas Asociadas</label>
+                                <select name="tarjeta" class="form-select" name="" id="tarjetas" required>
+                                    <option value="" disabled selected>Selecciona una tarjeta</option>
+
+                                    @foreach ($usuario['tarjetasCredito'] as $tarjetasCredito)
+
+                                        <option value="{{ $tarjetasCredito['codigoTarjeta'] }}">Tarjeta con descripcion: {{ $tarjetasCredito['numeroTarjeta'] }}, {{ $tarjetasCredito['anyoVencimiento'] }}/{{ $tarjetasCredito['mesVencimiento'] }}, ***</option>
+
+                                    @endforeach
+
+
+                                </select>
+
+                            @else
+                                <label id="alertaTarjeta" for="tarjetas" class="form-label fw-bold ms-2 text-danger">ATENCION: registra una tarjeta para comprar</label>
+                            @endif                            
+
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="direcciones" class="form-label">Dirección de Envío</label>
-                            <select class="form-select" id="direcciones">
-                                <option selected>Selecciona una dirección</option>
-                                <option value="1">Dirección 1</option>
-                                <option value="2">Dirección 2</option>
-                                <option value="3">Dirección 3</option>
-                            </select>
+
+                            @if ($usuario['direcciones']!=null)
+
+                                <label for="direcciones" class="form-label">Dirección de Envío</label>
+                                <select name="direccion" class="form-select" id="direcciones" required>
+                                    <option value="" disabled selected>Selecciona una dirección</option>
+
+                                    @foreach ($usuario['direcciones'] as $direccion)
+
+                                        <option value="{{ $direccion['lugar']['codigoLugar'] }}"> {{ $direccion['lugar']['departamento'] }}, {{  $direccion['lugar']['codigoPostal'] }}, {{  $direccion['lugar']['nombrePais'] }}  </option>
+
+                                    @endforeach
+                                    
+
+                                </select>
+
+                            @else
+                                <label id="alertaDireccion" for="tarjetas" class="form-label fw-bold ms-2 text-danger">ATENCION: registra una direccion para comprar</label>
+                            @endif 
+
                         </td>
                     </tr>
                 </table>
@@ -161,16 +187,52 @@
                         </tr>
                     </thead>
                     <tbody id="productos">
-                        <tr>
-                            
-                        </tr>
+                        
                     </tbody>
                 </table>
+                <div id="infoMonto">
+                    <div class="mt-4 fs-5">
+                        <strong>
+                        Subtotal: 
+                        </strong>
+                        <span id="subtotal">
+
+                        </span>
+                    </div>
+                    <div class="fs-5">
+                        <strong>
+                        ISV: 
+                        </strong>
+                        <span id="ISV">
+                            15%
+                        </span>
+                    </div>
+                    <div class="fs-5">
+                        <strong>
+                        Costo envio: 
+                        </strong>
+                        <span id="ISV">
+                            L. 500
+                        </span>
+                    </div>
+                    <div class="fs-5">
+                        <strong>
+                        Total: 
+                        </strong>
+                        <span id="total">
+
+                        </span>
+                    </div>
+                </div>
+
+                <input type="hidden" id="subTotalInput" name="monto" value="">
+                
                 <div class="mt-4 d-flex justify-content-between">
-                    <a href="{{route('principal')}}" type="button" class="btn btn-primary">Seguir comprando</a>  <!--este boton lo va llevar al index-->
-                    <button id="realizarCompraBoton" type="submit" class="btn btn-success">Realizar compra</button> <!--este boton le va decir compra exitosa y lo va mandar a la base de datos-->
+                    <a href="{{route('principal')}}" type="button" class="btn btn-primary">Seguir comprando</a>
+                    <button id="realizarCompraBoton" type="submit" class="btn btn-success">Realizar compra</button>
                 </div>
             </form>
+            
         </div>
     </div>
 
@@ -195,6 +257,26 @@
         </div>
     </div>
 
+
+    <!-- Modal a mostrar si no hay stock de algun producto -->
+    <div class="modal fade" id="noStockModal" tabindex="-1" aria-labelledby="noStockModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="noStockModalLabel">Atención</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    No se encuentra suficiente stock de uno, o unos de tus productos en carrito
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warn" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.appConfig = {
@@ -202,7 +284,8 @@
                             urlProductosCategorias: "{{ route('obtener.productos.categoria', ['idCategoria' => '1', 'idUsuario' => '0']) }}",
                             urlLogin: "{{route('login')}}",
                             urlProductoVisualizar: "{{route('producto.visualizar', '0')}}",
-                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}",
+                            urlVerTransacciones: "{{ route('usuario.ver.transacciones', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/LeerLocalStorage.js') }}"></script>
@@ -215,19 +298,103 @@
     <script src="{{ asset ('/assets/JavaScript/realizarCompra.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        // Obtén el valor del carrito desde localStorage
+        // Obtener el valor del carrito desde localStorage
         let carrito = localStorage.getItem("carrito");
 
-        // Obtén una referencia al botón
+        // Obtener una referencia al botón
         let realizarCompraBoton = document.getElementById('realizarCompraBoton');
+
+        //Info del monto
+        const infoMonto = document.getElementById("infoMonto");
 
         // Verifica si el carrito es null
         if (carrito === null) {
             // Deshabilita el botón si es asi
             realizarCompraBoton.disabled = true;
-
+            //Se desactiva la info del monto tambien
+            infoMonto.classList.add("d-none");
         }
+
+        const alertaTarjeta = document.getElementById('alertaTarjeta'); //Esta alerta existe si no hay tarjeta asociada
+        const alertaDireccion = document.getElementById('alertaDireccion'); //Esta alerta existe si no hay direccion asociada
+
+        if (alertaTarjeta || alertaDireccion) {
+            // Ocultar el botón si cualquiera de los alertas existe
+            realizarCompraBoton.disabled = true;
+            infoMonto.classList.add("d-none");
+        }
+
     });
+    
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener todas las filas del cuerpo de la tabla
+            const filas = document.querySelectorAll('#productos tr');
+
+            // Contar cuántas filas hay
+            const totalFilas = filas.length;
+            console.log("Total de filas en la tabla:", totalFilas);
+
+            // Crear y agregar inputs ocultos dinámicamente
+            const form = document.querySelector('form');
+            filas.forEach((fila, index) => {
+                // Obtener el código y la cantidad de unidades de cada fila
+                const codigo = fila.cells[0].textContent.trim();
+                const cantidad = fila.cells[2].textContent.trim(); // La cantidad está en la tercera columna, por eso acceder a esa posicion
+
+                // Crear un input hidden para el código
+                const inputCodigo = document.createElement('input');
+                inputCodigo.type = 'hidden';
+                inputCodigo.name = `productos[${index}][codigoProducto]`;
+                inputCodigo.value = codigo;
+
+                // Crear un input hidden para la cantidad
+                const inputCantidad = document.createElement('input');
+                inputCantidad.type = 'hidden';
+                inputCantidad.name = `productos[${index}][cantidadUnidades]`;
+                inputCantidad.value = cantidad;
+
+                // Agregar los inputs ocultos al formulario para el backend
+                form.appendChild(inputCodigo);
+                form.appendChild(inputCantidad);
+            });
+
+        });
+
+        function calcularSubtotalYTotal() {
+            const filas = document.querySelectorAll('#productos tr');
+            let subtotal = 0;
+
+            filas.forEach(fila => {
+                const monto = parseFloat(fila.cells[3].textContent.replace('L. ', '').trim());
+                subtotal += monto;
+            });
+
+            // Mostrar el subtotal
+            document.getElementById('subtotal').textContent = `L. ${subtotal.toFixed(2)}`;
+
+            // Calcular el total (subtotal + 15%)
+            const total = (subtotal * 1.15) + 500;
+
+            // Mostrar el total
+            document.getElementById('total').textContent = `L. ${total.toFixed(2)}`;
+            document.getElementById('subTotalInput').value = subtotal.toFixed(2);
+            
+        }
+
+        // Llamar a la función para calcular el subtotal y total al cargar la página
+        calcularSubtotalYTotal();
+
+
+    </script>
+    <script>
+        @if(session('noStock'))
+            var noStock = new bootstrap.Modal(document.getElementById('noStockModal'));
+            noStock.show();
+            // Borra el valor de la sesión para evitar que la alerta se muestre en futuras visitas
+            @php session()->forget('noStock'); @endphp
+        @endif
     </script>
 
 </body>

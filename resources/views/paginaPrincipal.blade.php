@@ -65,7 +65,7 @@
                                 <!-- Nombre de usuario autogenerado por js -->
                             </a>
                             <ul id="dropdownUsuario" class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Transacciones</a></li>
+                                <li><a id="transaccionesBoton" class="dropdown-item" href="#">Transacciones</a></li>
                                 <li><a id="verCuentaBoton" class="dropdown-item" href="#">Ver cuenta</a></li>
                                 <li><a id="cerrarSesionBoton" class="dropdown-item logout" href="{{route('login')}}">Cerrar sesión</a></li>
                             </ul>
@@ -144,7 +144,8 @@
                             urlLogin: "{{ route('login') }}",
                             urlObtenerProductosDeTodasCategorias: "{{route('categorias.productos.obtener.todos')}}",
                             urlProductoVisualizar: "{{ route('producto.visualizar', '0')}}",
-                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}"
+                            urlVerCuenta: "{{ route('usuario.perfil', '0') }}",
+                            urlVerTransacciones: "{{ route('usuario.ver.transacciones', '0') }}"
                             };
     </script>
     <script src="{{ asset ('/assets/JavaScript/paginaPrincipalAñadir.js') }}"></script>
