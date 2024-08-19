@@ -142,7 +142,7 @@
                                         Precio: <div class="mt-1">Lps.{{ $producto['precioUnitario'] }} </div>
                                     </div>
                                 </p>
-                                <a href="{{ route('producto.visualizar',$producto['codigoProducto']) }}" class="btn btn-primary">Ir al producto</a>
+                                <a id="botonIrAProducto" href="{{ route('producto.visualizar', [ 'idProducto' => $producto['codigoProducto'], 'idUsuario' => '0' ]) }}" class="btn btn-primary">Ir al producto</a>
                             </div>
                         </div>
                     </section>
@@ -203,6 +203,11 @@
     </script>
     <script src="{{ asset ('/assets/JavaScript/obtenerCategorias.js') }}"></script>
     <script src="{{ asset ('/assets/JavaScript/carritoGeneral.js') }}"></script>
+    <script>
+        if(localStorage.getItem("codigoUsuario") != null){
+            document.getElementById("botonIrAProducto").href =document.getElementById("botonIrAProducto").href.replace("/0",`/${localStorage.getItem("codigoUsuario")}`);
+        }
+    </script>
 
 </body>
 </html>

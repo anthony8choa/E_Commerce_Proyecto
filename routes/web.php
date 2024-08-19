@@ -93,7 +93,7 @@ Route::get('/index', function(){
 })->name('principal');
 
 //Obtiene el id del producto y redirige a la vista con ese producto asociado
-Route::get('/producto/visualizar/{idProducto}', 
+Route::get('/producto/visualizar/{idProducto}/{idUsuario}', 
     [ProductosController::class, 'mostrarProductoPorId']
     )->name('producto.visualizar');
 

@@ -111,7 +111,16 @@
                 <section class="row fs-1 mb-2">
                     <!-- Nombre del producto -->
                     <div>
-                        <span id="productName">{{$producto['nombreProducto']}}</span>
+                        <span id="productName">
+                            {{$producto['nombreProducto']}}
+                        </span>
+                        @if ($listaDeFavUsuario != null)
+                            @foreach ($listaDeFavUsuario as $productoFav)
+                                @if ($productoFav['codigoProducto'] == $producto['codigoProducto'])
+                                    <span id="productoFavorito">❤️</span>
+                                @endif
+                            @endforeach
+                        @endif
                         <strong>
                             (en stock:  <span id="cantidadDisponible">{{$producto['cantidadDisponible']}}</span>) <span id="codigoProductoSpan" class="d-none">{{$producto['codigoProducto']}}</span>
                         </strong>
@@ -131,6 +140,9 @@
                             
                         </span>
                     </div>
+
+
+                    
                 </section>
                 <section class="row fs-5 fw-bold">
                     <!-- Favoritos -->
@@ -321,6 +333,14 @@
             // Cambia el estilo del enlace para hacerlo parecer deshabilitado
             añadirACarritoBoton.style.pointerEvents = 'none';
             añadirACarritoBoton.style.cursor = 'not-allowed';
+        }
+    </script>
+    <script>
+        let productoFavorito = document.getElementById("productoFavorito")
+        if(productoFavorito){
+            //Si ya existe el producto en la lista de favoritos, deshabilitar boton
+            let botonAgregarAFavoritos = document.getElementById("botonAgregarAFavoritos");
+            botonAgregarAFavoritos.classList.add("disabled");
         }
     </script>
 </body>

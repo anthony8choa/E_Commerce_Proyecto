@@ -13,19 +13,26 @@ class ProductosController extends Controller
      * @param idProducto refiere al id del producto a buscar
      * @return view refiere a la vista a la cual se le enviará todos los datos de ese producto
      */
-    public function mostrarProductoPorId($idProducto){
+    public function mostrarProductoPorId($idProducto, $idUsuario){
         $datoConvertirReseñasProducto = Http::get('http://localhost:8091/api/productos/mostrar/resenias/'.$idProducto);
         $datoConvertirProductoInfo = Http::get('http://localhost:8091/api/productos/mostrar/'.$idProducto);
+        $datoConvertirListaFav = Http::get('http://localhost:8091/api/usuarios/ver?codigousuario='.$idUsuario);
 
         $producto = $datoConvertirProductoInfo->Json();
         $reseniasDeProductoConvertir = $datoConvertirReseñasProducto->Json();
+        $productosEnListaFav =$datoConvertirListaFav->Json();
+
+        $listaDeFavUsuario = null;
+        if($productosEnListaFav != null){
+            $listaDeFavUsuario = $productosEnListaFav['listaproductos'];
+        }
 
         $reseniasDeProducto = null;
         if($reseniasDeProductoConvertir!=null){
             $reseniasDeProducto = $reseniasDeProductoConvertir['listarReseniaDTOs'];
         }
 
-        return view('visualizarProducto', compact('producto','reseniasDeProducto'));
+        return view('visualizarProducto', compact('producto','reseniasDeProducto','listaDeFavUsuario'));
     }
 
 }
