@@ -54,6 +54,12 @@ Route::get('/recibo/cliente', function () {
     return view('reciboCliente');
 })->name('recibo');
 
+//solo visualizar registroVentas
+Route::get('/registro/ventas', function () {
+    return view('registroVentas');
+})->name('ventas');
+
+
 
 Route::get('/index', function(){
     return view('paginaPrincipal');
